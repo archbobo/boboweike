@@ -1,5 +1,5 @@
 import type { InferGetServerSidePropsType } from 'next';
-import type { getServerSideProps } from '~/pages/[username]';
+import type { getServerSideProps } from '~/app/[username]';
 import { api } from '~/utils/api';
 
 export function UserPage(props: InferGetServerSidePropsType<typeof getServerSideProps>) {
