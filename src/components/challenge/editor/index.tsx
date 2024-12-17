@@ -1,6 +1,6 @@
 'use client';
 import Editor from '@monaco-editor/react';
-import type * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
+import type * as monaco from 'monaco-editor';
 import React from 'react';
 import { createTwoslashInlayProvider } from './twoslash';
 
@@ -96,7 +96,7 @@ const onMount =
     const filename = model.uri.toString();
 
     // what actually runs when checking errors
-    const runCommand = async () => {
+    const _runCommand = async () => {
       const errors = await Promise.all([
         ts.getSemanticDiagnostics(filename),
         ts.getSyntacticDiagnostics(filename),
