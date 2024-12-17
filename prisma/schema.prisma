@@ -90,8 +90,9 @@ model Challenge {
   id         Int        @id @default(autoincrement())
   createdAt  DateTime   @default(now())
   updatedAt  DateTime   @updatedAt
-  name       String
   difficulty Difficulty
+  name       String
+  description String
   prompt     String
   upvotes    Int
   user       User       @relation(fields: [userId], references: [id])
