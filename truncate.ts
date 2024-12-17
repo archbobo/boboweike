@@ -1,19 +1,20 @@
-const { PrismaClient } = require('@prisma/client');
+import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
 async function truncateTables() {
   try {
-    // Get all table names
-    const tableNames = await prisma.$queryRaw`
-    SELECT table_name FROM information_schema.tables
-    WHERE table_schema = 'public' -- Replace 'public' with your schema name if necessary
-    AND table_type = 'BASE TABLE'
-    `;
+    // 获取所有表名
+    const tableNames = await prisma.$queryRaw<
+      Array<{ table_name: string }>
+    >`SELECT table_name FROM information_schema.tables
+       WHERE table_schema = 'public' AND table_type = 'BASE TABLE'`;
 
-    // Truncate each table
+    // 遍历表名，逐一执行 TRUNCATE
     for (const { table_name } of tableNames) {
-      await prisma.$queryRaw`TRUNCATE TABLE "${table_name}" RESTART IDENTITY CASCADE`;
+      // 拼接 SQL 字符串，动态指定表名
+      const truncateQuery = `TRUNCATE TABLE "${table_name}" RESTART IDENTITY CASCADE;`;
+      await prisma.$executeRawUnsafe(truncateQuery);
     }
 
     console.log('All tables truncated successfully.');
