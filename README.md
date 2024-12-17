@@ -29,6 +29,7 @@ Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/ver
 
 ## Common Commands
 
+- prisma sutdio: `npx prisma studio`
 - truncate db talbes: `npx tsx truncate.ts`
 - seed db: `npx prisma db seed`
 - sync db: `npx prisma db push`
