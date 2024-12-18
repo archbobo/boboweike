@@ -7,7 +7,7 @@ export function Explore() {
   return (
     <div className="flex h-full flex-col">
       <section className="mb-8 flex max-w-[69ch] flex-col items-start gap-2 pt-4 md:pt-8">
-        <TypographyH1 className="bg-gradient-to-r from-pink-500 to-indigo-500 bg-clip-text text-transparent dark:from-pink-400 dark:to-indigo-400">
+        <TypographyH1 className="bg-gradient-to-r from-indigo-500 to-pink-500 bg-clip-text text-transparent dark:to-pink-400">
           Explore
         </TypographyH1>
         <TypographyP>
