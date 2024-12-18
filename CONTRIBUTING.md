@@ -37,7 +37,6 @@ GITHUB_ID=<client_id>
 GITHUB_SECRET=<client_secret>
 ```
 
-
 ### 4. Install dependencies
 
 Use `pnpm` to install dependencies.
@@ -70,9 +69,6 @@ Finally, you can run the dev server:
 pnpm dev
 ```
 
-[new-oauth]: https://github.com/settings/applications/new
-
-
 ### Sync data
 
 Once the server is running you can seed and sync data
@@ -87,3 +83,5 @@ if you ever need to blow away everything in your data and reseed run:
 pnpm reset
 pnpx prisma db seed
 ```
+
+[new-oauth]: https://github.com/settings/applications/new
