@@ -15,6 +15,8 @@ import { incrementOrDecrementUpvote } from './increment.action';
 import { TypographyH3 } from '../ui/typography/h3';
 import { DifficultyBadge } from '../explore/difficulty-badge';
 import { Button } from '../ui/button';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '../ui/dialog';
+import { ShareForm } from './share-form';
 
 interface Props {
   challenge: Challenge & {
@@ -88,9 +90,19 @@ export function DescriptionPanel({ challenge }: Props) {
               <Button variant="ghost" className="p-1">
                 <Bookmark size={20} className="stroke-gray-500 hover:stroke-gray-400" />
               </Button>
-              <Button variant="ghost" className="p-1">
-                <Share size={20} className="stroke-gray-500 hover:stroke-gray-400" />
-              </Button>
+              <Dialog>
+                <DialogTrigger>
+                  <Share size={20} className="stroke-gray-500 hover:stroke-gray-400" />
+                </DialogTrigger>
+                <DialogContent className="w-[200px]">
+                  <DialogHeader>
+                    <DialogTitle>Share this challenege</DialogTitle>
+                    <div className="py-4">
+                      <ShareForm />
+                    </div>
+                  </DialogHeader>
+                </DialogContent>
+              </Dialog>
             </div>
             <div className="prose-invert prose-h3:text-xl">
               {/* @ts-ignore */}
