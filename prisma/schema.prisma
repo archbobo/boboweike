@@ -2,13 +2,13 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-    provider = "prisma-client-js"
-    previewFeatures = ["jsonProtocol"]
+  provider        = "prisma-client-js"
+  previewFeatures = ["jsonProtocol"]
 }
 
 datasource db {
-  provider  = "postgresql"
-  url  	    = env("DATABASE_URL")
+  provider     = "postgresql"
+  url          = env("DATABASE_URL")
   relationMode = "prisma"
 }
 
@@ -27,7 +27,7 @@ enum Role {
 
 enum Status {
   BANNED
-  ACTIVE  // can post, comment, vote, etc
+  ACTIVE // can post, comment, vote, etc
   PENDING // must finish x number of challenges to be active
 }
 
@@ -76,6 +76,7 @@ model User {
   Solution      Solution[]
   Comment       Comment[]
   Report        Report[]
+  Bookmark      Bookmark[]
 }
 
 model VerificationToken {
@@ -87,19 +88,20 @@ model VerificationToken {
 }
 
 model Challenge {
-  id         Int        @id @default(autoincrement())
-  createdAt  DateTime   @default(now())
-  updatedAt  DateTime   @updatedAt
-  difficulty Difficulty
-  name       String
-  description String
-  prompt     String
-  user       User       @relation(fields: [userId], references: [id])
-  userId     String
-  Vote       Vote[]
-  Solution   Solution[]
-  Comment    Comment[]
-  Report     Report[]
+  id          Int        @id @default(autoincrement())
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  difficulty  Difficulty
+  name        String
+  description Json
+  prompt      Json
+  user        User       @relation(fields: [userId], references: [id])
+  userId      String
+  Vote        Vote[]
+  Solution    Solution[]
+  Comment     Comment[]
+  Report      Report[]
+  Bookmark    Bookmark[]
 
   @@index([userId])
 }
@@ -150,6 +152,17 @@ model Report {
   challenge   Challenge @relation(fields: [challengeId], references: [id])
   challengeId Int
   text        String
+
+  @@index([userId])
+  @@index([challengeId])
+}
+
+model Bookmark {
+  id          Int        @id @default(autoincrement())
+  user        User       @relation(fields: [userId], references: [id])
+  userId      String
+  challenge   Challenge? @relation(fields: [challengeId], references: [id])
+  challengeId Int?
 
   @@index([userId])
   @@index([challengeId])
