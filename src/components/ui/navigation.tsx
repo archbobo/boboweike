@@ -59,7 +59,7 @@ export function Navigation() {
                 </defs>
               </svg>
 
-              <span className="hidden font-bold sm:inline-block">type/hero</span>
+              <span className="hidden font-bold sm:inline-block">波波微课</span>
             </a>
             <NavigationMenu>
               <NavigationMenuList>
