@@ -24,6 +24,12 @@ export async function Challenge({ id }: Props) {
           challengeId: +id,
         },
       },
+      Bookmark: {
+        where: {
+          userId: session?.user.id,
+          challengeId: +id,
+        },
+      },
     },
   });
 
