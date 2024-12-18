@@ -41,7 +41,7 @@ export function Navigation() {
               >
                 <circle cx="12" cy="12" r="10"></circle>
               </svg>
-              <span className="hidden font-bold sm:inline-block">type/hero</span>
+              <span className="hidden font-bold sm:inline-block">波波微课</span>
             </a>
             <NavigationMenu>
               <NavigationMenuList>
