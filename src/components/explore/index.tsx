@@ -3,6 +3,8 @@ import { TypographyP } from '../ui/paragraph';
 import { TypographyH1 } from '../ui/typography/h1';
 import { ExploreSection } from './section';
 import { Suspense } from 'react';
+import { ExploreSectionSkeleton } from './section-skeleton';
+
 export function Explore() {
   return (
     <div className="flex h-full flex-col">
@@ -19,7 +21,7 @@ export function Explore() {
           est laborum
         </TypographyP>
       </section>
-      <Suspense fallback="loading...">
+      <Suspense fallback={<ExploreSectionSkeleton />}>
         <ExploreSection data={getChallenges} />
       </Suspense>
     </div>
