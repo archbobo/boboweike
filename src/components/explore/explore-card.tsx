@@ -1,6 +1,6 @@
 import { ArrowBigUp } from 'lucide-react';
 
-import { Challenges } from '.';
+import { type Challenges } from '.';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
 import { DifficultyBadge } from './difficulty-badge';
 
@@ -46,13 +46,16 @@ const rtf = new Intl.RelativeTimeFormat('en', {
 });
 
 // TODO: typescript
-const getRelativeTime = (date) => {
+const getRelativeTime = (date: Date) => {
   const now = new Date();
+  // @ts-ignore
   const elapsed = date - now;
 
   // "Math.abs" accounts for both "past" & "future" scenarios
+  // @ts-ignore
   for (const u in units)
     if (Math.abs(elapsed) > units[u] || u == 'second')
+      // @ts-ignore
       return rtf.format(Math.round(elapsed / units[u]), u);
 };
 
@@ -68,7 +71,7 @@ export function ExploreCard({ challenge }: Props) {
           <CardTitle>{challenge.name}</CardTitle>
           <CardDescription className="relative h-48 overflow-hidden pb-4">
             <div className="pointer-events-none absolute inset-0 h-full w-full shadow-[inset_0_-1.5rem_1rem_-0.5rem_hsl(var(--card))] duration-300 group-hover:shadow-[inset_0_-1.5rem_1rem_-0.5rem_hsl(var(--card-hovered))] group-focus:shadow-[inset_0_-1.5rem_1rem_-0.5rem_hsl(var(--card-hovered))]" />
-            {challenge.description}
+            {challenge.description?.toString()}
           </CardDescription>
         </div>
       </CardHeader>
