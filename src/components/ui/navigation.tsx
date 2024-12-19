@@ -36,8 +36,12 @@ export function Navigation() {
 
   // NOTE: 1. loading == true -> 2. signIn() -> 3. session status == 'loading' (loading == false)
   const handleSignIn = async () => {
-    setLoading(true);
-    await signIn('github');
+    try {
+      setLoading(true);
+      await signIn('github');
+    } catch {
+      setLoading(false);
+    }
   };
   const handleSignOut = async () => {
     await signOut({ redirect: false });
