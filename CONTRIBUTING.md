@@ -11,8 +11,9 @@ cp .env.example .env
 
 ### 2. Setup PostgreSQL.
 
+Starting the docker container
 ```
-docker compose up
+docker compose up -d
 ```
 
 see `docker-compose.yaml`
