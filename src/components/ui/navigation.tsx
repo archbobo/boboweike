@@ -61,7 +61,7 @@ export function Navigation() {
           <div className="relative flex basis-1/3">
             <a className="flex items-center space-x-2 duration-300" href="/">
               <svg
-                className="h-6 w-6 rounded-md bg-[#3178C6] p-[2px]"
+                className="ml-2 h-6 w-6 rounded-md bg-[#3178C6] p-[2px]"
                 viewBox="0 0 512 512"
                 xmlns="http://www.w3.org/2000/svg"
               >
@@ -88,7 +88,11 @@ export function Navigation() {
                 </defs>
               </svg>
 
-              <span className="font-bold leading-3">波波微课</span>
+              <span className="font-bold leading-3">
+                type
+                <br />
+                hero
+              </span>
             </a>
           </div>
           <NavigationMenu className="basis-1/3">
