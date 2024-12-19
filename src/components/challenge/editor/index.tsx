@@ -23,6 +23,7 @@ import { libSource } from './editor-types';
 import { createTwoslashInlayProvider } from './twoslash';
 import { VimStatusBar } from './vimMode';
 import type { Challenge } from '..';
+import { USER_CODE_START } from './constants';
 
 const DEFAULT_OPTIONS: monaco.editor.IStandaloneEditorConstructionOptions = {
   lineNumbers: 'on',
@@ -69,7 +70,7 @@ export const CodePanel = ({ challenge }: Props) => {
   }, [settings]);
 
   const handleSubmit = async () => {
-    const [, solution] = code.split('/* _____________ Your Code Here _____________ */');
+    const [, solution] = code.split(USER_CODE_START);
 
     if (hasErrors) {
       toast({
@@ -95,8 +96,9 @@ export const CodePanel = ({ challenge }: Props) => {
   const onMount =
     (value: string, onError: (v: boolean) => void) =>
     async (editor: monaco.editor.IStandaloneCodeEditor, monaco: Monaco) => {
-      const numLines = value.split('\n').length;
-      const lastLineLength = value.split('\n').at(-1)?.length || 1;
+      const lineWithUserCode = value
+        .split('\n')
+        .findIndex((line) => line.includes(USER_CODE_START));
 
       // once you register a lib you cant unregister it (idk how to unregister it)
       // so when editor mounts again it tries to add the lib again and throws an error
@@ -133,21 +135,11 @@ export const CodePanel = ({ challenge }: Props) => {
         onError(hasErrors);
       };
 
-      let fixingStart = false;
-
       model.onDidChangeContent((e) => {
-        if (
-          e.changes.some(
-            (c) =>
-              c.range.startLineNumber < numLines ||
-              (c.range.startLineNumber === numLines && c.range.startColumn <= lastLineLength),
-          )
-        ) {
-          if (!fixingStart && !e.isUndoing && !e.isRedoing) {
-            editor.trigger('someIdString', e.isUndoing ? 'redo' : 'undo', null);
-          }
-
-          fixingStart = !fixingStart;
+        // in monaco editor, the first line is e1e1e
+        // do net let them type if they are editing before lineWithUserCode
+        if (e.changes.some((c) => c.range.startLineNumber <= lineWithUserCode + 1)) {
+          editor.trigger('someIdString', 'undo', null);
         }
 
         typeCheck().catch(console.error);
