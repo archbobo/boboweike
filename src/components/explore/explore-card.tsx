@@ -1,11 +1,11 @@
 import { ArrowBigUp } from 'lucide-react';
 
-import { type Challenges } from '.';
+import { type Challenge } from '.';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
 import { DifficultyBadge } from './difficulty-badge';
 
 interface Props {
-  challenge: Awaited<Challenges>[0];
+  challenge: Awaited<Challenge>[0];
 }
 
 const BORDERS_BY_DIFFICULTY = {
@@ -52,18 +52,17 @@ const getRelativeTime = (date: Date) => {
   const elapsed = date - now;
 
   // "Math.abs" accounts for both "past" & "future" scenarios
-  for (const u in units) {
-    // @ts-ignore
+  // @ts-ignore
+  for (const u in units)
     if (Math.abs(elapsed) > units[u] || u == 'second')
       // @ts-ignore
       return rtf.format(Math.round(elapsed / units[u]), u);
-  }
 };
 
 export function ExploreCard({ challenge }: Props) {
   return (
     <Card
-      className={`hover:bg-card-hovered group-focus:bg-card-hovered group duration-300 ${
+      className={`group duration-300 hover:bg-card-hovered group-focus:bg-card-hovered ${
         SHADOWS_BY_DIFFICULTY[challenge.difficulty]
       } ${BORDERS_BY_DIFFICULTY[challenge.difficulty]}`}
     >
