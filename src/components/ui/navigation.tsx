@@ -60,9 +60,9 @@ export function Navigation() {
               </svg>
 
               <span className="font-bold leading-3">
-                type
-                <br />
-                hero
+                波波
+                {/* <br /> */}
+                微课
               </span>
             </a>
           </div>
