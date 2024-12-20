@@ -6,10 +6,6 @@ import { Bookmark as BookmarkIcon, Share, ThumbsUp } from 'lucide-react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { useRef, useState } from 'react';
-import ReactMarkdown from 'react-markdown';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import remarkGfm from 'remark-gfm';
 import { Button } from '~/components/ui/button';
 import {
   Dialog,
@@ -36,6 +32,7 @@ import { Checkbox } from '../ui/checkbox';
 import { TypographyLarge } from '../ui/typography/large';
 import { addReport } from './report.action';
 import { toast } from '../ui/use-toast';
+import { Markdown } from './markdown';
 
 interface Props {
   challenge: NonNullable<Challenge>;
@@ -360,34 +357,7 @@ export function DescriptionPanel({ challenge }: Props) {
               </TooltipProvider>
             </div>
             <div className="prose-invert leading-8 prose-h3:text-xl">
-              {/* @ts-ignore */}
-              <ReactMarkdown
-                remarkPlugins={[remarkGfm]}
-                components={{
-                  p: ({ ...props }) => <p className="mb-4" {...props} />,
-                  code({ inline, className, children, ...props }) {
-                    const match = /language-(\w+)/.exec(className || '');
-                    return !inline && match ? (
-                      <SyntaxHighlighter
-                        // @ts-ignore
-                        style={vscDarkPlus} // theme
-                        className="rounded-xl dark:rounded-md"
-                        language={match[1]}
-                        PreTag="section" // parent tag
-                        {...props}
-                      >
-                        {String(children).replace(/\n$/, '')}
-                      </SyntaxHighlighter>
-                    ) : (
-                      <code className="rounded-md bg-neutral-200 p-1 font-mono dark:bg-black">
-                        {children}
-                      </code>
-                    );
-                  },
-                }}
-              >
-                {challenge?.description}
-              </ReactMarkdown>
+              <Markdown>{challenge.description as string}</Markdown>
             </div>
           </div>
         </TabsContent>
