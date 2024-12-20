@@ -135,6 +135,8 @@ export const CodePanel = ({ challenge }: Props) => {
         onError(hasErrors);
       };
 
+      // TODO: we prolly should use this for blocking ranges as it might not be as janky
+      // https://github.com/Pranomvignesh/constrained-editor-plugin
       model.onDidChangeContent((e) => {
         // in monaco editor, the first line is e1e1e
         // do net let them type if they are editing before lineWithUserCode
