@@ -81,8 +81,7 @@ Once the server is running you can seed and sync data
 if you ever need to blow away everything in your data and reseed run:
 
 ```
-pnpm reset
-pnpx prisma db seed
+pnpm refresh
 ```
 
 [new-oauth]: https://github.com/settings/applications/new
