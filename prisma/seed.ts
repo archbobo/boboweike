@@ -26,7 +26,7 @@ try {
     update: {},
     create: {
       id: trashId,
-      email: 'chris@typehero.dev',
+      email: 'chris@boboweike.cn',
       name: 'chris',
       Challenge: challenges(),
     },
@@ -37,7 +37,7 @@ try {
     update: {},
     create: {
       id: gId,
-      email: 'g@typehero.dev',
+      email: 'g@boboweike.cn',
       name: 'g',
       Challenge: challenges(),
     },
