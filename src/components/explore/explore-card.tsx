@@ -1,6 +1,6 @@
 'use client';
 
-import { ArrowBigUp } from 'lucide-react';
+import { ThumbsUp } from 'lucide-react';
 
 import { type Challenge } from '.';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
@@ -111,8 +111,9 @@ export function ExploreCard({ challenge }: Props) {
             <div className="flex items-center">
               <DifficultyBadge difficulty={challenge.difficulty} />
             </div>
-            <div className="ml-4 flex items-center">
-              <ArrowBigUp /> {challenge._count.Vote}
+            <div className="ml-4 flex items-center justify-center text-center">
+              <ThumbsUp size={20} className="mr-2" />
+              <span>{challenge._count.Vote}</span>
             </div>
           </div>
           <div>Updated {getRelativeTime(challenge.updatedAt)}</div>
