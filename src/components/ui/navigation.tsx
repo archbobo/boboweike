@@ -98,9 +98,9 @@ export function Navigation() {
               </svg>
 
               <span className="font-bold leading-3">
-                type
+                波波
                 <br />
-                hero
+                微课
               </span>
             </a>
             <NavigationMenu className="pl-6">

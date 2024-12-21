@@ -48,6 +48,7 @@
     --popover-foreground: 0 0% 98%;
 
     --card: 240 10% 3.9%;
+    --card-hovered: 240 10% 6.9%;
     --card-foreground: 0 0% 98%;
 
     --border: 240 3.7% 15.9%;
@@ -83,4 +84,27 @@ body,
 #__next,
 main {
   height: 100%;
+}
+
+#leftBall {
+  animation: balls 5s linear infinite alternate;
+}
+
+#riteBall {
+  animation: balls 5s linear infinite alternate;
+}
+
+@keyframes balls {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@media (pointer: coarse) {
+  #cursorthing {
+    display: none;
+  }
 }
