@@ -49,9 +49,7 @@ export default function Index() {
           className="pointer-events-none fixed left-0 top-0 z-10 h-20 w-20 rounded-full border border-neutral-400 duration-75 ease-out dark:border-neutral-700"
         />
         <h1 className="bg-gradient-to-r from-[#3178c6] to-black bg-clip-text text-center text-9xl font-black text-transparent dark:to-white">
-          波波
-          <br />
-          微课
+          波波微课
         </h1>
         <p className="font-bold">💪 挑战 🧠 学习 📈 提升</p>
 
