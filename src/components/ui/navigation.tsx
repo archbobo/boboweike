@@ -63,7 +63,7 @@ export function Navigation() {
     <header className="w-full">
       <nav
         className={`flex h-14 items-center ${
-          pathname.includes('/challenge') ? 'px-4' : 'container'
+          pathname.includes('/challenge') || pathname.includes('/create') ? 'px-4' : 'container'
         }`}
       >
         <div className="flex w-full items-center justify-between">
@@ -97,7 +97,11 @@ export function Navigation() {
                 </defs>
               </svg>
 
-              <span className="font-bold leading-3">波波微课</span>
+              <span className="font-bold leading-3">
+                type
+                <br />
+                hero
+              </span>
             </a>
             <NavigationMenu className="pl-6">
               <NavigationMenuList>
