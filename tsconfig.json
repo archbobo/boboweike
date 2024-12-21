@@ -41,7 +41,7 @@
     "./src/**/*.cjs",
     "./src/**/*.mjs",
     ".next/types/**/*.ts"
-  ],
+, "src/app/create/page.tsx.bak"  ],
   "exclude": [
     "node_modules"
   ]
