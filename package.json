@@ -1,5 +1,5 @@
 {
-  "name": "boboweike",
+  "name": "type-hero",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -8,8 +8,8 @@
     "postinstall": "prisma generate",
     "lint": "next lint",
     "reset": "prisma db push --force-reset --preview-feature",
-    "start": "next start",
     "format": "prettier -w 'src/**/*.{ts,tsx,css,cjs,mjs,json}'",
+    "start": "next start",
     "refresh": "pnpm reset && pnpm prisma db seed",
     "typecheck": "tsc --noEmit",
     "prepare": "husky install"
@@ -95,5 +95,10 @@
   "prisma": {
     "schema": "./prisma/schema.prisma",
     "seed": "npx tsx ./prisma/seed.ts"
+  },
+  "pnpm": {
+    "patchedDependencies": {
+      "next-auth@4.22.1": "patches/next-auth@4.22.1.patch"
+    }
   }
 }
