@@ -10,7 +10,7 @@ const units = {
 
 const rtf = new Intl.RelativeTimeFormat('en', {
   numeric: 'auto',
-  style: 'short',
+  style: 'long',
 });
 
 export const getRelativeTime = (date: Date) => {
