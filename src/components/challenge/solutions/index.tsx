@@ -7,6 +7,7 @@ import type { Challenge } from '..';
 import { SolutionEditor } from './solution-editor';
 import { useState } from 'react';
 import { SharedSolution } from '@prisma/client';
+import { getRelativeTime } from '~/utils/relativeTime';
 
 interface Props {
   challenge: NonNullable<Challenge>;
@@ -33,7 +34,7 @@ export function Solutions({ challenge }: Props) {
                 All
               </div>
               <div className="flex gap-2 rounded-xl bg-black/5 px-4 py-1 text-neutral-500 dark:bg-white/5 dark:text-neutral-400">
-                Tag 2
+                generics
               </div>
             </div>
             <Button
@@ -67,14 +68,14 @@ function SolutionRow({
         <div className="rounded-full bg-neutral-200 px-2 py-1 text-xs font-bold text-neutral-600 dark:bg-neutral-700 dark:text-neutral-400">
           {solution.user?.name}
         </div>
-        <div>{date.toLocaleString()}</div>
+        <div>{getRelativeTime(solution.createdAt)}</div>
       </div>
       <div className="flex gap-3 text-neutral-600 duration-300 dark:text-neutral-400">
         <button className="flex cursor-pointer items-center gap-2 rounded-full bg-emerald-600/10 px-2 py-1 text-sm text-emerald-600 duration-300 hover:bg-emerald-400/40 dark:bg-emerald-400/20 dark:text-emerald-400 dark:hover:bg-emerald-400/40">
-          <ArrowUp className="h-4 w-4 stroke-1" /> 70
+          <ArrowUp className="h-4 w-4 stroke-1" /> {solution._count.vote}
         </button>
         <button className="flex cursor-pointer items-center gap-2 rounded-full bg-black/5 px-2 py-1 text-sm duration-300 hover:bg-black/20 dark:bg-white/5 dark:hover:bg-white/20">
-          <MessageCircle className="h-4 w-4 stroke-1" /> 69
+          <MessageCircle className="h-4 w-4 stroke-1" /> {solution._count.solutionComment}
         </button>
       </div>
     </div>
