@@ -26,9 +26,9 @@ try {
     update: {},
     create: {
       id: trashId,
-      email: 'chris@boboweike.cn',
+      email: 'chris@typehero.dev',
       name: 'chris',
-      Challenge: challenges(),
+      challenge: challenges(),
     },
   });
 
@@ -37,9 +37,9 @@ try {
     update: {},
     create: {
       id: gId,
-      email: 'g@boboweike.cn',
+      email: 'g@typehero.dev',
       name: 'g',
-      Challenge: challenges(),
+      challenge: challenges(),
     },
   });
 
