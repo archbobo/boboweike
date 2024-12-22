@@ -13,6 +13,7 @@ const DialogTrigger = DialogPrimitive.Trigger;
 // @ts-ignore
 const DialogPortal = ({ className, ...props }: DialogPrimitive.DialogPortalProps) => (
   // @ts-ignore
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
   <DialogPrimitive.Portal className={cn(className)} {...props} />
 );
 DialogPortal.displayName = DialogPrimitive.Portal.displayName;
