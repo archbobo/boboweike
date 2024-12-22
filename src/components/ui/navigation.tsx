@@ -26,6 +26,7 @@ import {
 } from './dropdown-menu';
 import { useSession } from 'next-auth/react';
 import { RoleTypes } from '@prisma/client';
+import { isProd } from '~/utils/featureFlags';
 
 export function Navigation() {
   const [mounted, setMounted] = useState(false);
@@ -97,7 +98,11 @@ export function Navigation() {
                 </defs>
               </svg>
 
-              <span className="font-bold leading-3">波波微课</span>
+              <span className="font-bold leading-3">
+                type
+                <br />
+                hero
+              </span>
             </a>
             <NavigationMenu className="pl-6">
               <NavigationMenuList>
@@ -108,12 +113,14 @@ export function Navigation() {
                     </NavigationMenuLink>
                   </Link>
                 </NavigationMenuItem>
-                <NavigationMenuItem className="hidden sm:block">
-                  <NavigationMenuTrigger>Something Nice</NavigationMenuTrigger>
-                  <NavigationMenuContent>
-                    <NavigationMenuLink>Nice</NavigationMenuLink>
-                  </NavigationMenuContent>
-                </NavigationMenuItem>
+                {!isProd() && (
+                  <NavigationMenuItem className="hidden sm:block">
+                    <NavigationMenuTrigger>Something Nice</NavigationMenuTrigger>
+                    <NavigationMenuContent>
+                      <NavigationMenuLink>Nice</NavigationMenuLink>
+                    </NavigationMenuContent>
+                  </NavigationMenuItem>
+                )}
               </NavigationMenuList>
             </NavigationMenu>
           </div>
