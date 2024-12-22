@@ -73,7 +73,7 @@ export default async function Dashboard({ user }: Props) {
         <Tabs defaultValue="in-progress" className="space-y-4">
           <TabsList className="rounded-full border border-border bg-background">
             <TabsTrigger
-              className="rounded-lg duration-300 data-[state=active]:bg-border"
+              className="rounded-lg rounded-l-2xl duration-300 data-[state=active]:bg-border"
               value="in-progress"
             >
               In-Progress
