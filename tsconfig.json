@@ -46,7 +46,7 @@
     ".next/types/**/*.ts",
     "scripts/dl-monaco.mjs",
     "./prisma/*.ts"
-, "src/app/create/page.tsx"],
+, "src/app/create/page.tsx.bak"],
   "exclude": [
     "node_modules",
 		"*.d.ts",
