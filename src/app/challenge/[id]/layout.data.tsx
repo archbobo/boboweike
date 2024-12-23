@@ -1,30 +1,23 @@
-import { getServerSession, type Session } from 'next-auth';
-import { notFound } from 'next/navigation';
+'use server';
+import { type Session, getServerSession } from 'next-auth';
+import { ChallengeLayout } from '~/components/challenge/challenge-layout';
+import { CodePanel } from '~/components/challenge/editor';
 import { prisma } from '~/server/db';
 
-import { ChallengeLayout } from './challenge-layout';
-import { DescriptionPanel } from './description-panel';
-import { CodePanel } from './editor';
-
-interface Props {
-  id: string;
-}
-
-export type Challenge = Awaited<ReturnType<typeof getChallenge>>;
-
-export async function Challenge({ id }: Props) {
+export async function LayoutData({
+  children,
+  challengeId,
+}: {
+  children: React.ReactNode;
+  challengeId: string;
+}) {
   const session = await getServerSession();
-  const challenge = await getChallenge(id, session);
-
-  if (!challenge || typeof challenge.prompt !== 'string') {
-    return notFound();
-  }
-
+  const challenge = await getChallenge(challengeId, session);
+  if (!challenge) return <div>loading</div>;
+  // if on submissions/{id} feed the overlay as right panel
+  // else use editor
   return (
-    <ChallengeLayout
-      left={<DescriptionPanel challenge={challenge} />}
-      right={<CodePanel mode="solve" challenge={challenge} />}
-    />
+    <ChallengeLayout left={children} right={<CodePanel mode="solve" challenge={challenge} />} />
   );
 }
 

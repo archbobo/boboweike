@@ -7,7 +7,7 @@ import { Form, FormControl, FormField, FormItem, FormMessage } from '~/component
 import { Input } from '~/components/ui/input';
 import { useToast } from '~/components/ui/use-toast';
 import { postSolution } from './post-solution.action';
-import type { Challenge } from '..';
+import { type Challenge } from '~/app/challenge/[id]/layout';
 import { useSession } from 'next-auth/react';
 import { useTheme } from 'next-themes';
 import { useRouter } from 'next/navigation';
@@ -62,6 +62,9 @@ export function SolutionEditor({ setOpen, challenge }: Props) {
         variant: 'success',
         title: 'Your solution has been posted!',
       });
+
+      // refresh the router so we see latest data
+      router.refresh();
     } catch (error) {
       toast({
         variant: 'destructive',
