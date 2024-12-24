@@ -85,3 +85,6 @@ pnpm refresh
 ```
 
 [new-oauth]: https://github.com/settings/applications/new
+
+#### Dependencies
+UI Library: [shadcn](https://ui.shadcn.com/)
