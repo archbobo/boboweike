@@ -21,9 +21,9 @@ export default function Index() {
         <p className="font-bold">💪 挑战 🧠 学习 📈 提升</p>
 
         <p className="max-w-[80ch] bg-transparent text-center text-neutral-600 dark:text-neutral-400">
-          Connect and collaborate with a community of TypeScript developers on Type Hero. Engage in
+          Connect and collaborate with a community of TypeScript developers on 波波微课. Engage in
           discussions, create challenges, and share insights with fellow typescript enthusiasts.
-          Type Hero has collaborative coding challenges that foster a supportive and inspiring
+          波波微课 has collaborative coding challenges that foster a supportive and inspiring
           environment, where you can learn from others and showcase your expertise.
         </p>
       </div>
