@@ -87,6 +87,7 @@
     "eslint": "^8.40.0",
     "eslint-config-next": "^13.4.2",
     "husky": "^8.0.0",
+    "lint-staged": "^13.2.3",
     "postcss": "^8.4.21",
     "prettier": "^2.8.8",
     "prettier-plugin-tailwindcss": "^0.2.8",
@@ -100,5 +101,8 @@
   "prisma": {
     "schema": "./prisma/schema.prisma",
     "seed": "npx tsx ./prisma/seed.ts"
+  },
+  "lint-staged": {
+    "src/**/*.{ts,tsx,css}": "prettier --write"
   }
 }
