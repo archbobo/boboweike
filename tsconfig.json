@@ -1,11 +1,7 @@
 {
   "compilerOptions": {
     "target": "es2017",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "checkJs": true,
     "skipLibCheck": true,
@@ -22,9 +18,7 @@
     "noUncheckedIndexedAccess": true,
     "baseUrl": ".",
     "paths": {
-      "~/*": [
-        "./src/*"
-      ]
+      "~/*": ["./src/*"]
     },
     "plugins": [
       {
@@ -47,9 +41,6 @@
     ".next/types/**/*.ts",
     "scripts/dl-monaco.mjs",
     "./prisma/*.ts"
-, "src/app/create/page.tsx.bak"  ],
-  "exclude": [
-    "node_modules",
-		"*.d.ts",
-  ]
+, "src/app/create/page.tsx.bak", "src/app/create/preview/page.tsx.bak"  ],
+  "exclude": ["node_modules"]
 }
