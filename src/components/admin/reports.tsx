@@ -135,7 +135,7 @@ export const ReportDetails = ({ data }: ReportsProps) => {
               <TableRow
                 onClick={() => {
                   setSelectedIssue(report);
-                  setDialogOpen(true);
+                  router.push(`/admin/report/${report.id}`);
                 }}
                 className="hover:cursor-pointer"
                 key={reportIdx}
