@@ -1,6 +1,6 @@
 import Head from 'next/head';
-import Community from '~/components/landing/community';
 import Features from '~/components/landing/features';
+import Community from '~/components/landing/community';
 import Hero from '~/components/landing/hero';
 import { Footsies } from '~/components/ui/footsies';
 
