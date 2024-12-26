@@ -26,5 +26,15 @@ async function getSolution(solutionId: string) {
     },
   });
 
-  return solution;
+  const f = await prisma.comment.findMany({
+    where: {
+      rootType: 'SOLUTION',
+      rootSolutionId: +solutionId,
+    },
+  });
+
+  return {
+    ...solution,
+    jimComments: f,
+  };
 }
