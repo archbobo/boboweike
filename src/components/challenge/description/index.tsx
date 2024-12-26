@@ -133,7 +133,7 @@ export function Description({ challenge }: Props) {
     }
   }
   return (
-    <div className="px-4 py-3">
+    <div className="custom-scrollable-element h-full overflow-y-auto px-4 pb-36 pt-3">
       {/* NOTE: collapse this element */}
       <div className="flex items-center gap-4">
         <TypographyH3 className="mb-2 mr-auto max-w-[75%] items-center truncate text-2xl font-bold">
