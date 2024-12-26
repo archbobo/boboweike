@@ -1,6 +1,6 @@
 name: CI
 
-on: [ push, pull_request ]
+on: [push, pull_request]
 
 env:
   DATABASE_URL: 'postgres://fake.com'
@@ -12,6 +12,10 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
+
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+      cancel-in-progress: true
 
     steps:
       - name: Checkout

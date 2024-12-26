@@ -40,7 +40,7 @@
     "./src/**/*.mjs",
     ".next/types/**/*.ts",
     "scripts/dl-monaco.mjs",
-    "./prisma/*.ts" 
+    "./prisma/*.ts"
   ],
 "exclude": ["node_modules", ".next"]
 }
