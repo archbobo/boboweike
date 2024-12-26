@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import Features from '~/components/landing/features';
-import Community from '~/components/landing/community';
 import Hero from '~/components/landing/hero';
 import { Footsies } from '~/components/ui/footsies';
 
@@ -17,7 +16,7 @@ export default async function Index() {
       </Head>
       <Hero />
       <Features />
-      <Community />
+      {/* <Community /> */}
       <Footsies />
     </>
   );
