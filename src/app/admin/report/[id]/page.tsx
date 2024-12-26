@@ -16,7 +16,7 @@ export interface Props {
   };
 }
 
-export default async function getReport(props: Props) {
+const Report = async function (props: Props) {
   const idNum = Number(props.params.id);
   // Double check that we have a number, redirect out if we don't
   if (isNaN(idNum)) {
@@ -122,4 +122,6 @@ export default async function getReport(props: Props) {
       </section>
     </div>
   );
-}
+};
+
+export default Report;

@@ -1,6 +1,6 @@
 'use client';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Delete, Trash2, Reply } from 'lucide-react';
+import { Delete, Trash2, Reply, Share } from 'lucide-react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -17,7 +17,6 @@ import { reportChallengeComment } from './comment.action';
 import { Tooltip, TooltipContent, TooltipTrigger } from '~/components/ui/tooltip';
 import { UserBadge } from '~/components/ui/user-badge';
 import { useSession } from 'next-auth/react';
-// import { Markdown } from '~/components/ui/markdown';
 
 interface CommentProps {
   comment: ChallengeRouteData['comment'][number];
@@ -58,6 +57,28 @@ const Comment = ({ comment }: CommentProps) => {
       threat: false,
     },
   });
+
+  async function copyPathNotifyUser() {
+    try {
+      await copyCommentUrlToClipboard();
+      toast({
+        title: 'Success!',
+        variant: 'success',
+        description: <p>Copied comment URL to clipboard!</p>,
+      });
+    } catch (error) {
+      console.error(error);
+      toast({
+        title: 'Failure!',
+        variant: 'destructive',
+        description: <p>Something went wrong!</p>,
+      });
+    }
+  }
+
+  async function copyCommentUrlToClipboard() {
+    await navigator.clipboard.writeText(`${window.location.href}/comment/${comment.id}`);
+  }
 
   async function handleCommentReport(data: CommentReportSchemaType) {
     try {
@@ -112,15 +133,24 @@ const Comment = ({ comment }: CommentProps) => {
           </Tooltip>
         </div>
 
-        <div className="flex gap-2">
+        <div className="flex items-center gap-2">
+          <div
+            onClick={() => {
+              copyPathNotifyUser();
+            }}
+            className="flex cursor-pointer items-center gap-1 text-neutral-500 duration-200 hover:text-neutral-400 hover:underline"
+          >
+            <Share className="h-3 w-3" />
+            <small className="font-md text-sm leading-none">Share</small>
+          </div>
           {/* TODO: make dis work */}
-          <button className="flex cursor-pointer items-center gap-1 text-sm text-neutral-400 duration-200 hover:text-neutral-500 hover:underline dark:text-neutral-600 dark:hover:text-neutral-500">
+          <button className="flex cursor-pointer items-center gap-1 text-sm text-neutral-500 duration-200 hover:text-neutral-400 hover:underline dark:text-neutral-500 dark:hover:text-neutral-400">
             <Reply className="h-3 w-3" />
             Reply
           </button>
           {/* TODO: make dis work */}
           {isAuthor ? (
-            <button className="flex cursor-pointer items-center gap-1 text-sm text-neutral-400 duration-200 hover:text-neutral-500 hover:underline dark:text-neutral-600 dark:hover:text-neutral-500">
+            <button className="flex cursor-pointer items-center gap-1 text-sm text-neutral-500 duration-200 hover:text-neutral-400 hover:underline dark:text-neutral-500 dark:hover:text-neutral-400">
               <Trash2 className="h-3 w-3" />
               Delete
             </button>
@@ -170,6 +200,7 @@ const Comment = ({ comment }: CommentProps) => {
               </div>
               <p className="max-h-[30vh] overflow-y-auto">{comment.text}</p>
             </div>
+
             <Form {...form}>
               {/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
               <form onSubmit={form.handleSubmit(handleCommentReport)}>
@@ -295,6 +326,7 @@ const Comment = ({ comment }: CommentProps) => {
                     </p>
                   )}
                 </div>
+
                 <div className="flex pt-4">
                   <Button type="submit" className="w-full">
                     Report
