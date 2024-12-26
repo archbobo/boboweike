@@ -1,8 +1,8 @@
 import { Github } from 'lucide-react';
-import FakeChallengeCard from './fake-challeng-card';
+import FakeChallengeCards from './fake-challeng-card';
 
 const Hero = () => (
-  <div className="container mb-[56px] grid min-h-[calc(100lvh_-_112px)] grid-cols-2 items-center">
+  <div className="container mb-[56px] grid min-h-[calc(100lvh_-_112px)] items-center justify-center lg:grid-cols-2">
     {/* background film grain noise effect */}
     {/* <svg className="pointer-events-none mix-blend-soft-light opacity-50 z-10 fixed left-0 top-0 h-full w-full" id="grain">
       <filter id="noise">
@@ -10,12 +10,12 @@ const Hero = () => (
       </filter>
       <rect width="100%" height="100%" filter="url(#noise)"></rect>
     </svg> */}
-    <div className="flex h-full flex-col justify-center gap-10 overflow-visible">
-      <div className="relative mr-auto flex items-center gap-5">
+    <div className="flex h-full flex-col items-center justify-center gap-10 overflow-visible text-white lg:items-start">
+      <div className="relative flex items-center gap-5 lg:mr-auto">
         <div className="absolute left-1/2 top-1/2 -z-10 hidden h-56 w-56 -translate-x-[15%] -translate-y-1/2 rounded-full bg-white/10 blur-2xl dark:block lg:h-96 lg:w-96 lg:blur-3xl"></div>
         <div className="absolute right-1/2 top-1/2 -z-10 hidden h-56 w-56 -translate-y-1/2 translate-x-[15%] rounded-full bg-[#3178c6]/20 blur-2xl dark:block lg:h-96 lg:w-96 lg:blur-3xl"></div>
         <svg
-          className="h-44 w-44 rounded-[2rem] bg-[#3178C6] p-[2px] dark:bg-[#3178C6]"
+          className="h-28 w-28 rounded-3xl bg-[#3178C6] p-[2px] dark:bg-[#3178C6] sm:h-44 sm:w-44 sm:rounded-[2rem]"
           viewBox="0 0 512 512"
           xmlns="http://www.w3.org/2000/svg"
         >
@@ -41,15 +41,15 @@ const Hero = () => (
             </clipPath>
           </defs>
         </svg>
-        <h1 className="bg-gradient-to-r from-[#3178c6] from-30% to-black bg-clip-text text-7xl font-black text-transparent dark:from-[#3178c6] dark:to-white md:text-8xl">
-          波波
+        <h1 className="bg-gradient-to-r from-[#3178c6] from-30% to-black bg-clip-text text-6xl font-black text-transparent dark:from-[#3178c6] dark:to-white sm:text-8xl">
+          type
           <br />
-          微课
+          hero
         </h1>
       </div>
-      <p className="max-w-[50ch] bg-transparent leading-9 text-black/50 dark:text-white/50">
+      <p className="max-w-[50ch] bg-transparent text-center leading-9 text-black/50 dark:text-white/50 lg:text-left">
         Connect, collaborate, and grow with a community of TypeScript developers. Elevate your
-        skills trough interactive coding challenges, discussions, and knowledge sharing
+        skills through interactive coding challenges, discussions, and knowledge sharing
         {/* Connect and collaborate with a community of TypeScript developers on Type Hero.
         Engage in discussions, create challenges, and share insights with fellow typescript
         enthusiasts. Type Hero has collaborative coding challenges that foster a supportive and
@@ -66,7 +66,7 @@ const Hero = () => (
       </div>
     </div>
 
-    <div className="relative hidden h-3/4 w-full rounded-full md:block">
+    <div className="relative hidden h-3/4 w-full overflow-visible rounded-full lg:block">
       <div
         className="movingbackground absolute -inset-40 top-1/2 -z-30 aspect-square -translate-y-1/2 rounded-full shadow-[inset_0_0_5rem_5rem] shadow-background"
         style={{
@@ -75,9 +75,7 @@ const Hero = () => (
             'linear-gradient(to right, #8888 1px, transparent 1px), linear-gradient(to bottom, #8888 1px, transparent 1px)',
         }}
       ></div>
-      <div className="relative mx-auto h-full w-4/5">
-        <FakeChallengeCard />
-      </div>
+      <FakeChallengeCards />
     </div>
   </div>
 );
