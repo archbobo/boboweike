@@ -3,7 +3,7 @@ import { Button } from '~/components/ui/button';
 import { FakeChallengeCard } from '~/components/landing/fake-challenge-card';
 import Link from 'next/link';
 
-const BoboWeikeLogo = () => {
+const TypeHeroLogo = () => {
   return (
     <svg
       fill="none"
@@ -30,27 +30,19 @@ const BoboWeikeLogo = () => {
 };
 
 const Hero = () => (
-  <section className="overflow-x-hidden">
-    <svg
-      className="pointer-events-none absolute left-0 top-0 z-10 h-full w-full opacity-50 mix-blend-soft-light"
-      id="grain"
-    >
-      <filter id="noise">
-        <feTurbulence
-          type="fractalNoise"
-          baseFrequency="1"
-          numOctaves="5"
-          stitchTiles="stitch"
-        ></feTurbulence>
-      </filter>
-      <rect width="100%" height="100%" filter="url(#noise)"></rect>
-    </svg>
-    <div className="container mb-[56px] grid min-h-[calc(100lvh_-_112px)] items-center justify-center lg:grid-cols-2">
+  <section className="lg:overflow-x-hidden">
+    {/* <svg className="pointer-events-none mix-blend-soft-light opacity-50 z-10 absolute left-0 top-0 h-full w-full" id="grain">
+    <filter id="noise">
+      <feTurbulence type="fractalNoise" baseFrequency="1" numOctaves="5" stitchTiles="stitch"></feTurbulence>
+    </filter>
+    <rect width="100%" height="100%" filter="url(#noise)"></rect>
+  </svg> */}
+    <div className="container mb-[56px] grid min-h-[calc(100lvh_-_112px)] items-center justify-center md:px-24 lg:grid-cols-2">
       <div className="flex w-full flex-col items-center justify-center gap-10 lg:items-start">
         <div className="relative flex w-full items-center justify-center gap-4 lg:justify-start">
-          <div className="absolute left-1/2 top-1/2 -z-10 hidden h-56 w-56 -translate-x-[15%] -translate-y-[50%] rounded-full bg-slate-400/20 blur-3xl dark:block"></div>
+          <div className="absolute left-1/2 top-1/2 -z-10 hidden h-56 w-56 -translate-x-[15%] -translate-y-[50%] rounded-full bg-slate-400/10 blur-3xl dark:block"></div>
           <div className="absolute right-1/2 top-1/2 -z-10 hidden h-56 w-56 -translate-y-[40%] rounded-full bg-[#3178c6]/20 blur-3xl dark:block"></div>
-          <BoboWeikeLogo />
+          <TypeHeroLogo />
           <h1 className="bg-gradient-to-r from-[#3178c6] to-black bg-clip-text text-6xl font-extrabold text-transparent dark:to-white sm:text-8xl sm:leading-[5.5rem]">
             波波
             <br />
@@ -63,8 +55,11 @@ const Hero = () => (
           skills trough interactive coding challenges, discussions, and knowledge sharing
         </p>
         <div className="flex gap-3">
-          <Button className="flex items-center gap-2 rounded-xl px-4 py-2 font-bold" asChild>
-            <Link href="/explore">Explore challenges</Link>
+          <Button className="group relative flex items-center gap-2 overflow-hidden rounded-xl px-4 py-2 font-bold duration-500 dark:hover:text-white">
+            <div className="absolute h-44 w-44 -translate-x-full rounded-full bg-[#3178C6] duration-500 group-hover:translate-x-0" />
+            <Link className="z-10" href="/explore">
+              Explore challenges
+            </Link>
           </Button>
           <Button
             className="flex items-center gap-2 rounded-xl border-2 px-4 py-2 dark:text-white"
@@ -79,15 +74,16 @@ const Hero = () => (
         </div>
       </div>
 
-      <div className="relative hidden h-[800px] w-full overflow-visible  lg:block">
-        <div className="background absolute -z-30 aspect-square h-[750px] w-[650px] translate-x-[-30px] shadow-[inset_0_0_5rem_3rem] shadow-background"></div>
+      <div className="group relative hidden h-[800px] overflow-visible rounded-full lg:block">
+        <div className="moving-grid-background absolute -inset-40 top-1/2 -z-30 aspect-square -translate-y-1/2 translate-x-[-30px] rounded-full shadow-[inset_0_0_5rem_3rem] shadow-background" />
         <FakeChallengeCard
-          className="absolute z-10 translate-x-[77px] translate-y-[258px]"
-          title="Implement a generic type"
+          className="absolute translate-x-[100px] translate-y-[116px] group-hover:z-10 group-hover:translate-x-[27px] group-hover:translate-y-[256px] xl:translate-x-[190px] xl:group-hover:translate-x-[77px]"
+          title="Implement a JSON parser type"
         />
         <FakeChallengeCard
-          className="absolute translate-x-[190px] translate-y-[116px]"
-          title="Implement a JSON parser type"
+          difficulty="EASY"
+          className="absolute translate-x-[27px] translate-y-[256px] group-hover:translate-x-[100px] group-hover:translate-y-[116px] xl:translate-x-[77px] xl:group-hover:translate-x-[190px]"
+          title="Implement a generic type"
         />
       </div>
     </div>
