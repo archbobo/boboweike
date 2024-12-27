@@ -88,9 +88,9 @@ const Comments = ({ challengeId, commentCount }: Props) => {
   return (
     <div
       className={clsx(
-        'sticky bottom-0 overflow-hidden border-zinc-300 bg-background/90 shadow-[0_0_3rem_-0.25rem_#0004] backdrop-blur-sm duration-300 dark:border-zinc-700 dark:border-b-muted dark:bg-muted/90 dark:shadow-[0_0_3rem_-0.25rem_#0008]',
+        'sticky bottom-0 overflow-hidden border-t border-zinc-300 bg-background/90 shadow-[0_0_3rem_-0.25rem_#0004] backdrop-blur-sm duration-300 dark:border-zinc-700 dark:border-b-muted dark:bg-muted/90 dark:shadow-[0_0_3rem_-0.25rem_#0008]',
         {
-          'border-t': !showComments,
+          'lg:border-t-none': showComments,
         },
       )}
     >
@@ -113,7 +113,7 @@ const Comments = ({ challengeId, commentCount }: Props) => {
           className={clsx(
             'custom-scrollable-element flex flex-col-reverse overscroll-contain duration-300',
             {
-              'h-[64] pb-2 md:h-[calc(100vh_-_247px)]': showComments,
+              'h-36 pb-2 lg:h-[calc(100vh_-_247px)]': showComments,
               'h-0 overflow-y-hidden': !showComments,
               'overflow-y-auto': showComments && data?.pages[0]?.data.length !== 0,
             },
@@ -156,8 +156,8 @@ const Comments = ({ challengeId, commentCount }: Props) => {
                 text.length > MAX_COMMENT_LENGTH
                   ? 'text-red-600 dark:text-red-400'
                   : text.length > MAX_COMMENT_LENGTH * 0.9
-                    ? 'text-amber-600 dark:text-amber-400'
-                    : 'text-neutral-500 dark:text-zinc-500'
+                  ? 'text-amber-600 dark:text-amber-400'
+                  : 'text-neutral-500 dark:text-zinc-500'
               }`}
             >
               {text.length}/{MAX_COMMENT_LENGTH}

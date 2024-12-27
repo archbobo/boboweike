@@ -56,19 +56,19 @@ const ExploreCard = ({ challenge }: ExploreCardProps) => {
     >
       {challenge.difficulty === 'BEGINNER' && (
         <>
-          <Circle className="absolute -right-4 -top-8 h-24 w-24 stroke-1 text-white/30 duration-300 group-hover:h-20 group-hover:w-20 dark:group-hover:text-black/30"></Circle>
-          <Circle className="absolute -right-4 -top-8 h-32 w-32 stroke-1 text-white/30 duration-500 group-hover:h-28 group-hover:w-28 dark:group-hover:text-black/30"></Circle>
+          <Circle className="absolute -right-4 -top-8 h-24 w-24 origin-top-right stroke-1 text-white/30 duration-300 group-hover:scale-90 dark:group-hover:text-black/30"></Circle>
+          <Circle className="absolute -right-4 -top-8 h-32 w-32 origin-top-right stroke-1 text-white/30 duration-500 group-hover:scale-90 dark:group-hover:text-black/30"></Circle>
         </>
       )}
       {challenge.difficulty === 'EASY' && (
         <>
-          <Diamond className="absolute -right-5 -top-10 h-24 w-24 stroke-1 text-white/30 duration-300 group-hover:h-20 group-hover:w-20 group-hover:rotate-0 dark:group-hover:text-black/30"></Diamond>
-          <Diamond className="absolute -right-5 -top-10 h-32 w-32 rotate-12 stroke-1 text-white/30 duration-500 group-hover:h-28 group-hover:w-28 group-hover:-rotate-12 dark:group-hover:text-black/30"></Diamond>
+          <Diamond className="absolute -right-5 -top-10 h-24 w-24 origin-top-right stroke-1 text-white/30 duration-300 group-hover:scale-90 dark:group-hover:text-black/30"></Diamond>
+          <Diamond className="absolute -right-5 -top-10 h-32 w-32 rotate-12 stroke-1 text-white/30 duration-300 group-hover:-translate-y-2 group-hover:translate-x-2 group-hover:-rotate-12 group-hover:scale-90 dark:group-hover:text-black/30"></Diamond>
         </>
       )}
       {challenge.difficulty === 'MEDIUM' && (
         <>
-          <Triangle className="absolute -right-4 -top-6 h-20 w-20 rotate-[40deg] stroke-2 text-white/50 duration-200 group-hover:rotate-[0deg] group-hover:scale-50 dark:group-hover:text-black/30"></Triangle>
+          <Triangle className="absolute -right-4 -top-6 h-20 w-20 rotate-[40deg] stroke-2 text-white/50 duration-200 group-hover:rotate-0 group-hover:scale-50 dark:group-hover:text-black/30"></Triangle>
           <Triangle className="absolute -right-12 -top-14 h-36 w-36 rotate-45 stroke-1 text-white/50 duration-300 group-hover:h-32 group-hover:w-32 group-hover:rotate-[20deg] dark:group-hover:text-black/30"></Triangle>
         </>
       )}
@@ -81,7 +81,7 @@ const ExploreCard = ({ challenge }: ExploreCardProps) => {
       {challenge.difficulty === 'EXTREME' && (
         <>
           <Sparkle className="absolute -right-4 -top-10 h-24 w-24 stroke-1 text-white/40 duration-500 group-hover:-translate-x-4 group-hover:translate-y-10 group-hover:-rotate-[125deg] dark:group-hover:text-black/30"></Sparkle>
-          <Sparkle className="absolute -right-12 -top-20 h-48 w-48 stroke-1 text-white/40 duration-300 group-hover:h-24 group-hover:w-24 dark:group-hover:text-black/30"></Sparkle>
+          <Sparkle className="absolute -right-12 -top-20 h-48 w-48 origin-top-right stroke-1 text-white/40 duration-300 group-hover:scale-50 dark:group-hover:text-black/30"></Sparkle>
         </>
       )}
       <CardHeader className="relative flex flex-col items-start gap-1 py-5">
@@ -102,13 +102,10 @@ const ExploreCard = ({ challenge }: ExploreCardProps) => {
       </CardHeader>
       <CardContent className="relative flex flex-col justify-between gap-2 rounded-xl bg-background p-6 pb-0 duration-300 group-hover:bg-card-hovered">
         <div className="flex items-center gap-2">
-          <Button
-            size="sm"
-            className="-ml-[0.33rem] flex h-auto w-fit items-center rounded-full bg-transparent py-1 pl-[0.33rem] pr-2 text-xs font-bold text-neutral-700 hover:bg-black/10 dark:text-white dark:hover:bg-white/20"
-          >
+          <div className="-ml-[0.33rem] flex h-auto w-fit items-center whitespace-nowrap rounded-full bg-transparent py-1 pl-[0.33rem] pr-2 text-xs font-bold text-neutral-700 duration-300 hover:bg-black/10 dark:text-white dark:hover:bg-white/20">
             @{challenge.user.name}
-          </Button>
-          <div className="text-sm text-muted-foreground">
+          </div>
+          <div className="whitespace-nowrap text-sm text-muted-foreground">
             {getRelativeTime(challenge.updatedAt)}
           </div>
         </div>

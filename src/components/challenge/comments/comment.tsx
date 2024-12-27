@@ -66,12 +66,14 @@ const Comment = ({ comment }: CommentProps) => {
 
   return (
     <div className="flex flex-col gap-1 p-3 pt-2">
-      <div className="flex justify-between pr-[0.4rem]">
+      <div className="flex items-start justify-between pr-[0.4rem]">
         <div className="flex items-center gap-1">
           <UserBadge username={comment.user.name ?? ''} />
           <Tooltip delayDuration={0.05}>
             <TooltipTrigger asChild>
-              <span className="text-sm text-neutral-500">{getRelativeTime(comment.createdAt)}</span>
+              <span className="mr-2 whitespace-nowrap text-sm text-neutral-500">
+                {getRelativeTime(comment.createdAt)}
+              </span>
             </TooltipTrigger>
             <TooltipContent align="start" className="rounded-xl">
               <span className="text-white-500 text-xs">{comment.createdAt.toLocaleString()}</span>
@@ -79,7 +81,7 @@ const Comment = ({ comment }: CommentProps) => {
           </Tooltip>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center justify-end gap-2">
           <div
             onClick={() => {
               copyPathNotifyUser();
