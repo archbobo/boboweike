@@ -73,7 +73,7 @@ export function Navigation() {
             align="end"
             className="mt-[0.33rem] w-56 rounded-xl bg-white/50 backdrop-blur-sm dark:bg-neutral-950/50"
           >
-            <Link className="block" href="/create">
+            <Link className="block" href="/wizard">
               <DropdownMenuItem className="rounded-lg p-2 duration-300 focus:bg-accent focus:outline-none dark:hover:bg-neutral-700/50">
                 <Plus className="mr-2 h-4 w-4" />
                 <span>Create a Challange</span>
@@ -132,7 +132,7 @@ export function Navigation() {
     <header className="w-full">
       <nav
         className={`flex h-14 items-center ${
-          pathname.includes('/challenge') || pathname.includes('/create') ? 'px-4' : 'container  '
+          pathname.includes('/challenge') ? 'px-4' : 'container  '
         }`}
       >
         <div className="flex w-full items-center justify-between">
@@ -166,7 +166,11 @@ export function Navigation() {
                 </defs>
               </svg>
 
-              <span className="font-bold leading-3">波波微课</span>
+              <span className="font-bold leading-3">
+                type
+                <br />
+                hero
+              </span>
             </a>
 
             {!isProd() && (
