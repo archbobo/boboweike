@@ -1,4 +1,3 @@
-import { getChallengeReports } from '~/components/admin/admin.actions';
 import React from 'react';
 import { prisma } from '~/server/db';
 import { ReportType } from '@prisma/client';
@@ -38,14 +37,11 @@ const f = cva('border p-4 rounded-xl', {
 export default async function ReportPage() {
   const reports = await getReports();
 
-  const bob = reports.reduce(
-    (all, cur) => {
-      if (!all[cur.type]) all[cur.type] = [];
-      all[cur.type].push(cur);
-      return all;
-    },
-    {} as Record<ReportType, (typeof reports)[0][]>,
-  );
+  const bob = reports.reduce((all, cur) => {
+    if (!all[cur.type]) all[cur.type] = [];
+    all[cur.type].push(cur);
+    return all;
+  }, {} as Record<ReportType, (typeof reports)[0][]>);
 
   return (
     <div className="container">

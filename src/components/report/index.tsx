@@ -1,4 +1,4 @@
-import { type IssueType, ReportIssue, ReportType } from '@prisma/client';
+import { type IssueType } from '@prisma/client';
 import React from 'react';
 import {
   type ChallengeReport,
@@ -26,7 +26,6 @@ import { toast } from '~/components/ui/use-toast';
 
 export interface ReportDialogPropsBase {
   triggerAsChild?: boolean;
-  // reportType?: ReportType;
 }
 
 export interface ReportUserDialogProps extends ReportDialogPropsBase {
@@ -60,13 +59,7 @@ export default function ReportDialog({
   | ReportCommentDialogProps
   | ReportSolutionDialogProps
 >) {
-  const {
-    handleSubmit,
-    formState: { errors },
-    register,
-    control,
-    setValue,
-  } = useForm({
+  const { handleSubmit, register, control, setValue } = useForm({
     defaultValues: {
       derogatory: false,
       unclear: false,
@@ -139,17 +132,14 @@ export default function ReportDialog({
             }
 
             // This shit is like... extra jank.
-            const issues = Object.entries(e).reduce(
-              (all, [key, value]) => {
-                if (key === 'comments') return all;
-                if (value)
-                  all.push({
-                    type: key.toUpperCase() as IssueType,
-                  });
-                return all;
-              },
-              [] as { type: IssueType }[],
-            );
+            const issues = Object.entries(e).reduce((all, [key, value]) => {
+              if (key === 'comments') return all;
+              if (value)
+                all.push({
+                  type: key.toUpperCase() as IssueType,
+                });
+              return all;
+            }, [] as { type: IssueType }[]);
 
             const value = await addReport({
               ...args,
@@ -188,7 +178,7 @@ export default function ReportDialog({
             <Text intent="leading">Please select all that apply:</Text>
             <FormField
               name="derogatory"
-              render={({ field }) => (
+              render={() => (
                 <FormItem>
                   <div className="flex items-center gap-2">
                     <Checkbox
@@ -203,7 +193,7 @@ export default function ReportDialog({
             />
             <FormField
               name="derogatory"
-              render={({ field }) => (
+              render={() => (
                 <FormItem>
                   <div className="flex items-center gap-2">
                     <Checkbox
@@ -218,7 +208,7 @@ export default function ReportDialog({
             />
             <FormField
               name="hateSpeech"
-              render={({ field }) => (
+              render={() => (
                 <FormItem>
                   <div className="flex items-center gap-2">
                     <Checkbox
@@ -233,7 +223,7 @@ export default function ReportDialog({
             />
             <FormField
               name="spam"
-              render={({ field }) => (
+              render={() => (
                 <FormItem>
                   <div className="flex items-center gap-2">
                     <Checkbox
@@ -248,7 +238,7 @@ export default function ReportDialog({
             />
             <FormField
               name="threat"
-              render={({ field }) => (
+              render={() => (
                 <FormItem>
                   <div className="flex items-center gap-2">
                     <Checkbox
@@ -264,7 +254,7 @@ export default function ReportDialog({
             {reportType === 'CHALLENGE' && (
               <FormField
                 name="unclear"
-                render={({ field }) => (
+                render={() => (
                   <FormItem>
                     <div className="flex items-center gap-2">
                       <Checkbox
@@ -281,7 +271,7 @@ export default function ReportDialog({
 
             <FormField
               name="comments"
-              render={({ field }) => (
+              render={() => (
                 <FormItem className="my-3">
                   <div className="flex flex-col gap-3">
                     <div>Other information</div>
