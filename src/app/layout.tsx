@@ -8,8 +8,8 @@ import { Toaster } from '~/components/ui/toaster';
 
 const inter = Inter({ subsets: ['latin'] });
 export const metadata = {
-  title: '波波微课',
-  description: 'Level up your programming skills with interactive exercises',
+  title: 'Type Hero',
+  description: 'Level up your typescript skills with interactive exercises',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -26,8 +26,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={`${inter.className} flex flex-col`}>
         <Providers>
           <Navigation />
-          <main className="flex-1">
-            <div className="h-full">{children}</div>
+          <main className="flex flex-1 flex-col">
+            <div className="flex h-full flex-col">{children}</div>
           </main>
           <Toaster />
         </Providers>
