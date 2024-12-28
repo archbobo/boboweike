@@ -35,7 +35,7 @@ export type ExploreChallengeData = Awaited<ReturnType<typeof getEasyChallenges>>
 async function getEasyChallenges() {
   return prisma.challenge.findMany({
     where: {
-      visibility: 'VISIBLE',
+      status: 'ACTIVE',
       difficulty: { in: ['EASY'] },
       user: {
         NOT: {
@@ -56,7 +56,7 @@ async function getEasyChallenges() {
 async function getMediumChallenges() {
   return prisma.challenge.findMany({
     where: {
-      visibility: 'VISIBLE',
+      status: 'ACTIVE',
       difficulty: { in: ['MEDIUM'] },
       user: {
         NOT: {
@@ -77,7 +77,7 @@ async function getMediumChallenges() {
 async function getHardChallenges() {
   return prisma.challenge.findMany({
     where: {
-      visibility: 'VISIBLE',
+      status: 'ACTIVE',
       difficulty: { in: ['HARD'] },
       user: {
         NOT: {
