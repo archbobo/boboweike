@@ -2,6 +2,7 @@ import Head from 'next/head';
 import { Provider as BalancerProvider } from 'react-wrap-balancer';
 import Features from '~/components/landing/features';
 import Hero from '~/components/landing/hero';
+import Waitlist from '~/components/landing/waitlist/banner';
 import { Footsies } from '~/components/ui/footsies';
 
 export default async function Index() {
@@ -18,7 +19,7 @@ export default async function Index() {
       <BalancerProvider>
         <Hero />
         <Features />
-        {/* <Community /> */}
+        <Waitlist />
         <Footsies />
       </BalancerProvider>
     </>
