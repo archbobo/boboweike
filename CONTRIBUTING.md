@@ -38,7 +38,10 @@ GITHUB_ID=<client_id>
 GITHUB_SECRET=<client_secret>
 ```
 
-### 4. Install dependencies
+### 4. Setup uploadthing for file uploads
+Go to [uploadthing.com](https://uploadthing.com/dashboard) and create a project, then copy in the secrets into your `.env`.
+
+### 5. Install dependencies
 
 Use `pnpm` to install dependencies.
 
@@ -46,7 +49,7 @@ Use `pnpm` to install dependencies.
 pnpm install
 ```
 
-### 5. Push Schema Changes
+### 6. Push Schema Changes
 
 Run the prisma push command to sync db schemas:
 
@@ -54,7 +57,7 @@ Run the prisma push command to sync db schemas:
 pnpx prisma db push
 ```
 
-### 6. Seed the database
+### 7. Seed the database
 
 Run the prisma seed command to add mock data
 

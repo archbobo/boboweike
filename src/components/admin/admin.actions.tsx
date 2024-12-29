@@ -238,3 +238,15 @@ export async function getChallenge(id: number) {
     },
   });
 }
+
+/**
+ * The function fetches the last 100 uploaded images.
+ */
+export async function getUploadedImages() {
+  return prisma.imageUpload.findMany({
+    take: 100,
+    orderBy: {
+      createdAt: 'asc',
+    },
+  });
+}
