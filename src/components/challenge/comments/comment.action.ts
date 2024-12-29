@@ -24,10 +24,30 @@ export async function addComment(comment: ChallengeComment | SolutionComment) {
 
   if (!session?.user.id) return 'unauthorized';
   if (comment.text.length === 0) return 'text_is_empty';
+  if (!session?.user.id) return 'unauthorized';
+  if (comment.text.length === 0) return 'text_is_empty';
 
   return await prisma.comment.create({
     data: {
       ...comment,
+      userId: session.user.id,
+    },
+  });
+}
+
+export async function updateComment(text: string, id: number) {
+  const session = await getServerAuthSession();
+
+  if (!session?.user.id) return 'unauthorized';
+  if (text.length === 0) return 'text_is_empty';
+  if (!session?.user.id) return 'unauthorized';
+
+  return await prisma.comment.update({
+    where: {
+      id,
+    },
+    data: {
+      text,
       userId: session.user.id,
     },
   });
