@@ -9,7 +9,7 @@ import { Toaster } from '~/components/ui/toaster';
 const inter = Inter({ subsets: ['latin'] });
 export const metadata = {
   title: '波波微课',
-  description: 'Level up your typescript skills with interactive exercises',
+  description: 'Level up your golang skills with interactive exercises',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -17,10 +17,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html suppressHydrationWarning>
       <head>
         <title>波波微课</title>
-        <meta
-          name="description"
-          content="Level up your typescript skills with interactive exercises"
-        />
+        <meta name="description" content="Level up your golang skills with interactive exercises" />
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
       </head>
       <body className={`${inter.className} flex flex-col`}>

@@ -9,7 +9,7 @@ type ValidFileTypes = 'image' | 'video' | 'audio' | 'blob';
 type FileRouterInput =
   | ValidFileTypes[]
   | {
-    // @ts-ignore fixed by typehero god
+    // @ts-ignore fixed by boboweike god
     [key: ValidFileTypes]: {
       maxFileSize?: string;
       maxFileCount?: number;
