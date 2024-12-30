@@ -5,12 +5,31 @@ import '../styles/globals.css';
 import { Inter } from 'next/font/google';
 import { Navigation } from '~/components/ui/navigation';
 import { Toaster } from '~/components/ui/toaster';
+import type { Metadata } from 'next';
 
 const inter = Inter({ subsets: ['latin'] });
-export const metadata = {
-  title: '波波微课',
-  description: 'Level up your golang skills with interactive exercises',
-};
+
+const OG_IMAGE = '/real-og.png';
+export async function generateMetadata(): Promise<Metadata> {
+  const title = '波波微课';
+  const description = 'Level up your golang skills with interactive exercises';
+  return {
+    title,
+    description,
+    openGraph: {
+      images: [OG_IMAGE],
+      description,
+      title,
+      type: 'website',
+    },
+    twitter: {
+      images: [OG_IMAGE],
+      title,
+      description,
+      card: 'summary_large_image',
+    },
+  };
+}
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
