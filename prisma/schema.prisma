@@ -300,10 +300,12 @@ enum CommentRoot {
 }
 
 model Comment {
-  id       Int     @id @default(autoincrement())
-  text     String  @db.Text
-  visible  Boolean @default(true)
-  parentId Int?
+  id            Int       @id @default(autoincrement())
+  text          String    @db.Text
+  visible       Boolean   @default(true)
+  parentId      Int?
+  parentComment Comment?  @relation("reply_comments", fields: [parentId], references: [id], onUpdate: Restrict, onDelete: Restrict)
+  replies       Comment[] @relation("reply_comments")
 
   userId String
   user   User   @relation(fields: [userId], references: [id])
@@ -322,6 +324,7 @@ model Comment {
 
   @@index([rootSolutionId])
   @@index([rootChallengeId])
+  @@index([parentId])
   @@index([userId])
 }
 

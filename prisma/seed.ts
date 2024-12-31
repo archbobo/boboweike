@@ -1,7 +1,8 @@
 import { faker } from '@faker-js/faker';
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient, type Prisma } from '@prisma/client';
 import uuidByString from 'uuid-by-string';
 import { loadChallengesFromTypeChallenge } from './challenges.mock';
+import CommentMock from './comment.mock';
 import UserMock from './user.mock';
 
 const prisma = new PrismaClient();
@@ -39,14 +40,18 @@ export const trashId = uuidByString('trash');
 export const gId = uuidByString('g');
 
 try {
-  const someChallenge = await prisma.challenge.findFirst();
+  const someChallenge = await prisma.challenge.findFirst({
+    where: {
+      status: 'ACTIVE',
+    },
+  });
 
   await prisma.user.upsert({
     where: { id: trashId },
     update: {},
     create: {
       id: trashId,
-      email: 'chris@boboweike.cn',
+      email: 'chris@typehero.dev',
       name: 'chris',
       sharedSolution: {
         create: alotOfSharedSolutions(someChallenge?.id ?? 2),
@@ -54,14 +59,31 @@ try {
     },
   });
 
+  const comments = Array.from({ length: 10 }, () => CommentMock());
+
+  const replies: Prisma.CommentCreateManyInput[] = [];
+
+  const { comment: createdComments } = await prisma.challenge.update({
+    where: { id: someChallenge?.id },
+    include: {
+      comment: true,
+    },
+    data: {
+      comment: {
+        create: comments,
+      },
+    },
+  });
+
+  for (const comment of createdComments) {
+    replies.push(CommentMock(comment.id), CommentMock(comment.id));
+  }
+
   await prisma.challenge.update({
     where: { id: someChallenge?.id },
     data: {
       comment: {
-        create: Array.from({ length: 50 }, () => ({
-          text: 'here is a comment',
-          userId: trashId,
-        })),
+        create: replies,
       },
     },
   });
