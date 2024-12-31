@@ -60,7 +60,11 @@ export function Navigation() {
                 </defs>
               </svg>
 
-              <span className="font-bold leading-3">波波微课</span>
+              <span className="font-bold leading-3">
+                type
+                <br />
+                hero
+              </span>
             </a>
 
             <Link href="/explore">
@@ -145,7 +149,7 @@ function LoginButton() {
           <Link className="block" href="/wizard">
             <DropdownMenuItem className="rounded-lg p-2 duration-300 focus:bg-accent focus:outline-none dark:hover:bg-neutral-700/50">
               <Plus className="mr-2 h-4 w-4" />
-              <span>Create a Challange</span>
+              <span>Create a Challenge</span>
             </DropdownMenuItem>
           </Link>
           <Link className="block" href={`/@${session.user.name}`}>
