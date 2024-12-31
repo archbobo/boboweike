@@ -60,11 +60,7 @@ export function Navigation() {
                 </defs>
               </svg>
 
-              <span className="font-bold leading-3">
-                type
-                <br />
-                hero
-              </span>
+              <span className="font-bold leading-3">波波微课</span>
             </a>
 
             <Link href="/explore">
