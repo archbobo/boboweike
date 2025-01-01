@@ -104,6 +104,7 @@ export function TestCasesEditor({ form, hasTsErrors, setTsErrors }: Props) {
                 <div className="w-full flex-1">
                   <CodeEditor
                     onChange={field.onChange as OnChange}
+                    // @ts-ignore
                     onMount={onMount(setTsErrors)}
                     value={field.value}
                   />

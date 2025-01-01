@@ -17,14 +17,14 @@ export interface Props {
   };
 }
 
-function Report(props: Props) {
+async function Report(props: Props) {
   const idNum = Number(props.params.id);
   // Double check that we have a number, redirect out if we don't
   if (isNaN(idNum)) {
     return redirect('/admin');
   }
 
-  const report = getReport(idNum);
+  const report = await getReport(idNum);
 
   if (!report) return redirect('/admin');
 

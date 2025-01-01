@@ -194,6 +194,7 @@ export function CodePanel(props: Props) {
             const [, , storeThiseCode] = (code ?? '').split(USER_CODE_START_REGEX);
             setLocalStorageCode(storeThiseCode ?? '');
           }}
+          // @ts-ignore
           onMount={onMount(code, setTsErrors)}
           value={code}
         />
