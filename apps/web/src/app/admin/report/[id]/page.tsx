@@ -24,7 +24,7 @@ function Report(props: Props) {
     return redirect('/admin');
   }
 
-  const report = await getReport(idNum);
+  const report = getReport(idNum);
 
   if (!report) return redirect('/admin');
 

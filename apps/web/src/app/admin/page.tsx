@@ -40,10 +40,10 @@ async function Admin() {
 // TODO: i think we need nested routing here so we can only load the data when the tab is active
 // 💀 this has to be a job for trash
 function View() {
-  const allBannedUsers = await getBannedUsers();
+  const allBannedUsers = getBannedUsers();
   // This needs done because server functions are dumb and this throws A LOT of errors otherwise.
-  const firstPage = await getInfiniteReports();
-  const uploadedimages = await getUploadedImages();
+  const firstPage = getInfiniteReports();
+  const uploadedimages = getUploadedImages();
 
   return (
     <div className="container m-8 flex flex-col space-y-4">
