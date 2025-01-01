@@ -4,6 +4,11 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+patchedDependencies:
+  lucide-react@0.260.0:
+    hash: h6w6ds4pfexdcc2jeo33qccehm
+    path: patches/lucide-react@0.260.0.patch
+
 importers:
 
   .:
@@ -109,7 +114,7 @@ importers:
         version: 4.17.21
       lucide-react:
         specifier: ^0.260.0
-        version: 0.260.0(react@18.2.0)
+        version: 0.260.0(patch_hash=h6w6ds4pfexdcc2jeo33qccehm)(react@18.2.0)
       lz-string:
         specifier: ^1.5.0
         version: 1.5.0
@@ -7423,7 +7428,7 @@ snapshots:
     dependencies:
       yallist: 4.0.0
 
-  lucide-react@0.260.0(react@18.2.0):
+  lucide-react@0.260.0(patch_hash=h6w6ds4pfexdcc2jeo33qccehm)(react@18.2.0):
     dependencies:
       react: 18.2.0
 

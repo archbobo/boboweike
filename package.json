@@ -116,6 +116,11 @@
     "schema": "./prisma/schema.prisma",
     "seed": "npx tsx ./prisma/seed.ts"
   },
+  "pnpm": {
+    "patchedDependencies": {
+      "lucide-react@0.260.0": "patches/lucide-react@0.260.0.patch"
+    }
+  },
   "lint-staged": {
     "src/**/*.{ts,tsx,css}": "prettier --write"
   },
