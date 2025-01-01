@@ -50,7 +50,7 @@ Use `pnpm` to install dependencies.
 pnpm install
 ```
 
-### 6. Push Schema Changes
+### 6. Push Database Schema and Seed
 
 ```
 turbo seed
