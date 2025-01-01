@@ -40,6 +40,7 @@ GITHUB_SECRET=<client_secret>
 ```
 
 ### 4. Setup uploadthing for file uploads
+
 Go to [uploadthing.com](https://uploadthing.com/dashboard) and create a project, then copy in the secrets into your `.env`.
 
 ### 5. Install dependencies
@@ -81,4 +82,5 @@ pnpm refresh
 [new-oauth]: https://github.com/settings/applications/new
 
 #### Dependencies
+
 UI Library: [shadcn](https://ui.shadcn.com/)
