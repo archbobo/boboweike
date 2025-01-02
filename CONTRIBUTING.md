@@ -3,11 +3,13 @@
 To contribute you will first need to fork the repo and make some adjustments to get it up and running on your local
 machine. Below are the steps to follow in order for you to get dotfyle to run on your local machine.
 
-### 1. Make a copy of `.env` from the example file `.env.example`.
+### 1. Create a `.env` file
 
 ```
 cp apps/web/.env.example apps/web/.env
 ```
+
+Provide your own values as needed.
 
 ### 2. Setup PostgreSQL.
 
