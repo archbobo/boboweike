@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "next build",
+    "clean": "rm -rf .next dist node_modules",
     "dev": "dotenv -e ../../.env next dev",
     "format": "prettier -w \"src/**/*.{ts,tsx,css,cjs,mjs,json}\"",
     "lint": "eslint .",
