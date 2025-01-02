@@ -40,7 +40,7 @@ async function Admin() {
 
 // TODO: i think we need nested routing here so we can only load the data when the tab is active
 // 💀 this has to be a job for trash
-function View() {
+async function View() {
   const allBannedUsers = await getBannedUsers();
   // This needs done because server functions are dumb and this throws A LOT of errors otherwise.
   const firstPage = await getInfiniteReports();
