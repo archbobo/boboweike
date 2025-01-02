@@ -3,7 +3,6 @@
 import { RoleTypes } from '@repo/db/types';
 import { prisma } from '@repo/db';
 
-// @ts-nocheck
 export async function approveChallenge(
   challengeId: number,
   userId: string,

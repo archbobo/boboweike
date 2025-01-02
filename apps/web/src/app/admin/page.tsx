@@ -1,15 +1,15 @@
 'use server';
 import { RoleTypes } from '@repo/db/types';
-import { Lock } from 'lucide-react';
+import { Lock } from '@repo/ui/icons';
 import React from 'react';
 import { getServerAuthSession } from '@repo/auth/server';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@repo/ui';
 import { ChallengeReviews } from '~/components/admin/challenge-reviews';
 import { getBannedUsers, getUploadedImages } from '~/components/admin/admin.actions';
 import { ImageUploadReport } from '~/components/admin/images';
 // import Reports2 from '~/components/admin/reports';
 import { BannedUsers } from '~/components/admin/users';
 import { getInfiniteReports } from '~/components/report/report.action';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '~/components/ui/tabs';
 
 async function Admin() {
   const session = await getServerAuthSession();
@@ -39,7 +39,7 @@ async function Admin() {
 
 // TODO: i think we need nested routing here so we can only load the data when the tab is active
 // 💀 this has to be a job for trash
-async function View() {
+const View = async () => {
   const allBannedUsers = await getBannedUsers();
   // This needs done because server functions are dumb and this throws A LOT of errors otherwise.
   const firstPage = await getInfiniteReports();
@@ -101,6 +101,6 @@ async function View() {
       </div>
     </div>
   );
-}
+};
 
 export default Admin;

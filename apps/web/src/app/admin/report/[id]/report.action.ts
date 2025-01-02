@@ -27,7 +27,7 @@ export async function getReports() {
 export type ReportWithInfo = Awaited<ReturnType<typeof getReport>>;
 
 export async function getReport(idNum: number) {
-  return await prisma.report.findFirst({
+  return prisma.report.findFirst({
     where: {
       id: Number(idNum),
     },
