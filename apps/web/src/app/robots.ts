@@ -8,6 +8,6 @@ export default function robots(): MetadataRoute.Robots {
       disallow: '/private/',
     },
     // TODO: add a sitemap
-    // sitemap: 'https://typehero.dev/sitemap.xml',
+    // sitemap: 'https://boboweike.cn/sitemap.xml',
   };
 }

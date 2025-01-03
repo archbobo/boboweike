@@ -35,7 +35,7 @@ function Features() {
               </div>
             </a>
             <h1 className="text-4xl font-bold">
-              <Balancer>What&apos;s in TypeHero?</Balancer>
+              <Balancer>What&apos;s in 波波微课?</Balancer>
             </h1>
             <p className="text-black/50 dark:text-white/50">
               <Balancer>All you need to become a TypeScript menace</Balancer>
@@ -66,7 +66,7 @@ function Features() {
             <FeatureCard
               className="pointer-events-none left-[35px] top-[30%] w-[50%] rounded-t-xl border border-zinc-300 opacity-80 transition-transform duration-500 group-hover:translate-y-2 dark:border-zinc-700"
               className2="pointer-events-none rounded-t-xl border border-zinc-300 dark:border-zinc-700 left-[calc(50%+35px+1rem)] top-[30%] w-[150%] ransition-transform duration-500 group-hover:-translate-y-6 opacity-80 backdrop-blur-md rounded-xl overflow-hidden"
-              description="Craft your own coding challenges to share with the Typehero community"
+              description="Craft your own coding challenges to share with the 波波微课 community"
               classNameBG="lg:bg-gradient-to-tr"
               image={{
                 dark: FeatureCardCreateDark1,
