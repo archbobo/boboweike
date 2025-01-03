@@ -359,6 +359,9 @@ importers:
       '@repo/db':
         specifier: workspace:*
         version: link:../db
+      '@tanstack/react-table':
+        specifier: ^8.9.3
+        version: 8.20.6(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       class-variance-authority:
         specifier: ^0.7.0
         version: 0.7.1
@@ -407,7 +410,7 @@ importers:
     dependencies:
       '@next/eslint-plugin-next':
         specifier: canary
-        version: 15.1.1-canary.23
+        version: 15.1.1-canary.24
       '@repo/tsconfig':
         specifier: workspace:*
         version: link:../config-typescript
@@ -419,7 +422,7 @@ importers:
         version: 5.62.0(eslint@8.57.1)(typescript@5.7.2)
       '@vercel/style-guide':
         specifier: ^4.0.2
-        version: 4.0.2(@next/eslint-plugin-next@15.1.1-canary.23)(eslint@8.57.1)(prettier@2.8.8)(typescript@5.7.2)
+        version: 4.0.2(@next/eslint-plugin-next@15.1.1-canary.24)(eslint@8.57.1)(prettier@2.8.8)(typescript@5.7.2)
       eslint:
         specifier: ^8.40.0
         version: 8.57.1
@@ -1011,8 +1014,8 @@ packages:
   '@next/eslint-plugin-next@13.5.8':
     resolution: {integrity: sha512-rmNr6kz5g7x2CQ/5RMmav7/wTGOFIv4fcP+bxawNaJP+Y5Gb0Dvq+omBUvL66pDo/fhWurElatelEFpHX+tMSw==}
 
-  '@next/eslint-plugin-next@15.1.1-canary.23':
-    resolution: {integrity: sha512-miwDxFDEC9ZblFb2OJSn4beETg1IrSJ+zKCbQKcwA5D25Koj8ByoCsJDe1mJGy0xJ0pUBLvvJPausVAT3FxeWQ==}
+  '@next/eslint-plugin-next@15.1.1-canary.24':
+    resolution: {integrity: sha512-OqnmOngO/ZyUZfRLthcB95fEQPj/h6lwD+4kLPi++/I+Wu4G1T5i97opS7skpKqzici8cFaIyv56w4QXnUqmGw==}
 
   '@next/swc-darwin-arm64@13.5.8':
     resolution: {integrity: sha512-HkFw3QPeIy9bImWVTbsvzfEWQkuzBEQTK/L7ORMg+9sXNN0vNR5Gz/chD4/VbozTHyA38lWTrMBfLoWVpD+2IA==}
@@ -6477,7 +6480,7 @@ snapshots:
     dependencies:
       glob: 7.1.7
 
-  '@next/eslint-plugin-next@15.1.1-canary.23':
+  '@next/eslint-plugin-next@15.1.1-canary.24':
     dependencies:
       fast-glob: 3.3.1
 
@@ -7987,7 +7990,7 @@ snapshots:
     optionalDependencies:
       '@uploadthing/mime-types': 0.2.10
 
-  '@vercel/style-guide@4.0.2(@next/eslint-plugin-next@15.1.1-canary.23)(eslint@8.57.1)(prettier@2.8.8)(typescript@5.7.2)':
+  '@vercel/style-guide@4.0.2(@next/eslint-plugin-next@15.1.1-canary.24)(eslint@8.57.1)(prettier@2.8.8)(typescript@5.7.2)':
     dependencies:
       '@babel/core': 7.26.0
       '@babel/eslint-parser': 7.25.9(@babel/core@7.26.0)(eslint@8.57.1)
@@ -8009,7 +8012,7 @@ snapshots:
       eslint-plugin-unicorn: 43.0.2(eslint@8.57.1)
       prettier-plugin-packagejson: 2.5.6(prettier@2.8.8)
     optionalDependencies:
-      '@next/eslint-plugin-next': 15.1.1-canary.23
+      '@next/eslint-plugin-next': 15.1.1-canary.24
       eslint: 8.57.1
       prettier: 2.8.8
       typescript: 5.7.2

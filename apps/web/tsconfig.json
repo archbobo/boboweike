@@ -21,6 +21,6 @@
     "next.config.js",
     "next.config.mjs",
     "postcss.config.cjs"
-  ],
+, "../../packages/ui/src/components/data-table-pagination.tsx"  ],
   "exclude": ["node_modules", ".next", "public"]
 }
