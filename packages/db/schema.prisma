@@ -156,8 +156,10 @@ model Challenge {
   description      String          @db.Text
   /// this is a short blue thats shown on the explore card
   shortDescription String
-  /// this is the test cases + default starter code
-  prompt           String          @db.Text
+  /// Starter code for the challenge
+  code             String          @db.Text
+  /// Test cases that need to be passed in order have the submission be accepted.
+  tests            String          @db.Text
   status           ChallengeStatus @default(PENDING)
 
   user   User   @relation(fields: [userId], references: [id])
