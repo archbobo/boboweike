@@ -23,7 +23,7 @@ import {
 } from '@repo/ui';
 import Link from 'next/link';
 import { ShareForm } from '../share-form';
-import { addOrRemoveBookmark } from '../bookmark.action';
+import { addOrRemoveBookmark } from '../../../app/challenge/_components/bookmark.action';
 import { incrementOrDecrementUpvote } from '../increment.action';
 import { Markdown } from '~/components/ui/markdown';
 import { type ChallengeRouteData } from '~/app/challenge/[id]/getChallengeRouteData';

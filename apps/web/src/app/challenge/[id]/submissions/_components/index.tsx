@@ -4,7 +4,7 @@ import type { Submission } from '@repo/db/types';
 import clsx from 'clsx';
 import Link from 'next/link';
 import { useMemo, useState } from 'react';
-import NoSubmissions from './nosubmissions';
+import NoSubmissions from '../../../../../components/challenge/submissions/nosubmissions';
 import type { ChallengeSubmissions } from '~/app/challenge/[id]/submissions/getChallengeSubmissions';
 import { getRelativeTime } from '~/utils/relativeTime';
 
