@@ -6,7 +6,7 @@ services:
     container_name: boboweike-db
     restart: always
     volumes:
-      - pg-data:/var/lib/postgresql/data
+      - boboweike-data:/var/lib/postgresql/data
     environment:
       POSTGRES_USER: bobo
       POSTGRES_PASSWORD: dev-pass
@@ -15,4 +15,4 @@ services:
       - 5432:5432
 
 volumes:
-  pg-data:
+  boboweike-data:
