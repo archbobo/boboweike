@@ -195,6 +195,7 @@ export function CodePanel(props: Props) {
         <SplitEditor
           tests={props.challenge.tests}
           challenge={props.challenge.code}
+          // @ts-ignore
           onMount={{ tests: onMount(code, setTsErrors) }}
           onChange={{
             user: async (code) => {
