@@ -23,7 +23,7 @@ export async function Explore() {
       </Suspense>
       <Suspense fallback={<ExploreSectionSkeleton />}>
         <ExploreSection
-          title="Newest"
+          title="🔥 Newest"
           fetcher={getChallengesByTagOrDifficulty}
           moreRoute="NEWEST"
         />
