@@ -7,7 +7,7 @@ export interface Props {
   };
 }
 
-export default async function Page(props: Props) {
+export default async function Tracks(props: Props) {
   const track = await getTrackById(Number(props.params.trackId));
   const challenges = await getChallenges();
 

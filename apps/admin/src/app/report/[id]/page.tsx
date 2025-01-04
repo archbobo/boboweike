@@ -1,14 +1,13 @@
+import { Alert, AlertDescription, AlertTitle, Markdown, Text } from '@repo/ui';
 import { AlertCircle, ChevronLeft } from '@repo/ui/icons';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
-import { Text, Alert, AlertDescription, AlertTitle } from '@repo/ui';
+import ChallengeReport from './_components/report/challenge.report';
+import CommentReport from './_components/report/comment.report';
+import SolutionReport from './_components/report/solution.report';
+import UserReportUi from './_components/report/user.report';
 import ReportActions from './actions';
 import { getReport, type ReportWithInfo } from './report.action';
-import { Markdown } from '~/components/ui/markdown';
-import ChallengeReport from '~/components/report/types/challenge.report';
-import CommentReport from '~/components/report/types/comment.report';
-import UserReportUi from '~/components/report/types/user.report';
-import SolutionReport from '~/components/report/types/solution.report';
 
 export interface Props {
   params: {
@@ -16,7 +15,7 @@ export interface Props {
   };
 }
 
-async function Report(props: Props) {
+function Report(props: Props) {
   const idNum = Number(props.params.id);
   // Double check that we have a number, redirect out if we don't
   if (isNaN(idNum)) {
