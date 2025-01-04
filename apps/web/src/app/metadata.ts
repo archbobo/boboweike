@@ -32,7 +32,6 @@ export const buildMetaForChallenge = async ({
   description,
   username,
 }: MetaParamsForChallenge): Promise<Metadata> => {
-
   return buildMeta({
     title,
     description,
@@ -41,8 +40,7 @@ export const buildMetaForChallenge = async ({
 
 /** Helper to build opengraph metadata with defaults, you should call this in generateMetadata() next function */
 export const buildMetaForDefault = async (): Promise<Metadata> => {
-  return buildMeta({
-  });
+  return buildMeta({});
 };
 
 /** update the metadata for og */
@@ -53,7 +51,6 @@ const buildMeta = async ({
   description?: string;
   title?: string;
 }): Promise<Metadata> => {
-
   if (description) {
     baseMetadata.description = description;
   }
