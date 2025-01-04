@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import { challengeParam } from '@repo/og-image';
 
 const OG_URL =
   process.env.NODE_ENV !== 'production' ? 'http://localhost:4200' : 'https://og.boboweike.cn';
@@ -16,31 +15,6 @@ const baseMetadata: Metadata = {
     follow: true,
   },
   description: tagline,
-  openGraph: {
-    title: '波波微课',
-    description: tagline,
-    siteName: '波波微课',
-    images: [
-      {
-        url: `${OG_URL}/api/default`,
-        width: 1920,
-        height: 1080,
-      },
-    ],
-    locale: 'en-US',
-    type: 'website',
-  },
-  twitter: {
-    title: '波波微课',
-    card: 'summary_large_image',
-    images: [
-      {
-        url: `${OG_URL}/api/default`,
-        width: 1920,
-        height: 1080,
-      },
-    ],
-  },
   icons: {
     shortcut: '/favicon.ico',
   },
@@ -58,16 +32,8 @@ export const buildMetaForChallenge = async ({
   description,
   username,
 }: MetaParamsForChallenge): Promise<Metadata> => {
-  const params = `${challengeParam.toSearchString({
-    description,
-    title,
-    username,
-  })}`;
-
-  const ogImageUrl = `${OG_URL}/api/challenge?${params}`;
 
   return buildMeta({
-    ogImageUrl,
     title,
     description,
   });
@@ -76,33 +42,24 @@ export const buildMetaForChallenge = async ({
 /** Helper to build opengraph metadata with defaults, you should call this in generateMetadata() next function */
 export const buildMetaForDefault = async (): Promise<Metadata> => {
   return buildMeta({
-    ogImageUrl: `${OG_URL}/api/default`,
   });
 };
 
 /** update the metadata for og */
 const buildMeta = async ({
-  ogImageUrl,
   description,
   title,
 }: {
-  ogImageUrl: string;
   description?: string;
   title?: string;
 }): Promise<Metadata> => {
-  baseMetadata.openGraph!.images = ogImageUrl;
-  baseMetadata.twitter!.images = ogImageUrl;
 
   if (description) {
     baseMetadata.description = description;
-    baseMetadata.twitter!.description = description;
-    baseMetadata.openGraph!.description = description;
   }
 
   if (title) {
     baseMetadata.title = title;
-    baseMetadata.twitter!.title = title;
-    baseMetadata.openGraph!.title = title;
   }
 
   return baseMetadata;

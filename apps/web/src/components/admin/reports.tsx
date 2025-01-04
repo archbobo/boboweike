@@ -1,104 +1,126 @@
-'use client';
-import { useInfiniteQuery } from '@tanstack/react-query';
-import { useRouter } from 'next/navigation';
-import React from 'react';
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-  Pagination,
-} from '@repo/ui';
-import { getInfiniteReports, type InfiniteReports } from '../ReportDialog/report-dialog.action';
+'use server';
 
-export interface ReportsProps {
-  initialReports: InfiniteReports;
+import { getServerAuthSession } from '@repo/auth/server';
+import { prisma } from '@repo/db';
+import { type Prisma, type Report } from '@repo/db/types';
+
+export interface ReportBase {
+  issues: Prisma.ReportIssueCreateWithoutReportInput[];
 }
 
-export default function Reports2({ initialReports }: ReportsProps) {
-  const router = useRouter();
+export type ChallengeReport = Omit<
+  Report,
+  | 'commentId'
+  | 'createdAt'
+  | 'id'
+  | 'reporterId'
+  | 'solutionId'
+  | 'status'
+  | 'type'
+  | 'updatedAt'
+  | 'userId'
+> &
+  ReportBase & { type: 'CHALLENGE' };
 
-  const [page, setPage] = React.useState(0);
-  const [enableInfinite, setEnableInfinite] = React.useState(false);
+export type UserReport = Omit<
+  Report,
+  | 'challengeId'
+  | 'commentId'
+  | 'createdAt'
+  | 'id'
+  | 'reporterId'
+  | 'solutionId'
+  | 'status'
+  | 'type'
+  | 'updatedAt'
+> &
+  ReportBase & { type: 'USER' };
 
-  const { data, hasNextPage, fetchNextPage } = useInfiniteQuery(
-    ['reports'],
-    async ({ pageParam }) => {
-      const data = await getInfiniteReports(pageParam);
-      return data;
+export type CommentReport = Omit<
+  Report,
+  | 'challengeId'
+  | 'createdAt'
+  | 'id'
+  | 'reporterId'
+  | 'solutionId'
+  | 'status'
+  | 'type'
+  | 'updatedAt'
+  | 'userId'
+> &
+  ReportBase & { type: 'COMMENT' };
+
+export type SolutionReport = Omit<
+  Report,
+  | 'challengeId'
+  | 'commentId'
+  | 'createdAt'
+  | 'id'
+  | 'reporterId'
+  | 'status'
+  | 'type'
+  | 'updatedAt'
+  | 'userId'
+> &
+  ReportBase & { type: 'SOLUTION' };
+/**
+ * @param report a report object specific to a user, challenge, or comment report type
+ * @returns 'created' if successful, 'not_logged_in' if the user is not logged in, and 'already_exists' if there's a pending report of the same type by the same user.
+ */
+export async function addReport(
+  report: ChallengeReport | CommentReport | SolutionReport | UserReport,
+) {
+  const reporter = await getServerAuthSession();
+  if (!reporter?.user.id) return 'not_logged_in';
+
+  let filterData;
+  switch (report.type) {
+    case 'CHALLENGE':
+      filterData = {
+        challengeId: report.challengeId,
+      };
+      break;
+    case 'COMMENT':
+      filterData = {
+        commentId: report.commentId,
+      };
+      break;
+    case 'USER':
+      filterData = {
+        userId: report.userId,
+      };
+      break;
+    case 'SOLUTION':
+      filterData = {
+        solutionId: report.solutionId,
+      };
+      break;
+  }
+
+  const alreadyReported = await prisma.report.findFirst({
+    where: {
+      type: report.type,
+      status: 'PENDING',
+      reporterId: reporter.user.id,
+      ...filterData,
     },
-    {
-      suspense: true,
-      getNextPageParam: (
-        a,
+  });
 
-        b,
-      ) => (a.metadata.hasNextPage ? a.metadata.lastCursor : false),
-      initialData: {
-        pages: [initialReports],
-        pageParams: [null],
+  if (alreadyReported) return 'already_exists';
+
+  await prisma.report.create({
+    data: {
+      reporterId: reporter.user.id,
+      updatedAt: new Date(),
+      ...report,
+      issues: {
+        createMany: {
+          data: report.issues,
+        },
       },
-      enabled: enableInfinite,
+      status: 'PENDING',
     },
-  );
+  });
 
-  React.useEffect(() => {
-    setEnableInfinite(true);
-  }, []);
-
-  return (
-    <section className="data-table">
-      <header className="flex justify-end">
-        <Pagination
-          onChange={(e) => {
-            if (!e.detail.pageLoaded) fetchNextPage().then(() => setPage(e.detail.page - 1));
-            else setPage(e.detail.page - 1);
-          }}
-          totalPages={data?.pages.length}
-          hasNextPage={hasNextPage}
-          currentPage={0 + 1}
-        />
-      </header>
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead>Type</TableHead>
-            <TableHead>Reporter</TableHead>
-            <TableHead>Status</TableHead>
-            <TableHead>Info</TableHead>
-            <TableHead>Tags</TableHead>
-            <TableHead>Created at</TableHead>
-            <TableHead>Updated at</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {data?.pages[page]?.data.map((tr) => (
-            <TableRow key={`report-${tr.id}`} onClick={() => router.push(`/admin/report/${tr.id}`)}>
-              <TableCell>{tr.type}</TableCell>
-              <TableCell>{tr.reporter.name}</TableCell>
-              <TableCell>{tr.status}</TableCell>
-              <TableCell>{tr.text.slice(0, 100)}</TableCell>
-              <TableCell>
-                <div className="flex flex-wrap gap-2">
-                  {tr.issues.map((i) => (
-                    <div key={`issues-${i.id}`} className="rounded-full bg-zinc-800 px-3 py-1">
-                      {i.type}
-                    </div>
-                  ))}
-                </div>
-              </TableCell>
-              <TableCell>
-                {tr.createdAt.toLocaleString(undefined, { dateStyle: 'short', timeStyle: 'short' })}
-              </TableCell>
-              <TableCell>
-                {tr.updatedAt.toLocaleString(undefined, { dateStyle: 'short', timeStyle: 'short' })}
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </section>
-  );
+  return 'created';
 }

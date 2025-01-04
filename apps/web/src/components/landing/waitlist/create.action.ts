@@ -1,7 +1,6 @@
 'use server';
 
 import { prisma } from '@repo/db';
-import { sendUserSignupEmail } from '~/app/api/email/route';
 import { type WaitlistFormSchema } from '~/components/landing/waitlist/waitlist-form';
 
 export async function uploadWaitlistEntry(data: WaitlistFormSchema) {
@@ -26,5 +25,5 @@ export async function uploadWaitlistEntry(data: WaitlistFormSchema) {
     },
   });
 
-  await sendUserSignupEmail(data.email);
+  // TODO: Send email to user
 }
