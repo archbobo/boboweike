@@ -17,9 +17,6 @@ importers:
       prettier-plugin-tailwindcss:
         specifier: ^0.4.1
         version: 0.4.1(prettier@2.8.8)
-      tsx:
-        specifier: ^3.12.7
-        version: 3.14.0
       turbo:
         specifier: ^1.13.4
         version: 1.13.4
