@@ -44,7 +44,7 @@ export const authOptions: NextAuthOptions = {
         httpOnly: true,
         sameSite: 'lax',
         path: '/',
-        domain: 'boboweike.cn',
+        domain: useSecureCookies ? 'boboweike.cn' : process.env.VERCEL_URL,
         secure: useSecureCookies,
       },
     },
