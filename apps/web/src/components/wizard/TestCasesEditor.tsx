@@ -24,6 +24,7 @@ export function TestCasesEditor({ form, hasTsErrors, setTsErrors }: Props) {
 
   const onMount = useCallback<NonNullable<CodeEditorProps['onMount']>>(
     async (editor, monaco) => {
+      // @ts-ignore
       loadCheckingLib(monaco);
 
       const model = editor.getModel();
@@ -56,6 +57,7 @@ export function TestCasesEditor({ form, hasTsErrors, setTsErrors }: Props) {
 
       monaco.languages.registerInlayHintsProvider(
         'typescript',
+        // @ts-ignore
         createTwoslashInlayProvider(monaco, ts),
       );
 
