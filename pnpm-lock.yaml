@@ -189,6 +189,9 @@ importers:
       '@uploadthing/react':
         specifier: ^5.2.0
         version: 5.7.0(@uploadthing/mime-types@0.2.10)(next@13.4.19(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react@18.2.0)(uploadthing@5.7.4)
+      '@vercel/edge-config':
+        specifier: ^0.2.1
+        version: 0.2.1
       clsx:
         specifier: ^2.0.0
         version: 2.1.1
@@ -555,7 +558,7 @@ importers:
         version: 1.14.0
       tailwindcss-animate:
         specifier: ^1.0.6
-        version: 1.0.7(tailwindcss@3.4.17)
+        version: 1.0.7(tailwindcss@3.3.3)
       unist-util-visit:
         specifier: ^5.0.0
         version: 5.0.0
@@ -2347,6 +2350,13 @@ packages:
     peerDependenciesMeta:
       '@uploadthing/mime-types':
         optional: true
+
+  '@vercel/edge-config-fs@0.1.0':
+    resolution: {integrity: sha512-NRIBwfcS0bUoUbRWlNGetqjvLSwgYH/BqKqDN7vK1g32p7dN96k0712COgaz6VFizAm9b0g6IG6hR6+hc0KCPg==}
+
+  '@vercel/edge-config@0.2.1':
+    resolution: {integrity: sha512-847kYqJEbga4PGgNrctQ9XsD+2Kw/S+UjzZnIFpebQ9VbdtB0MX4anq33WetcYZYPfhZd2L0uXVnY/BcjI5dOw==}
+    engines: {node: '>=14.6'}
 
   '@vercel/style-guide@4.0.2':
     resolution: {integrity: sha512-FroL+oOePzhw7n/I+f7zr4WNroGHT/+2TlW6WH9+CVSjMNsEyu7Qstj2mI5gWIBjT1Y2ZImKPppCzI2cIYmNZw==}
@@ -7611,6 +7621,12 @@ snapshots:
   '@uploadthing/shared@5.2.7(@uploadthing/mime-types@0.2.10)':
     optionalDependencies:
       '@uploadthing/mime-types': 0.2.10
+
+  '@vercel/edge-config-fs@0.1.0': {}
+
+  '@vercel/edge-config@0.2.1':
+    dependencies:
+      '@vercel/edge-config-fs': 0.1.0
 
   '@vercel/style-guide@4.0.2(@next/eslint-plugin-next@15.1.1-canary.25)(eslint@8.57.1)(prettier@2.8.8)(typescript@5.7.2)':
     dependencies:
