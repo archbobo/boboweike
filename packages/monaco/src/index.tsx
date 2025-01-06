@@ -120,6 +120,7 @@ export function CodePanel(props: CodePanelProps) {
 
               monaco.languages.registerInlayHintsProvider(
                 'typescript',
+                // @ts-ignore
                 createTwoslashInlayProvider(monaco, ts),
               );
             },
