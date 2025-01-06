@@ -49,7 +49,7 @@ function Features() {
               </div>
             </a>
             <h1 className="text-4xl font-bold">
-              <Balancer>What&apos;s in 波波微课?</Balancer>
+              <Balancer>What&apos;s in TypeHero?</Balancer>
             </h1>
             <p className="text-black/50 dark:text-white/50">
               <Balancer>All you need to become a TypeScript menace</Balancer>
@@ -108,7 +108,7 @@ function Features() {
                 'pointer-events-none w-[90%] border border-zinc-300 dark:border-zinc-700 rounded-t-2xl transition-all duration-500 overflow-hidden',
                 'left-[5%] top-[50%] md:top-[30%] md:left-1/2 md:left-[35px]',
               )}
-              description="Craft your own coding challenges to share with the 波波微课 community"
+              description="Craft your own coding challenges to share with the Typehero community"
               bgClass="lg:bg-gradient-to-tr"
               image={{
                 step1dark1: Step1Dark1,
@@ -126,9 +126,9 @@ function Features() {
               title="Challenge Creation"
             />
             <CuratedTracksCard
-              description="Tracks features curated TypeScript challenges, spanning various topics and difficulty levels, to advance your TypeScript skills."
+              description="Tracks are curated challenges, spanning various topics and difficulty levels, to advance your TypeScript skills."
               bgClass="lg:bg-gradient-to-tl"
-              title="Curated Tracks"
+              title="Learning Tracks"
             />
           </div>
         </div>
