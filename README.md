@@ -1,4 +1,4 @@
-[![Type Hero Logo](/logo.svg)](https://boboweike.cn/)
+[![波波微课 Logo](/logo.svg)](https://boboweike.cn/)
 
 # 波波微课
 
