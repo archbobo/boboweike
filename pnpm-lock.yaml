@@ -191,7 +191,7 @@ importers:
         version: 3.25.6(@types/react@18.3.18)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@uploadthing/react':
         specifier: ^5.2.0
-        version: 5.7.0(@uploadthing/mime-types@0.2.10)(next@13.5.8(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react@18.2.0)(uploadthing@5.7.4)
+        version: 5.7.0(@uploadthing/mime-types@0.2.10)(next@13.4.19(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react@18.2.0)(uploadthing@5.7.4)
       clsx:
         specifier: ^2.0.0
         version: 2.1.1
@@ -217,11 +217,11 @@ importers:
         specifier: ^0.4.0
         version: 0.4.2(monaco-editor@0.40.0)
       next:
-        specifier: ^13.4.10
-        version: 13.5.8(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+        specifier: ^13.4.19
+        version: 13.4.19(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       next-themes:
         specifier: ^0.2.1
-        version: 0.2.1(next@13.5.8(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+        version: 0.2.1(next@13.4.19(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -7603,7 +7603,7 @@ snapshots:
 
   '@uploadthing/mime-types@0.2.10': {}
 
-  '@uploadthing/react@5.7.0(@uploadthing/mime-types@0.2.10)(next@13.5.8(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react@18.2.0)(uploadthing@5.7.4)':
+  '@uploadthing/react@5.7.0(@uploadthing/mime-types@0.2.10)(next@13.4.19(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react@18.2.0)(uploadthing@5.7.4)':
     dependencies:
       '@uploadthing/shared': 5.2.7(@uploadthing/mime-types@0.2.10)
       attr-accept: 2.2.5
@@ -7612,7 +7612,7 @@ snapshots:
       tailwind-merge: 1.14.0
       uploadthing: 5.7.4
     optionalDependencies:
-      next: 13.5.8(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      next: 13.4.19(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
     transitivePeerDependencies:
       - '@uploadthing/mime-types'
 
@@ -10048,12 +10048,6 @@ snapshots:
       react: 18.2.0
       react-dom: 19.0.0(react@18.2.0)
 
-  next-themes@0.2.1(next@13.5.8(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
-    dependencies:
-      next: 13.5.8(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
-
   next-themes@0.2.1(next@13.5.8(react-dom@19.0.0(react@18.2.0))(react@18.2.0))(react-dom@19.0.0(react@18.2.0))(react@18.2.0):
     dependencies:
       next: 13.5.8(react-dom@19.0.0(react@18.2.0))(react@18.2.0)
@@ -10108,31 +10102,6 @@ snapshots:
       '@next/swc-win32-arm64-msvc': 13.4.19
       '@next/swc-win32-ia32-msvc': 13.4.19
       '@next/swc-win32-x64-msvc': 13.4.19
-    transitivePeerDependencies:
-      - '@babel/core'
-      - babel-plugin-macros
-
-  next@13.5.8(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
-    dependencies:
-      '@next/env': 13.5.8
-      '@swc/helpers': 0.5.2
-      busboy: 1.6.0
-      caniuse-lite: 1.0.30001690
-      postcss: 8.4.31
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
-      styled-jsx: 5.1.1(react@18.2.0)
-      watchpack: 2.4.0
-    optionalDependencies:
-      '@next/swc-darwin-arm64': 13.5.8
-      '@next/swc-darwin-x64': 13.5.8
-      '@next/swc-linux-arm64-gnu': 13.5.8
-      '@next/swc-linux-arm64-musl': 13.5.8
-      '@next/swc-linux-x64-gnu': 13.5.8
-      '@next/swc-linux-x64-musl': 13.5.8
-      '@next/swc-win32-arm64-msvc': 13.5.8
-      '@next/swc-win32-ia32-msvc': 13.5.8
-      '@next/swc-win32-x64-msvc': 13.5.8
     transitivePeerDependencies:
       - '@babel/core'
       - babel-plugin-macros
