@@ -20,7 +20,7 @@ import { getBaseUrl } from '~/utils/getBaseUrl';
 
 export function getAdminUrl() {
   // reference for vercel.com
-  if (process.env.VERCEL_URL) {
+  if (process.env.NEXT_PUBLIC_VERCEL_URL) {
     return `https://admin.boboweike.cn`;
   }
   // assume localhost
