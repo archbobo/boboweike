@@ -81,10 +81,9 @@ Enhancement suggestions are tracked as [GitHub issues](/issues).
 
 - Use a **clear and descriptive title** for the issue to indentify the
   suggestion.
-- Provide a **step-by-step description of the suggested enhancement** in as much
-  detail as possible.
+- Use a **clear and descriptive title** for the issue to identify the suggestion.
 - **Describe the current behavior** and **explain which behavior you expected to
-  see instead** and why. At this point you can also tell which alternatives do
+  see instead** and why. At this point, you can also tell which alternatives do
   not work for you.
 - You may want to include **screenshots** which help you demonstrate the steps
   or point out the part which the suggestion is related to.

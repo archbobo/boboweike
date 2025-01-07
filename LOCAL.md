@@ -1,23 +1,18 @@
 # Local Setup
 
 To contribute you will first need to fork the repo and make some adjustments to
-get it up and running on your local machine. Below are the steps to follow in
-order for you to get BoboWeike to run on your local machine.
+get it up and running on your local machine. Below are the steps to follow for you to get 波波微课 to run on your local machine.
 
 ### 1. Create a `.env` file
 
-```
-cp .env.example .env
-```
-
-Provide your own values as needed.
+Provide your values as needed.
 
 ### 2 Configure your database
 
-You can either use planetscale or a local docker container to run your database.
+You can either use Vercel PostgreSQL or a local Docker container to run your database.
 Use either 2.a or 2.b for the next step.
 
-### 2.a Docker local DB
+### 2.a Local Database (using Docker)
 
 Starting the docker container
 
@@ -25,7 +20,7 @@ Starting the docker container
 docker compose up -d
 ```
 
-### 2.b Vercel PostgreSQL DB
+### 2.b Remote Database (using Vercel PostgreSQL)
 
 TODO
 
@@ -121,7 +116,7 @@ UI Library: [shadcn](https://ui.shadcn.com/)
 pnpm refresh
 ```
 
-This will cause prisma to force reset the database through the `db:reset`
+This will cause Prisma to force reset the database through the `db:reset`
 command and then run `db:seed`.
 
 </details>
