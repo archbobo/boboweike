@@ -9,11 +9,11 @@ importers:
   .:
     devDependencies:
       prettier:
-        specifier: ^2.8.8
-        version: 2.8.8
+        specifier: ^3.0.2
+        version: 3.4.2
       prettier-plugin-tailwindcss:
         specifier: ^0.4.1
-        version: 0.4.1(prettier@2.8.8)
+        version: 0.4.1(prettier@3.4.2)
       turbo:
         specifier: ^1.13.4
         version: 1.13.4
@@ -127,11 +127,11 @@ importers:
         specifier: ^8.4.26
         version: 8.4.49
       prettier:
-        specifier: ^2.8.8
-        version: 2.8.8
+        specifier: ^3.0.2
+        version: 3.4.2
       prettier-plugin-tailwindcss:
         specifier: ^0.4.1
-        version: 0.4.1(prettier@2.8.8)
+        version: 0.4.1(prettier@3.4.2)
       raw-loader:
         specifier: ^4.0.2
         version: 4.0.2(webpack@5.97.1)
@@ -323,11 +323,11 @@ importers:
         specifier: ^8.4.26
         version: 8.4.49
       prettier:
-        specifier: ^2.8.8
-        version: 2.8.8
+        specifier: ^3.0.2
+        version: 3.4.2
       prettier-plugin-tailwindcss:
         specifier: ^0.4.1
-        version: 0.4.1(prettier@2.8.8)
+        version: 0.4.1(prettier@3.4.2)
       raw-loader:
         specifier: ^4.0.2
         version: 4.0.2(webpack@5.97.1)
@@ -447,6 +447,9 @@ importers:
       next-themes:
         specifier: ^0.2.1
         version: 0.2.1(next@13.4.19(react-dom@19.0.0(react@18.2.0))(react@18.2.0))(react-dom@19.0.0(react@18.2.0))(react@18.2.0)
+      prettier:
+        specifier: ^3.0.2
+        version: 3.4.2
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -558,7 +561,7 @@ importers:
         version: 1.14.0
       tailwindcss-animate:
         specifier: ^1.0.6
-        version: 1.0.7(tailwindcss@3.3.3)
+        version: 1.0.7(tailwindcss@3.4.17)
       unist-util-visit:
         specifier: ^5.0.0
         version: 5.0.0
@@ -583,7 +586,7 @@ importers:
     dependencies:
       '@next/eslint-plugin-next':
         specifier: canary
-        version: 15.1.1-canary.25
+        version: 15.1.1-canary.26
       '@repo/tsconfig':
         specifier: workspace:*
         version: link:../config-typescript
@@ -595,7 +598,7 @@ importers:
         version: 5.62.0(eslint@8.57.1)(typescript@5.7.2)
       '@vercel/style-guide':
         specifier: ^4.0.2
-        version: 4.0.2(@next/eslint-plugin-next@15.1.1-canary.25)(eslint@8.57.1)(prettier@2.8.8)(typescript@5.7.2)
+        version: 4.0.2(@next/eslint-plugin-next@15.1.1-canary.26)(eslint@8.57.1)(prettier@2.8.8)(typescript@5.7.2)
       eslint:
         specifier: ^8.40.0
         version: 8.57.1
@@ -1048,8 +1051,8 @@ packages:
   '@next/eslint-plugin-next@13.5.8':
     resolution: {integrity: sha512-rmNr6kz5g7x2CQ/5RMmav7/wTGOFIv4fcP+bxawNaJP+Y5Gb0Dvq+omBUvL66pDo/fhWurElatelEFpHX+tMSw==}
 
-  '@next/eslint-plugin-next@15.1.1-canary.25':
-    resolution: {integrity: sha512-AAcJHoCD7fyMwuByY9j8f64QgEL16g+cjj5wylhfyDWQ/9M+vApP/R9kdkohpha8w59o1uL8D/GTza9W14tH8Q==}
+  '@next/eslint-plugin-next@15.1.1-canary.26':
+    resolution: {integrity: sha512-0YX84w2xCxrEcM+0J9TovpPPkxU5gCRPOLxhYL64cINfs1THwJCUHeucV4LWO6BC8Ad2umR1rcweQ8T1HgAqwQ==}
 
   '@next/swc-darwin-arm64@13.4.19':
     resolution: {integrity: sha512-vv1qrjXeGbuF2mOkhkdxMDtv9np7W4mcBtaDnHU+yJG+bBwa6rYsYSCI/9Xm5+TuF5SbZbrWO6G1NfTh1TMjvQ==}
@@ -4705,6 +4708,11 @@ packages:
     engines: {node: '>=10.13.0'}
     hasBin: true
 
+  prettier@3.4.2:
+    resolution: {integrity: sha512-e9MewbtFo+Fevyuxn/4rrcDAaq0IYxPGLvObpQjiZBMAzB9IGmzlnG9RZy3FFas+eBMu2vA0CszMeduow5dIuQ==}
+    engines: {node: '>=14'}
+    hasBin: true
+
   pretty-format@3.8.0:
     resolution: {integrity: sha512-WuxUnVtlWL1OfZFQFuqvnvs6MiAGk9UNsBostyBOB0Is9wb5uRESevA6rnl/rkksXaGX3GzZhPup5d6Vp1nFew==}
 
@@ -6103,7 +6111,7 @@ snapshots:
     dependencies:
       glob: 7.1.7
 
-  '@next/eslint-plugin-next@15.1.1-canary.25':
+  '@next/eslint-plugin-next@15.1.1-canary.26':
     dependencies:
       fast-glob: 3.3.1
 
@@ -7628,7 +7636,7 @@ snapshots:
     dependencies:
       '@vercel/edge-config-fs': 0.1.0
 
-  '@vercel/style-guide@4.0.2(@next/eslint-plugin-next@15.1.1-canary.25)(eslint@8.57.1)(prettier@2.8.8)(typescript@5.7.2)':
+  '@vercel/style-guide@4.0.2(@next/eslint-plugin-next@15.1.1-canary.26)(eslint@8.57.1)(prettier@2.8.8)(typescript@5.7.2)':
     dependencies:
       '@babel/core': 7.26.0
       '@babel/eslint-parser': 7.25.9(@babel/core@7.26.0)(eslint@8.57.1)
@@ -7650,7 +7658,7 @@ snapshots:
       eslint-plugin-unicorn: 43.0.2(eslint@8.57.1)
       prettier-plugin-packagejson: 2.5.6(prettier@2.8.8)
     optionalDependencies:
-      '@next/eslint-plugin-next': 15.1.1-canary.25
+      '@next/eslint-plugin-next': 15.1.1-canary.26
       eslint: 8.57.1
       prettier: 2.8.8
       typescript: 5.7.2
@@ -10456,11 +10464,14 @@ snapshots:
     optionalDependencies:
       prettier: 2.8.8
 
-  prettier-plugin-tailwindcss@0.4.1(prettier@2.8.8):
+  prettier-plugin-tailwindcss@0.4.1(prettier@3.4.2):
     dependencies:
-      prettier: 2.8.8
+      prettier: 3.4.2
 
-  prettier@2.8.8: {}
+  prettier@2.8.8:
+    optional: true
+
+  prettier@3.4.2: {}
 
   pretty-format@3.8.0: {}
 
