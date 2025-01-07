@@ -36,7 +36,7 @@ body:
     id: terms
     attributes:
       label: Code of Conduct
-      description: By submitting this issue, you agree to follow our [Code of Conduct](https://typehero.dev/code_of_conduct)
+      description: By submitting this issue, you agree to follow our [Code of Conduct](https://boboweike.cn/code_of_conduct)
       options:
         - label: I agree to follow this project's Code of Conduct
           required: true
