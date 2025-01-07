@@ -517,6 +517,7 @@ const tracks: Track[] = [
 function Track({ className, difficulty, id, label }: Track) {
   const isMobile = useIsMobile();
   return (
+    // eslint-disable-next-line jsx-a11y/label-has-associated-control
     <label
       htmlFor={id}
       className="group/challenge flex w-[69%] cursor-pointer flex-col items-center pt-2"

@@ -117,4 +117,3 @@ Enhancement suggestions are tracked as [GitHub issues](/issues).
 | Adds in [Cool New Feature Name]                                       | YOOOOOO          |
 | fix: Stops a bug on challenge pages causing tests to fail incorrectly | fixing the thing |
 | Updates caching strategy to revalidate based on hash key              | Trust me bro     |
-
