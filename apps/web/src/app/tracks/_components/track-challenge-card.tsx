@@ -30,6 +30,7 @@ const BGS_BY_DIFFICULTY = {
 export function TrackChallenge({ challenge, className, mock }: TrackChallengeProps) {
   const isMobile = useIsMobile();
   return (
+    // eslint-disable-next-line jsx-a11y/label-has-associated-control
     <label
       htmlFor={challenge.id.toString()}
       className="group/challenge flex cursor-pointer flex-col items-center pt-2"
@@ -38,7 +39,7 @@ export function TrackChallenge({ challenge, className, mock }: TrackChallengePro
         className={clsx(
           `flex w-full cursor-pointer items-center justify-between gap-3 overflow-hidden rounded-lg bg-gradient-to-r from-neutral-500/10 ${
             BGS_BY_DIFFICULTY[challenge.difficulty]
-          } from-75% to-100% p-4 py-2 text-black/90 duration-300 group-active/challenge:bg-neutral-500/40 group-active/challenge:duration-75 dark:text-white/90 sm:py-4`,
+          } from-75% to-100% p-4 py-2 text-black/90 duration-300 group-active/challenge:bg-neutral-500/40 group-active/challenge:duration-75 sm:py-4 dark:text-white/90`,
           className,
           !isMobile &&
             'group-hover/challenge:scale-105 group-hover/challenge:rounded-xl group-hover/challenge:bg-neutral-500/20',

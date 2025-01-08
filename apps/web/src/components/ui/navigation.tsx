@@ -40,7 +40,7 @@ export function Navigation() {
       >
         <div className="flex w-full items-center justify-between">
           <div className="relative flex items-center gap-3">
-            <a className="flex items-center space-x-2 duration-300" href="/">
+            <Link className="flex items-center space-x-2 duration-300" href="/">
               <svg
                 className="h-8 w-8 rounded-md bg-[#3178C6] p-[2px]"
                 viewBox="0 0 512 512"
@@ -70,7 +70,7 @@ export function Navigation() {
               </svg>
 
               <span className="font-bold leading-3">波波微课</span>
-            </a>
+            </Link>
 
             {featureFlags?.exploreButton ? (
               <Link href="/explore">
