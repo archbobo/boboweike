@@ -22,6 +22,7 @@ export async function uploadWaitlistEntry(data: WaitlistFormSchema) {
       name: data.name,
       email: data.email,
       intention: isUser ? 'USER' : isBuilder ? 'BUILDER' : 'BOTH',
+      referrer: data.referrer,
     },
   });
 
