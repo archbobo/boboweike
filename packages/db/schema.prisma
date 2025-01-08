@@ -399,6 +399,7 @@ model TrackChallenge {
   Track       Track?    @relation(fields: [trackId], references: [id])
   trackId     Int?
 
+  @@unique([challengeId, orderId])
   @@index([challengeId])
   @@index([trackId])
 }
@@ -409,8 +410,5 @@ model Track {
   description     String
   visible         Boolean          @default(true)
   trackChallenges TrackChallenge[]
-  user            User?            @relation(fields: [userId], references: [id])
-  userId          String?
-
-  @@index([userId])
+  enrolledUsers   User[]
 }

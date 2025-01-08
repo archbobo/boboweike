@@ -13,17 +13,16 @@ import {
 import { Loader2, LogIn, Moon, Plus, Settings, Settings2, Sun, User } from '@repo/ui/icons';
 import { useTheme } from 'next-themes';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useContext, useEffect, useState } from 'react';
 import { FeatureFlagContext } from '~/app/feature-flag-provider';
-import { getBaseUrl } from '~/utils/getBaseUrl';
 
 export function getAdminUrl() {
   // reference for vercel.com
-  // https://github.com/vercel/next.js/discussions/45802
-  if (process.env.NEXT_PUBLIC_VERCEL_URL) {
+  if (process.env.VERCEL_URL) {
     return `https://admin.boboweike.cn`;
   }
+
   // assume localhost
   return `http://localhost:3001`;
 }
@@ -41,7 +40,7 @@ export function Navigation() {
       >
         <div className="flex w-full items-center justify-between">
           <div className="relative flex items-center gap-3">
-            <Link className="flex items-center space-x-2 duration-300" href="/">
+            <a className="flex items-center space-x-2 duration-300" href="/">
               <svg
                 className="h-8 w-8 rounded-md bg-[#3178C6] p-[2px]"
                 viewBox="0 0 512 512"
@@ -71,12 +70,19 @@ export function Navigation() {
               </svg>
 
               <span className="font-bold leading-3">波波微课</span>
-            </Link>
+            </a>
 
             {featureFlags?.exploreButton ? (
               <Link href="/explore">
                 <div className="hover:text-foreground/80 text-foreground ml-4 transition-colors">
                   Explore
+                </div>
+              </Link>
+            ) : null}
+            {featureFlags?.tracksButton ? (
+              <Link href="/tracks">
+                <div className="hover:text-foreground/80 text-foreground ml-4 transition-colors">
+                  Tracks
                 </div>
               </Link>
             ) : null}
@@ -122,6 +128,7 @@ function ThemeButton() {
 function LoginButton() {
   const [loading, setLoading] = useState(false);
   const { data: session, status } = useSession();
+  const router = useRouter();
 
   const isAdmin = session?.user.role.includes(RoleTypes.ADMIN);
   const isMod = session?.user.role.includes(RoleTypes.MODERATOR);
@@ -140,6 +147,7 @@ function LoginButton() {
   };
   const handleSignOut = async () => {
     await signOut({ redirect: false });
+    router.refresh();
   };
 
   return session ? (
