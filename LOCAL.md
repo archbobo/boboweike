@@ -143,3 +143,12 @@ This tends to resolve the issue as it entirely destroys and rebuilds + reseeds t
 
 </details>
 <!-- Other stuff here? I can't think of anything -->
+
+<details>
+  <summary>How do I use the `@vercel/toolbar` locally?</summary>
+  If you have access to the vercel project then you can run `vercel link` (make sure you have the vercel CLI).
+
+Follow the interactive CLI to link it to the boboweike project.
+
+From there on out you should be able to read and make comments while on local host for that branch.
+</details>

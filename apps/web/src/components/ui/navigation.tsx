@@ -20,6 +20,7 @@ import { getBaseUrl } from '~/utils/getBaseUrl';
 
 export function getAdminUrl() {
   // reference for vercel.com
+  // https://github.com/vercel/next.js/discussions/45802
   if (process.env.NEXT_PUBLIC_VERCEL_URL) {
     return `https://admin.boboweike.cn`;
   }
