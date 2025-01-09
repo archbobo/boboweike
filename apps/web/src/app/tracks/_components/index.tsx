@@ -1,6 +1,6 @@
 import { getServerAuthSession } from '@repo/auth/server';
 import { EnrolledTrackSection } from './track-enrolled-section';
-import { PopularTrackSection } from './track-popular-section';
+import { TrackGrid } from './track-grid';
 
 export async function Tracks() {
   const session = await getServerAuthSession();
@@ -20,7 +20,7 @@ export async function Tracks() {
         </p>
       </div>
       {session ? <EnrolledTrackSection /> : null}
-      <PopularTrackSection />
+      <TrackGrid />
     </div>
   );
 }
