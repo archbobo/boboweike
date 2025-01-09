@@ -1,11 +1,9 @@
 import { NextResponse, type NextRequest } from 'next/server';
 
-const STAGING_DOMAIN = 'staging.boboweike.cn';
+const STAGING_DOMAIN = 'web-staging';
 export function middleware(req: NextRequest) {
-  console.log({ VERCEL_ENV: process.env.VERCEL_ENV, VERCEL_URL: process.env.VERCEL_URL });
-  console.log({ NEXT_PUBLIC_VERCEL_ENV: process.env.NEXT_PUBLIC_VERCEL_ENV, NEXT_PUBLIC_VERCEL_URL: process.env.NEXT_PUBLIC_VERCEL_URL });
   const vercelEnv = process.env.VERCEL_ENV || process.env.NEXT_PUBLIC_VERCEL_ENV;
-  if (!vercelEnv || vercelEnv === STAGING_DOMAIN) {
+  if (!vercelEnv || vercelEnv?.includes(STAGING_DOMAIN)) {
     return NextResponse.next();
   }
   const path = req.nextUrl.pathname;
