@@ -19,7 +19,8 @@ import { FeatureFlagContext } from '~/app/feature-flag-provider';
 
 export function getAdminUrl() {
   // reference for vercel.com
-  if (process.env.VERCEL_URL) {
+  const vercelUrl = process.env.VERCEL_URL || process.env.NEXT_PUBLIC_VERCEL_URL;
+  if (vercelUrl) {
     return `https://admin.boboweike.cn`;
   }
 
