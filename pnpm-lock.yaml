@@ -503,7 +503,7 @@ importers:
         specifier: ^1.0.6
         version: 1.1.4(@types/react-dom@18.3.5(@types/react@18.3.18))(@types/react@18.3.18)(react-dom@19.0.0(react@18.2.0))(react@18.2.0)
       '@radix-ui/react-progress':
-        specifier: ^1.0.3
+        specifier: ^1.1.1
         version: 1.1.1(@types/react-dom@18.3.5(@types/react@18.3.18))(@types/react@18.3.18)(react-dom@19.0.0(react@18.2.0))(react@18.2.0)
       '@radix-ui/react-scroll-area':
         specifier: ^1.0.4
@@ -573,7 +573,7 @@ importers:
         version: 1.14.0
       tailwindcss-animate:
         specifier: ^1.0.6
-        version: 1.0.7(tailwindcss@3.4.17)
+        version: 1.0.7(tailwindcss@3.3.3)
       unist-util-visit:
         specifier: ^5.0.0
         version: 5.0.0
@@ -598,7 +598,7 @@ importers:
     dependencies:
       '@next/eslint-plugin-next':
         specifier: canary
-        version: 15.2.0-canary.1
+        version: 15.2.0-canary.2
       '@repo/tsconfig':
         specifier: workspace:*
         version: link:../config-typescript
@@ -610,7 +610,7 @@ importers:
         version: 5.62.0(eslint@8.57.1)(typescript@5.7.2)
       '@vercel/style-guide':
         specifier: ^4.0.2
-        version: 4.0.2(@next/eslint-plugin-next@15.2.0-canary.1)(eslint@8.57.1)(prettier@2.8.8)(typescript@5.7.2)
+        version: 4.0.2(@next/eslint-plugin-next@15.2.0-canary.2)(eslint@8.57.1)(prettier@2.8.8)(typescript@5.7.2)
       eslint:
         specifier: ^8.40.0
         version: 8.57.1
@@ -1063,8 +1063,8 @@ packages:
   '@next/eslint-plugin-next@13.5.8':
     resolution: {integrity: sha512-rmNr6kz5g7x2CQ/5RMmav7/wTGOFIv4fcP+bxawNaJP+Y5Gb0Dvq+omBUvL66pDo/fhWurElatelEFpHX+tMSw==}
 
-  '@next/eslint-plugin-next@15.2.0-canary.1':
-    resolution: {integrity: sha512-f/N1B/Z4w0IjE8HJJFwQUxyCAxNocaTfnrxTDUeKzhTQL+v4UjjF+Zf9Tf+p6mmhT42Yi1QF9MlqndA48eokgQ==}
+  '@next/eslint-plugin-next@15.2.0-canary.2':
+    resolution: {integrity: sha512-kEASMOdqYB+2alQ2qBbKAbPffZ5QWaDzXzy3cJNCbWfq+LmcEXFjiIoOw+EH3Obz4JLpH5yszTHLoyqTRpnqhg==}
 
   '@next/swc-darwin-arm64@13.4.19':
     resolution: {integrity: sha512-vv1qrjXeGbuF2mOkhkdxMDtv9np7W4mcBtaDnHU+yJG+bBwa6rYsYSCI/9Xm5+TuF5SbZbrWO6G1NfTh1TMjvQ==}
@@ -6288,7 +6288,7 @@ snapshots:
     dependencies:
       glob: 7.1.7
 
-  '@next/eslint-plugin-next@15.2.0-canary.1':
+  '@next/eslint-plugin-next@15.2.0-canary.2':
     dependencies:
       fast-glob: 3.3.1
 
@@ -7905,7 +7905,7 @@ snapshots:
     dependencies:
       '@vercel/edge-config-fs': 0.1.0
 
-  '@vercel/style-guide@4.0.2(@next/eslint-plugin-next@15.2.0-canary.1)(eslint@8.57.1)(prettier@2.8.8)(typescript@5.7.2)':
+  '@vercel/style-guide@4.0.2(@next/eslint-plugin-next@15.2.0-canary.2)(eslint@8.57.1)(prettier@2.8.8)(typescript@5.7.2)':
     dependencies:
       '@babel/core': 7.26.0
       '@babel/eslint-parser': 7.25.9(@babel/core@7.26.0)(eslint@8.57.1)
@@ -7927,7 +7927,7 @@ snapshots:
       eslint-plugin-unicorn: 43.0.2(eslint@8.57.1)
       prettier-plugin-packagejson: 2.5.6(prettier@2.8.8)
     optionalDependencies:
-      '@next/eslint-plugin-next': 15.2.0-canary.1
+      '@next/eslint-plugin-next': 15.2.0-canary.2
       eslint: 8.57.1
       prettier: 2.8.8
       typescript: 5.7.2
