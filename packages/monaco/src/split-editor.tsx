@@ -38,8 +38,6 @@ export default function SplitEditor({
   onChange,
   monaco,
 }: SplitEditorProps) {
-  const monaco = useMonaco();
-
   useEffect(() => {
     if (monaco) {
       const libUri = monaco.Uri.parse(LIB_URI);

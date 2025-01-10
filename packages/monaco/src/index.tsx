@@ -106,6 +106,7 @@ export function CodePanel(props: CodePanelProps) {
               setTestEditorState(editor);
             },
             user: async (editor, monaco) => {
+              // @ts-ignore
               setMonacoInstance(monaco);
               monaco.languages.typescript.typescriptDefaults.setCompilerOptions({
                 ...monaco.languages.typescript.typescriptDefaults.getCompilerOptions(),
