@@ -45,7 +45,7 @@ export function Navigation() {
         >
           <div className="flex w-full items-center justify-between">
             <div className="relative flex items-center gap-3">
-              <a
+              <Link
                 className="flex items-center space-x-2 focus:outline-none focus-visible:ring-2"
                 href="/"
               >
@@ -78,7 +78,7 @@ export function Navigation() {
                 </svg>
 
                 <span className="font-bold leading-3">波波微课</span>
-              </a>
+              </Link>
               {featureFlags?.exploreButton ? (
                 <Link href="/explore" className="ml-4">
                   <div
