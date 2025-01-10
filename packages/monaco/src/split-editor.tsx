@@ -26,6 +26,7 @@ export interface SplitEditorProps {
     tests?: OnChange;
     user?: OnChange;
   };
+  monaco: typeof import('monaco-editor') | undefined;
 }
 
 export default function SplitEditor({
@@ -35,6 +36,7 @@ export default function SplitEditor({
   onMount,
   onValidate,
   onChange,
+  monaco,
 }: SplitEditorProps) {
   const monaco = useMonaco();
 
