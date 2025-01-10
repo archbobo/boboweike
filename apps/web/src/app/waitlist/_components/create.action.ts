@@ -1,7 +1,7 @@
 'use server';
 
 import { prisma } from '@repo/db';
-import { type WaitlistFormSchema } from '~/components/landing/waitlist/waitlist-form';
+import type { WaitlistFormSchema } from './waitlist-form';
 
 export async function uploadWaitlistEntry(data: WaitlistFormSchema) {
   const isUser = data.intention === 'user';

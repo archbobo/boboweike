@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
-import Features from '~/components/landing/features';
-import Hero from '~/components/landing/hero';
-import Waitlist from '~/components/landing/waitlist/banner';
 import { Footsies } from '~/components/ui/footsies';
+import Features from './_components/features';
+import Hero from './_components/hero';
+import { WaitlistBanner } from './_components/waitlist-banner';
 
 export const metadata: Metadata = {
   title: '波波微课',
@@ -16,7 +16,7 @@ export default async function Index() {
       <Hero />
       <Features />
       {/* <Community /> */}
-      <Waitlist />
+      <WaitlistBanner />
       <Footsies />
     </>
   );
