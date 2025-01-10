@@ -41,7 +41,9 @@ function Hero() {
             <div className="absolute right-1/2 top-1/2 -z-10 hidden h-56 w-56 -translate-y-[40%] rounded-full bg-[#3178c6]/20 blur-3xl dark:block" />
             <TypeHeroLogo />
             <h1 className="bg-gradient-to-r from-[#3178c6] to-black bg-clip-text text-6xl font-extrabold text-transparent sm:text-8xl sm:leading-[5.5rem] dark:to-white">
-              波波微课
+              波波
+              <br />
+              微课
             </h1>
           </div>
 
