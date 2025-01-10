@@ -3,7 +3,7 @@ import { NextResponse, type NextRequest } from 'next/server';
 const STAGING_DOMAIN = 'web-staging';
 export function middleware(req: NextRequest) {
   const vercelEnv = process.env.VERCEL_ENV || process.env.NEXT_PUBLIC_VERCEL_ENV;
-  if (!vercelEnv || vercelEnv === 'preview' || vercelEnv?.includes(STAGING_DOMAIN)) {
+  if (!vercelEnv || vercelEnv?.includes(STAGING_DOMAIN)) {
     return NextResponse.next();
   }
   const path = req.nextUrl.pathname;
