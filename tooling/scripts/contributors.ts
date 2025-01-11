@@ -14,8 +14,8 @@ async function getOcto() {
   }
   const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN });
   const response = await octokit.request('GET /repos/{owner}/{repo}/contributors', {
-    owner: 'bautistaaa',
-    repo: 'typehero',
+    owner: 'bobo',
+    repo: 'boboweike',
   });
   // put all avatar urls in a list
   return response.data.map((contributor) => contributor);

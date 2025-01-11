@@ -60,8 +60,8 @@ export default million.next(
       // Suppresses source map uploading logs during build
       silent: true,
 
-      org: 'typehero',
-      project: 'typehero-web-production',
+      org: 'boboweike',
+      project: 'boboweike-web-production',
     },
     {
       // For all available options, see:
