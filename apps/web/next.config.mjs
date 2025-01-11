@@ -10,8 +10,23 @@ const millionConfig = {
   auto: { rsc: true },
 };
 
+const isProd = process.env.NODE_ENV === 'production';
 /** @type {import("next").NextConfig} */
 const nextConfig = {
+  async headers() {
+    return !isProd
+      ? [
+          {
+            // allow CORS only on dev for admin site to get monaco files
+            source: '/min/vs/(.*)',
+            headers: [
+              { key: 'Access-Control-Allow-Origin', value: '*' },
+              { key: 'Access-Control-Allow-Methods', value: 'GET' },
+            ],
+          },
+        ]
+      : [];
+  },
   webpack: (config) => {
     config.module.rules.push({
       test: /\.md$/,
@@ -60,8 +75,8 @@ export default million.next(
       // Suppresses source map uploading logs during build
       silent: true,
 
-      org: 'boboweike',
-      project: 'boboweike-web-production',
+      org: 'typehero',
+      project: 'typehero-web-production',
     },
     {
       // For all available options, see:
