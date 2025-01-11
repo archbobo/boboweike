@@ -34,6 +34,11 @@ export async function getReports(lastCursor?: number, take = 3) {
               vote: true,
             },
           },
+          user: {
+            select: {
+              name: true,
+            },
+          },
         },
       },
       user: true,
@@ -66,7 +71,11 @@ export async function getReportedUserInformation(userId: string) {
       comment: {
         take: 10,
         include: {
-          user: true,
+          user: {
+            select: {
+              name: true,
+            },
+          },
           _count: {
             select: {
               replies: true,
