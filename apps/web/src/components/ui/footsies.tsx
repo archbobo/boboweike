@@ -7,7 +7,9 @@ export function Footsies() {
         <div className="space-x-2">
           Built with <Binary className="inline-block h-5 w-5 text-[#31bdc6]" /> by 架构师杨波.
         </div>
-        <div className="text-neutral-500">© {new Date().getFullYear()} 波波微课</div>
+        <div className="text-neutral-500 dark:text-neutral-400">
+          © {new Date().getFullYear()} 波波微课
+        </div>
       </div>
     </footer>
   );
