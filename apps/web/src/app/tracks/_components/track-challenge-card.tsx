@@ -30,6 +30,7 @@ const BGS_BY_DIFFICULTY = {
 export function TrackChallenge({ challenge, className, mock }: TrackChallengeProps) {
   const isMobile = useIsMobile();
   return (
+    // eslint-disable-next-line jsx-a11y/label-has-associated-control
     <label
       htmlFor={challenge.id.toString()}
       className="group/challenge flex cursor-pointer flex-col items-center pt-2"
