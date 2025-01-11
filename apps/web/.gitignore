@@ -1,1 +1,3 @@
 .vercel
+# Sentry Auth Token
+.sentryclirc
