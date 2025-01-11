@@ -15,6 +15,15 @@ export default async function SolutionPage({ params: { solutionId } }: Props) {
   return <SolutionDetails solution={solution} />;
 }
 
+export async function generateMetadata({ params: { solutionId } }: Props) {
+  const solution = await getSolution(solutionId);
+  if (!solution) return null;
+  return {
+    title: `${solution.title}, solution to ${solution.challenge?.name} | 波波微课`,
+    description: `View this solution to ${solution.challenge?.name} on 波波微课.`,
+  };
+}
+
 async function getSolution(solutionId: string) {
   const solution = await prisma.sharedSolution.findFirst({
     where: {

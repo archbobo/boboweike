@@ -8,7 +8,7 @@ const baseMetadata: Metadata = {
   metadataBase: new URL(OG_URL),
   title: {
     default: '波波微课',
-    template: '%s | 波波微课',
+    template: '%s',
   },
   robots: {
     index: true,

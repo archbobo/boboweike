@@ -1,5 +1,6 @@
 import { getServerAuthSession } from '@repo/auth/server';
 import { TypographyH2 } from '@repo/ui';
+import type { Metadata } from 'next';
 import { Wizard } from '~/components/wizard';
 
 export default async function Page() {
@@ -15,3 +16,8 @@ export default async function Page() {
 
   return <Wizard />;
 }
+
+export const metadata: Metadata = {
+  title: 'Create a Challenge | 波波微课',
+  description: 'Create a challenge on 波波微课 and share it with the world!',
+};
