@@ -118,6 +118,7 @@ export function CodePanel(props: CodePanelProps) {
             setTestEditorState(editor);
           },
           user: async (editor, monaco) => {
+            // @ts-ignore
             setMonacoInstance(monaco);
 
             monaco.languages.typescript.typescriptDefaults.setCompilerOptions({
@@ -152,6 +153,7 @@ export function CodePanel(props: CodePanelProps) {
 
             monaco.languages.registerInlayHintsProvider(
               'typescript',
+              // @ts-ignore
               createTwoslashInlayProvider(monaco, ts),
             );
           },
