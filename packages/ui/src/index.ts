@@ -7,7 +7,6 @@ export * from './components/button';
 export * from './components/calendar';
 export * from './components/card';
 export * from './components/checkbox';
-export * from './components/command';
 export * from './components/data-table';
 export * from './components/data-table-pagination';
 export * from './components/dialog';

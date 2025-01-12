@@ -55,13 +55,13 @@ importers:
         version: 2.6.0-beta.12
       next:
         specifier: 13.4.19
-        version: 13.4.19(@babel/core@7.26.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+        version: 13.4.19(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       next-auth:
         specifier: ^4.22.1
-        version: 4.24.11(next@13.4.19(@babel/core@7.26.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+        version: 4.24.11(next@13.4.19(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       next-themes:
         specifier: ^0.2.1
-        version: 0.2.1(next@13.4.19(@babel/core@7.26.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+        version: 0.2.1(next@13.4.19(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -179,7 +179,7 @@ importers:
         version: link:../../packages/ui
       '@sentry/nextjs':
         specifier: ^7.66.0
-        version: 7.120.3(next@13.4.19(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react@18.2.0)(webpack@5.97.1)
+        version: 7.120.3(next@13.4.19(@babel/core@7.26.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react@18.2.0)(webpack@5.97.1)
       '@t3-oss/env-nextjs':
         specifier: ^0.6.0
         version: 0.6.1(typescript@5.7.2)(zod@3.24.1)
@@ -197,16 +197,16 @@ importers:
         version: 3.25.6(@types/react@18.3.18)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@uploadthing/react':
         specifier: ^5.5.0
-        version: 5.7.0(@uploadthing/mime-types@0.2.10)(next@13.4.19(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react@18.2.0)(uploadthing@5.7.4)
+        version: 5.7.0(@uploadthing/mime-types@0.2.10)(next@13.4.19(@babel/core@7.26.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react@18.2.0)(uploadthing@5.7.4)
       '@vercel/analytics':
         specifier: ^1.0.2
-        version: 1.4.1(next@13.4.19(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react@18.2.0)
+        version: 1.4.1(next@13.4.19(@babel/core@7.26.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react@18.2.0)
       '@vercel/edge-config':
         specifier: ^0.2.1
         version: 0.2.1
       '@vercel/toolbar':
         specifier: ^0.1.1
-        version: 0.1.30(next@13.4.19(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react@18.2.0)
+        version: 0.1.30(next@13.4.19(@babel/core@7.26.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react@18.2.0)
       clsx:
         specifier: ^2.0.0
         version: 2.1.1
@@ -233,13 +233,13 @@ importers:
         version: 0.4.2(monaco-editor@0.40.0)
       next:
         specifier: ^13.4.19
-        version: 13.4.19(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+        version: 13.4.19(@babel/core@7.26.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       next-international:
         specifier: 1.0.0-rc.4
         version: 1.0.0-rc.4
       next-themes:
         specifier: ^0.2.1
-        version: 0.2.1(next@13.4.19(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+        version: 0.2.1(next@13.4.19(@babel/core@7.26.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -588,7 +588,7 @@ importers:
         version: 1.14.0
       tailwindcss-animate:
         specifier: ^1.0.6
-        version: 1.0.7(tailwindcss@3.4.17)
+        version: 1.0.7(tailwindcss@3.3.3)
       unist-util-visit:
         specifier: ^5.0.0
         version: 5.0.0
@@ -613,7 +613,7 @@ importers:
     dependencies:
       '@next/eslint-plugin-next':
         specifier: canary
-        version: 15.2.0-canary.4
+        version: 15.2.0-canary.5
       '@repo/tsconfig':
         specifier: workspace:*
         version: link:../config-typescript
@@ -625,7 +625,7 @@ importers:
         version: 5.62.0(eslint@8.57.1)(typescript@5.7.2)
       '@vercel/style-guide':
         specifier: ^4.0.2
-        version: 4.0.2(@next/eslint-plugin-next@15.2.0-canary.4)(eslint@8.57.1)(prettier@2.8.8)(typescript@5.7.2)
+        version: 4.0.2(@next/eslint-plugin-next@15.2.0-canary.5)(eslint@8.57.1)(prettier@2.8.8)(typescript@5.7.2)
       eslint:
         specifier: ^8.40.0
         version: 8.57.1
@@ -1097,8 +1097,8 @@ packages:
   '@next/eslint-plugin-next@13.5.8':
     resolution: {integrity: sha512-rmNr6kz5g7x2CQ/5RMmav7/wTGOFIv4fcP+bxawNaJP+Y5Gb0Dvq+omBUvL66pDo/fhWurElatelEFpHX+tMSw==}
 
-  '@next/eslint-plugin-next@15.2.0-canary.4':
-    resolution: {integrity: sha512-VONsR5+mZyb8JuYV9LnuDtb4F4Hen3qNvueLE+7DM6odsBX/5mrd0sJ11YzoKxINUGbDTfEAH8o7LH7jOPhuSA==}
+  '@next/eslint-plugin-next@15.2.0-canary.5':
+    resolution: {integrity: sha512-xjPridkpSq+jn8ubo5BuOxQNZd1z3u1/cM1EdoR/9TrrhkJa5iTTfaYtHFwFl9lTw22HZk0IhP1d5lH4SWhJsQ==}
 
   '@next/swc-darwin-arm64@13.4.19':
     resolution: {integrity: sha512-vv1qrjXeGbuF2mOkhkdxMDtv9np7W4mcBtaDnHU+yJG+bBwa6rYsYSCI/9Xm5+TuF5SbZbrWO6G1NfTh1TMjvQ==}
@@ -6598,7 +6598,7 @@ snapshots:
     dependencies:
       glob: 7.1.7
 
-  '@next/eslint-plugin-next@15.2.0-canary.4':
+  '@next/eslint-plugin-next@15.2.0-canary.5':
     dependencies:
       fast-glob: 3.3.1
 
@@ -7934,7 +7934,7 @@ snapshots:
       '@sentry/utils': 7.120.3
       localforage: 1.10.0
 
-  '@sentry/nextjs@7.120.3(next@13.4.19(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react@18.2.0)(webpack@5.97.1)':
+  '@sentry/nextjs@7.120.3(next@13.4.19(@babel/core@7.26.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react@18.2.0)(webpack@5.97.1)':
     dependencies:
       '@rollup/plugin-commonjs': 24.0.0(rollup@2.79.2)
       '@sentry/core': 7.120.3
@@ -7946,7 +7946,7 @@ snapshots:
       '@sentry/vercel-edge': 7.120.3
       '@sentry/webpack-plugin': 1.21.0
       chalk: 3.0.0
-      next: 13.4.19(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      next: 13.4.19(@babel/core@7.26.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       react: 18.2.0
       resolve: 1.22.8
       rollup: 2.79.2
@@ -8346,7 +8346,7 @@ snapshots:
 
   '@uploadthing/mime-types@0.2.10': {}
 
-  '@uploadthing/react@5.7.0(@uploadthing/mime-types@0.2.10)(next@13.4.19(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react@18.2.0)(uploadthing@5.7.4)':
+  '@uploadthing/react@5.7.0(@uploadthing/mime-types@0.2.10)(next@13.4.19(@babel/core@7.26.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react@18.2.0)(uploadthing@5.7.4)':
     dependencies:
       '@uploadthing/shared': 5.2.7(@uploadthing/mime-types@0.2.10)
       attr-accept: 2.2.5
@@ -8355,7 +8355,7 @@ snapshots:
       tailwind-merge: 1.14.0
       uploadthing: 5.7.4
     optionalDependencies:
-      next: 13.4.19(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      next: 13.4.19(@babel/core@7.26.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
     transitivePeerDependencies:
       - '@uploadthing/mime-types'
 
@@ -8363,9 +8363,9 @@ snapshots:
     optionalDependencies:
       '@uploadthing/mime-types': 0.2.10
 
-  '@vercel/analytics@1.4.1(next@13.4.19(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react@18.2.0)':
+  '@vercel/analytics@1.4.1(next@13.4.19(@babel/core@7.26.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react@18.2.0)':
     optionalDependencies:
-      next: 13.4.19(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      next: 13.4.19(@babel/core@7.26.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       react: 18.2.0
 
   '@vercel/edge-config-fs@0.1.0': {}
@@ -8374,7 +8374,7 @@ snapshots:
     dependencies:
       '@vercel/edge-config-fs': 0.1.0
 
-  '@vercel/style-guide@4.0.2(@next/eslint-plugin-next@15.2.0-canary.4)(eslint@8.57.1)(prettier@2.8.8)(typescript@5.7.2)':
+  '@vercel/style-guide@4.0.2(@next/eslint-plugin-next@15.2.0-canary.5)(eslint@8.57.1)(prettier@2.8.8)(typescript@5.7.2)':
     dependencies:
       '@babel/core': 7.26.0
       '@babel/eslint-parser': 7.25.9(@babel/core@7.26.0)(eslint@8.57.1)
@@ -8396,7 +8396,7 @@ snapshots:
       eslint-plugin-unicorn: 43.0.2(eslint@8.57.1)
       prettier-plugin-packagejson: 2.5.6(prettier@2.8.8)
     optionalDependencies:
-      '@next/eslint-plugin-next': 15.2.0-canary.4
+      '@next/eslint-plugin-next': 15.2.0-canary.5
       eslint: 8.57.1
       prettier: 2.8.8
       typescript: 5.7.2
@@ -8406,7 +8406,7 @@ snapshots:
       - jest
       - supports-color
 
-  '@vercel/toolbar@0.1.30(next@13.4.19(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react@18.2.0)':
+  '@vercel/toolbar@0.1.30(next@13.4.19(@babel/core@7.26.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react@18.2.0)':
     dependencies:
       '@tinyhttp/app': 1.3.0
       chokidar: 3.6.0
@@ -8416,7 +8416,7 @@ snapshots:
       get-port: 5.1.1
       strip-ansi: 6.0.1
     optionalDependencies:
-      next: 13.4.19(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      next: 13.4.19(@babel/core@7.26.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       react: 18.2.0
 
   '@webassemblyjs/ast@1.14.1':
@@ -10874,13 +10874,13 @@ snapshots:
 
   neo-async@2.6.2: {}
 
-  next-auth@4.24.11(next@13.4.19(@babel/core@7.26.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
+  next-auth@4.24.11(next@13.4.19(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
     dependencies:
       '@babel/runtime': 7.26.0
       '@panva/hkdf': 1.2.1
       cookie: 0.7.2
       jose: 4.15.9
-      next: 13.4.19(@babel/core@7.26.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      next: 13.4.19(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       oauth: 0.9.15
       openid-client: 5.7.1
       preact: 10.25.4
