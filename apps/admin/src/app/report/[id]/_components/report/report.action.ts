@@ -1,6 +1,7 @@
 'use server';
 
 import { prisma } from '@repo/db';
+import { cache } from 'react';
 
 export type ReportsData = Awaited<ReturnType<typeof getReports>>;
 export type InfiniteReports = Awaited<ReturnType<typeof getInfiniteReports>>;
@@ -62,7 +63,7 @@ export async function getReports(lastCursor?: number, take = 3) {
   });
 }
 
-export async function getReportedUserInformation(userId: string) {
+export const getReportedUserInformation = cache(async (userId: string) => {
   return await prisma.user.findFirstOrThrow({
     where: {
       id: userId,
@@ -102,4 +103,4 @@ export async function getReportedUserInformation(userId: string) {
       },
     },
   });
-}
+});
