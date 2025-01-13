@@ -1,8 +1,7 @@
-import { notFound } from 'next/navigation';
 import { getServerAuthSession } from '@repo/auth/server';
-import { getChallengeSubmissions } from './getChallengeSubmissions';
+import { notFound } from 'next/navigation';
 import { Submissions } from './_components';
-import type { Metadata } from 'next';
+import { getChallengeSubmissions } from './getChallengeSubmissions';
 
 interface Props {
   params: {
@@ -10,21 +9,10 @@ interface Props {
   };
 }
 
-export async function generateMetadata({ params: { id } }: Props): Promise<Metadata> {
-  const submissions = await getChallengeSubmissions('', id);
-
-  if (!submissions) {
-    return {
-      title: 'Submissions | 波波微课',
-      description: 'View your submissions to this challenge on 波波微课.',
-    };
-  }
-
-  return {
-    title: `${submissions.length} Submission${submissions.length == 1 ? '' : 's'} | 波波微课`,
-    description: 'View all of your submissions to this challenge on 波波微课.',
-  };
-}
+export const metadata = {
+  title: 'Submissions | 波波微课',
+  description: 'View your submissions to this challenge on 波波微课.',
+};
 
 export default async function SubmissionPage({ params: { id } }: Props) {
   const session = await getServerAuthSession();
