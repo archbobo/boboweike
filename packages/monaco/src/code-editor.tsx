@@ -6,7 +6,7 @@ import { useTheme } from 'next-themes';
 import { useMemo } from 'react';
 import { useEditorSettingsStore } from './settings-store';
 import { libSource } from './editor-types';
-// eslint-disable-next-line @typescript-eslint/consistent-type-imports
+// eslint-disable-next-line @typescript-eslint/consistent-type-imports, import/no-extraneous-dependencies
 import * as MonacoEditor from 'monaco-editor';
 
 const ADMIN_HOST = 'admin.boboweike.cn';
