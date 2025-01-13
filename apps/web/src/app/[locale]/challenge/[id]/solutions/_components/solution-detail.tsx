@@ -67,7 +67,7 @@ export function SolutionDetails({ solution }: Props) {
                     <p>Share challenge</p>
                   </TooltipContent>
                 </Tooltip>
-                <ReportDialog reportType="SOLUTION" solutionId={solution.id!}>
+                <ReportDialog reportType="SOLUTION" solutionId={solution.id}>
                   <ActionMenu
                     items={[
                       {
@@ -113,7 +113,7 @@ export function SolutionDetails({ solution }: Props) {
           <Markdown>{solution.description || ''}</Markdown>
         </div>
       </div>
-      <Comments rootId={solution.id!} type="SOLUTION" />
+      <Comments rootId={solution.id} type="SOLUTION" />
     </div>
   );
 }
