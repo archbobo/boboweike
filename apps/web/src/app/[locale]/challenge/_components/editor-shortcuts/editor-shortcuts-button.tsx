@@ -20,11 +20,11 @@ export function EditorShortcutsButton() {
           <TooltipContent className="px-2 py-1">Shortcuts</TooltipContent>
         </Tooltip>
       </DialogTrigger>
-      <DialogContent className="w-[200px]">
+      <DialogContent>
         <DialogHeader>
           <DialogTitle>Shortcuts</DialogTitle>
         </DialogHeader>
-        <div className="pt-4">
+        <div>
           <EditorShortcuts />
         </div>
       </DialogContent>

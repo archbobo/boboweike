@@ -97,7 +97,7 @@ export function Description({ challenge }: Props) {
               </TooltipContent>
             </Tooltip>
           </DialogTrigger>
-          <DialogContent className="w-[200px]">
+          <DialogContent>
             <DialogHeader>
               <DialogTitle>Share this challenge</DialogTitle>
             </DialogHeader>
