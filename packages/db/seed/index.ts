@@ -39,58 +39,52 @@ await prisma.challenge.createMany({
 export const trashId = uuidByString('trash');
 export const gId = uuidByString('g');
 
-// Seed Tracks
-const TRACK_AMOUNT = 10;
-for (let i = 0; i < TRACK_AMOUNT; i++) {
-  // Get random challenges.
-  const challenges = await getRandomChallenges();
+const tracks = [
+  {
+    name: 'Crafting TypeScript Utility Types',
+    description:
+      "This collection guides you through hands-on exercises to recreate Typescript's built-in utility types.",
+  },
+  {
+    name: 'Typescript Wizardry',
+    description:
+      "Dive into the elite realm of TypeScript mastery with our 'Pro-Level TypeScript Challenges.' Designed for seasoned professionals, this collection offers a formidable gauntlet of intricate exercises, pushing the boundaries of your TypeScript expertise to the limit.",
+  },
+  {
+    name: 'Javascript Built in Methods',
+    description:
+      "This collection of challenges equips you to develop and enhance standard JavaScript methods, all while harnessing TypeScript's advanced type system to achieve a fully typesafe developer experience.",
+  },
+  {
+    name: 'Understanding Typescript Syntax',
+    description:
+      'A collection of challenging exercises that dive into type annotations, generics, and more to level up your typescript abilities.',
+  },
+  {
+    name: 'Typescript Foundations',
+    description:
+      "'Typescript Foundations' is a curated set of challenges designed to build a strong foundation. From basic syntax to advanced concepts, this collection offers hands-on exercises to help you become a TypeScript Hero.",
+  },
+];
 
-  // Create a track.
-  const track = await prisma.track.create({
+for (const [index, track] of tracks.entries()) {
+  const challenges = await getRandomChallenges(index);
+
+  const createdTrack = await prisma.track.create({
     data: {
-      title: faker.lorem.words(2),
-      description: faker.lorem.sentences(1),
+      title: track.name,
+      description: track.description,
       visible: true,
     },
   });
 
-  // Create/Connect a Track Challenge.
-  for (const challenge of challenges) {
-    // Check if track challenge already exists with the orderId & challengeId.
-    const orderId = faker.number.int({ max: 10, min: 0 });
-    try {
-      const trackChallenge = await prisma.trackChallenge.findUnique({
-        where: {
-          challengeId_orderId: {
-            challengeId: challenge.id,
-            orderId,
-          },
-        },
-      });
-
-      await prisma.track.update({
-        where: {
-          id: track.id,
-        },
-        data: {
-          trackChallenges: {
-            connect: {
-              id: trackChallenge?.id,
-            },
-          },
-        },
-      });
-    } catch (_e) {
-      // Assume does not exist.
-      await prisma.trackChallenge.create({
-        data: {
-          challengeId: challenge.id,
-          trackId: track.id,
-          orderId,
-        },
-      });
-    }
-  }
+  await prisma.trackChallenge.createMany({
+    data: challenges.map((challenge, index) => ({
+      challengeId: challenge.id,
+      trackId: createdTrack.id,
+      orderId: index,
+    })),
+  });
 }
 
 try {
@@ -105,7 +99,7 @@ try {
     update: {},
     create: {
       id: trashId,
-      email: 'chris@boboweike.cn',
+      email: 'chris@typehero.dev',
       name: 'chris',
       sharedSolution: {
         create: alotOfSharedSolutions(someChallenge?.id ?? 2),
@@ -150,12 +144,10 @@ try {
   process.exit(1);
 }
 
-async function getRandomChallenges(): Promise<Challenge[]> {
-  const challengesCount = await prisma.challenge.count();
-  const skip = Math.floor(Math.random() * (challengesCount - 10));
+async function getRandomChallenges(iteration: number): Promise<Challenge[]> {
   const challenges = await prisma.challenge.findMany({
     take: 10,
-    skip,
+    skip: 10 * iteration,
   });
   return challenges;
 }
