@@ -10,9 +10,14 @@ services:
     volumes:
       - boboweike-data:/var/lib/postgresql/data
     environment:
-      POSTGRES_USER: bobo
-      POSTGRES_PASSWORD: dev-pass
-      POSTGRES_DB: boboweike-db
+      POSTGRES_USER: dev
+      POSTGRES_PASSWORD: dev
+      POSTGRES_DB: boboweike
+    healthcheck:
+      test: ['CMD', 'pg_isready', '-U', 'dev', '-d', 'boboweike']
+      interval: 10s
+      timeout: 20s
+      retries: 5
     ports:
       - 5432:5432
 
