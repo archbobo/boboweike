@@ -1,7 +1,7 @@
 // NOTE: this whole package is bugged and once they fix this we can remove this workaround
-import bundleAnalyzer from '@next/bundle-analyzer';
 // eslint-disable-next-line import/no-unresolved
 import vercelToolbar from '@vercel/toolbar/plugins/next';
+import bundleAnalyzer from '@next/bundle-analyzer';
 // eslint-disable-next-line import/no-unresolved
 import million from 'million/compiler';
 
