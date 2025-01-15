@@ -1,10 +1,10 @@
 'use server';
 
 import { prisma } from '@repo/db';
-import { Resend } from 'resend';
+// import { Resend } from 'resend';
 import type { WaitlistFormSchema } from './waitlist-form';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+// const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function uploadWaitlistEntry(data: WaitlistFormSchema) {
   const isUser = data.intention === 'user';
