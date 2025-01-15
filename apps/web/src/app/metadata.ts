@@ -28,7 +28,6 @@ export const buildMetaForUser = async ({
   description,
   username,
 }: MetaParamsForChallenge): Promise<Metadata> => {
-
   return buildMeta({
     title,
     description,
@@ -41,7 +40,6 @@ export const buildMetaForChallenge = async ({
   description,
   username,
 }: MetaParamsForChallenge): Promise<Metadata> => {
-
   return buildMeta({
     title,
     description,
@@ -70,7 +68,6 @@ const buildMeta = async ({
   description?: string;
   title?: string;
 }): Promise<Metadata> => {
-
   if (description) {
     baseMetadata.description = description;
   }

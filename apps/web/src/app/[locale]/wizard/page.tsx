@@ -3,6 +3,7 @@ import { TypographyH2 } from '@repo/ui/components/typography/h2';
 import type { Metadata } from 'next';
 import { Wizard } from './_components';
 import { buildMetaForDefault } from '~/app/metadata';
+
 export async function generateMetadata(): Promise<Metadata> {
   return buildMetaForDefault({
     title: 'Create a Challenge | 波波微课',
