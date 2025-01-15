@@ -189,6 +189,9 @@ importers:
       '@tanstack/react-query':
         specifier: ^4.29.25
         version: 4.36.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      '@tanstack/react-query-devtools':
+        specifier: ^4.35.3
+        version: 4.36.1(@tanstack/react-query@4.36.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@tanstack/react-table':
         specifier: ^8.9.3
         version: 8.20.6(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
@@ -625,7 +628,7 @@ importers:
     dependencies:
       '@next/eslint-plugin-next':
         specifier: canary
-        version: 15.2.0-canary.10
+        version: 15.2.0-canary.11
       '@repo/tsconfig':
         specifier: workspace:*
         version: link:../config-typescript
@@ -637,7 +640,7 @@ importers:
         version: 5.62.0(eslint@8.57.1)(typescript@5.7.2)
       '@vercel/style-guide':
         specifier: ^4.0.2
-        version: 4.0.2(@next/eslint-plugin-next@15.2.0-canary.10)(eslint@8.57.1)(prettier@2.8.8)(typescript@5.7.2)
+        version: 4.0.2(@next/eslint-plugin-next@15.2.0-canary.11)(eslint@8.57.1)(prettier@2.8.8)(typescript@5.7.2)
       eslint:
         specifier: ^8.45.0
         version: 8.57.1
@@ -1106,8 +1109,8 @@ packages:
   '@next/eslint-plugin-next@13.5.8':
     resolution: {integrity: sha512-rmNr6kz5g7x2CQ/5RMmav7/wTGOFIv4fcP+bxawNaJP+Y5Gb0Dvq+omBUvL66pDo/fhWurElatelEFpHX+tMSw==}
 
-  '@next/eslint-plugin-next@15.2.0-canary.10':
-    resolution: {integrity: sha512-7iaR2DR0IutO4LQlhU8933Y76DZDzjcgd91fVm45pCUlOXBptiw0LUwz5MPZCJKazrABi9nyLlEBBp4P8WpD3A==}
+  '@next/eslint-plugin-next@15.2.0-canary.11':
+    resolution: {integrity: sha512-oQx3SjB3Qg/t/7B1zPk+s6yYTUDp62PN9Li/uHYgSZTQgdW3sHv+hhPet/0g0PGwG9RIt3qrLeM8bvhSyGXoKA==}
 
   '@next/swc-darwin-arm64@13.5.8':
     resolution: {integrity: sha512-HkFw3QPeIy9bImWVTbsvzfEWQkuzBEQTK/L7ORMg+9sXNN0vNR5Gz/chD4/VbozTHyA38lWTrMBfLoWVpD+2IA==}
@@ -2325,8 +2328,19 @@ packages:
     peerDependencies:
       tailwindcss: '>=3.0.0 || insiders || >=4.0.0-alpha.20'
 
+  '@tanstack/match-sorter-utils@8.19.4':
+    resolution: {integrity: sha512-Wo1iKt2b9OT7d+YGhvEPD3DXvPv2etTusIMhMUoG7fbhmxcXCtIjJDEygy91Y2JFlwGyjqiBPRozme7UD8hoqg==}
+    engines: {node: '>=12'}
+
   '@tanstack/query-core@4.36.1':
     resolution: {integrity: sha512-DJSilV5+ytBP1FbFcEJovv4rnnm/CokuVvrBEtW/Va9DvuJ3HksbXUJEpI0aV1KtuL4ZoO9AVE6PyNLzF7tLeA==}
+
+  '@tanstack/react-query-devtools@4.36.1':
+    resolution: {integrity: sha512-WYku83CKP3OevnYSG8Y/QO9g0rT75v1om5IvcWUwiUZJ4LanYGLVCZ8TdFG5jfsq4Ej/lu2wwDAULEUnRIMBSw==}
+    peerDependencies:
+      '@tanstack/react-query': ^4.36.1
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
 
   '@tanstack/react-query@4.36.1':
     resolution: {integrity: sha512-y7ySVHFyyQblPl3J3eQBWpXZkliroki3ARnBKsdJchlgt7yJLRDUcf4B8soufgiYt3pEQIkBWBx1N9/ZPIeUWw==}
@@ -5402,6 +5416,9 @@ packages:
   remark-rehype@10.1.0:
     resolution: {integrity: sha512-EFmR5zppdBp0WQeDVZ/b66CWJipB2q2VLNFMabzDSGR66Z2fQii83G5gTBbgGEnEEA0QRussvrFHxk1HWGJskw==}
 
+  remove-accents@0.5.0:
+    resolution: {integrity: sha512-8g3/Otx1eJaVD12e31UbJj1YzdtVvzH85HV7t+9MJYk/u3XmkOUJ5Ys9wQrf9PCPK8+xn4ymzqYCiZl6QWKn+A==}
+
   require-from-string@2.0.2:
     resolution: {integrity: sha512-Xf0nWe6RseziFMu+Ap9biiUbmplq6S9/p+7w7YXP/JBHhrUDDUhwa+vANyubuqfZWTveU//DYVGsDG7RKL/vEw==}
     engines: {node: '>=0.10.0'}
@@ -6599,7 +6616,7 @@ snapshots:
     dependencies:
       glob: 7.1.7
 
-  '@next/eslint-plugin-next@15.2.0-canary.10':
+  '@next/eslint-plugin-next@15.2.0-canary.11':
     dependencies:
       fast-glob: 3.3.1
 
@@ -8019,7 +8036,20 @@ snapshots:
       postcss-selector-parser: 6.0.10
       tailwindcss: 3.4.17
 
+  '@tanstack/match-sorter-utils@8.19.4':
+    dependencies:
+      remove-accents: 0.5.0
+
   '@tanstack/query-core@4.36.1': {}
+
+  '@tanstack/react-query-devtools@4.36.1(@tanstack/react-query@4.36.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
+    dependencies:
+      '@tanstack/match-sorter-utils': 8.19.4
+      '@tanstack/react-query': 4.36.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      superjson: 1.12.4
+      use-sync-external-store: 1.4.0(react@18.2.0)
 
   '@tanstack/react-query@4.36.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
     dependencies:
@@ -8343,7 +8373,7 @@ snapshots:
     dependencies:
       '@vercel/edge-config-fs': 0.1.0
 
-  '@vercel/style-guide@4.0.2(@next/eslint-plugin-next@15.2.0-canary.10)(eslint@8.57.1)(prettier@2.8.8)(typescript@5.7.2)':
+  '@vercel/style-guide@4.0.2(@next/eslint-plugin-next@15.2.0-canary.11)(eslint@8.57.1)(prettier@2.8.8)(typescript@5.7.2)':
     dependencies:
       '@babel/core': 7.26.0
       '@babel/eslint-parser': 7.25.9(@babel/core@7.26.0)(eslint@8.57.1)
@@ -8365,7 +8395,7 @@ snapshots:
       eslint-plugin-unicorn: 43.0.2(eslint@8.57.1)
       prettier-plugin-packagejson: 2.5.6(prettier@2.8.8)
     optionalDependencies:
-      '@next/eslint-plugin-next': 15.2.0-canary.10
+      '@next/eslint-plugin-next': 15.2.0-canary.11
       eslint: 8.57.1
       prettier: 2.8.8
       typescript: 5.7.2
@@ -11686,6 +11716,8 @@ snapshots:
       '@types/mdast': 3.0.15
       mdast-util-to-hast: 12.3.0
       unified: 10.1.2
+
+  remove-accents@0.5.0: {}
 
   require-from-string@2.0.2: {}
 
