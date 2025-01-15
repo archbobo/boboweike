@@ -1,12 +1,6 @@
 import { getServerAuthSession } from '@repo/auth/server';
 import { prisma } from '@repo/db';
-import type { Metadata } from 'next';
-import { NewSettings } from './_components/new-settings';
-
-export const metadata: Metadata = {
-  title: 'Settings | 波波微课',
-  description: 'Change your settings on 波波微课.',
-};
+import { NewSettings } from '../_components/new-settings';
 
 export default async function SettingsPage() {
   const session = await getServerAuthSession();
