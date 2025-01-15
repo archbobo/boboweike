@@ -16,7 +16,16 @@ const baseMetadata: Metadata = {
   },
 };
 
+// TODO: infer from ZOD
 interface MetaParamsForChallenge {
+  title: string;
+  description: string;
+  username: string;
+  difficulty: 'BEGINNER' | 'EASY' | 'EXTREME' | 'HARD' | 'MEDIUM';
+  date: string;
+}
+
+interface MetaParamsForUser {
   title: string;
   description: string;
   username: string;
@@ -27,7 +36,7 @@ export const buildMetaForUser = async ({
   title,
   description,
   username,
-}: MetaParamsForChallenge): Promise<Metadata> => {
+}: MetaParamsForUser): Promise<Metadata> => {
   return buildMeta({
     title,
     description,
@@ -39,6 +48,8 @@ export const buildMetaForChallenge = async ({
   title,
   description,
   username,
+  difficulty,
+  date,
 }: MetaParamsForChallenge): Promise<Metadata> => {
   return buildMeta({
     title,
