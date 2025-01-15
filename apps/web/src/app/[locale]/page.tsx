@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Footsies } from '~/components/ui/footsies';
+import { Footsies } from '~/components/footsies';
 import { Features } from './_components/features';
 import { Hero } from './_components/hero';
 import { WaitlistBanner } from './_components/waitlist-banner';
