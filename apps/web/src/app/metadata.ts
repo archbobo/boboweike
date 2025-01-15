@@ -1,11 +1,7 @@
 import type { Metadata } from 'next';
 
-const OG_URL =
-  process.env.NODE_ENV !== 'production' ? 'http://localhost:4200' : 'https://og.boboweike.cn';
-
 const tagline = 'Level up your typescript skills with interactive exercises';
 const baseMetadata: Metadata = {
-  metadataBase: new URL(OG_URL),
   title: {
     default: '波波微课',
     template: '%s',
@@ -26,12 +22,26 @@ interface MetaParamsForChallenge {
   username: string;
 }
 
+/** Helper to build opengraph metadata for a user, you should call this in generateMetadata() next function */
+export const buildMetaForUser = async ({
+  title,
+  description,
+  username,
+}: MetaParamsForChallenge): Promise<Metadata> => {
+
+  return buildMeta({
+    title,
+    description,
+  });
+};
+
 /** Helper to build opengraph metadata for a challenge, you should call this in generateMetadata() next function */
 export const buildMetaForChallenge = async ({
   title,
   description,
   username,
 }: MetaParamsForChallenge): Promise<Metadata> => {
+
   return buildMeta({
     title,
     description,
@@ -39,8 +49,17 @@ export const buildMetaForChallenge = async ({
 };
 
 /** Helper to build opengraph metadata with defaults, you should call this in generateMetadata() next function */
-export const buildMetaForDefault = async (): Promise<Metadata> => {
-  return buildMeta({});
+export const buildMetaForDefault = async ({
+  title,
+  description,
+}: {
+  title?: string;
+  description?: string;
+}): Promise<Metadata> => {
+  return buildMeta({
+    title,
+    description,
+  });
 };
 
 /** update the metadata for og */
@@ -51,6 +70,7 @@ const buildMeta = async ({
   description?: string;
   title?: string;
 }): Promise<Metadata> => {
+
   if (description) {
     baseMetadata.description = description;
   }

@@ -1,10 +1,13 @@
 import type { Metadata } from 'next';
+import { buildMetaForDefault } from '~/app/metadata';
 import { Footsies } from '~/components/footsies';
 
-export const metadata: Metadata = {
-  title: 'Privacy | 波波微课',
-  description: 'Read the 波波微课 Privacy Policy.',
-};
+export async function generateMetadata(): Promise<Metadata> {
+  return buildMetaForDefault({
+    title: 'Privacy | 波波微课',
+    description: 'Read the 波波微课 Privacy Policy.',
+  });
+}
 
 export default function Page() {
   return (
