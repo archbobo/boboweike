@@ -1,4 +1,3 @@
-
 import Filter from 'bad-words';
 import overrideWords from './bad-word-overrides.json';
 
