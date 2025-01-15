@@ -1,0 +1,10 @@
+
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://boboweike.cn
+
+# Sitemaps
+Sitemap: https://boboweike.cn/sitemap.xml
