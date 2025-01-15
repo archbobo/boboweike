@@ -1,6 +1,6 @@
 name: Report
 
-# on:
+on:
 #   workflow_run:
 #     workflows: ['Quality']
 #     types:
