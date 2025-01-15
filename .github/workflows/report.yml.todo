@@ -1,10 +1,10 @@
 name: Report
 
 on:
-#   workflow_run:
-#     workflows: ['Quality']
-#     types:
-#       - completed
+  workflow_run:
+    workflows: ['Quality']
+    types:
+      - completed
 
 jobs:
   e2e:
