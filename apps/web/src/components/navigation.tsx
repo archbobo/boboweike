@@ -77,9 +77,9 @@ export function Navigation() {
                 </svg>
 
                 <span className="font-bold leading-3">
-                  type
+                  波波
                   <br />
-                  hero
+                  微课
                 </span>
               </Link>
               {featureFlags?.exploreButton ? (
@@ -203,12 +203,12 @@ function LoginButton() {
           </a>
         ) : null}
         {isAdminOrMod ? (
-          <a className="block" href="/challenge-playground">
+          <Link className="block" href="/challenge-playground">
             <DropdownMenuItem className="focus:bg-accent rounded-lg p-2 duration-300 focus:outline-none dark:hover:bg-neutral-700/50">
               <Play className="mr-2 h-4 w-4" />
               <span>Challenge Playground</span>
             </DropdownMenuItem>
-          </a>
+          </Link>
         ) : null}
         <DropdownMenuSeparator />
         <Button
