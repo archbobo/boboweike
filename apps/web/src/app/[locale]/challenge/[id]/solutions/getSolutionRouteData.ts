@@ -12,6 +12,7 @@ export const getSolutionsRouteData = cache(async (challengeId: string, session: 
       submission: {
         where: {
           userId: session?.user.id || '',
+          isSuccessful: true,
         },
         orderBy: [
           {
@@ -22,6 +23,9 @@ export const getSolutionsRouteData = cache(async (challengeId: string, session: 
       },
       sharedSolution: {
         orderBy: [
+          {
+            isPinned: 'desc',
+          },
           {
             createdAt: 'desc',
           },
