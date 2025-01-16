@@ -20,6 +20,7 @@ export function middleware(req: NextRequest) {
   if (
     path === '/explore' ||
     path.startsWith('/challenge') ||
+    path.startsWith('/challenge-playground') ||
     path.startsWith('/challenge/') ||
     path.startsWith('/tracks') ||
     path.startsWith('/tracks/')
