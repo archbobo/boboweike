@@ -25,9 +25,14 @@ setup('authenticate user', async ({ page }) => {
         },
       },
       roles: {
-        create: {
-          role: 'USER',
-        },
+        connectOrCreate: {
+          where: {
+            role: 'USER',
+          },
+          create: {
+            role: 'USER',
+          },
+        }
       },
       accounts: {
         create: {
