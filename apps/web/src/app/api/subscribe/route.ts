@@ -9,11 +9,11 @@
 // TODO: Implement the POST method to add a new subscriber to your Mailchimp Audience
 
 export async function POST(req: Request) {
-  const { name, email, intention } = await req.json();
+  const { name: NAME, email, intention: REASON } = await req.json();
 
   const merge_fields = {
-    name,
-    REASON: intention,
+    NAME,
+    REASON,
   };
 
   try {
