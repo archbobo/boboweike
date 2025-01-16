@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: '*',
       disallow: ['/api/*'],
     },
-    sitemap: '/sitemap.xml',
+    sitemap: 'https://boboweike.cn/sitemap.xml',
   };
 }
