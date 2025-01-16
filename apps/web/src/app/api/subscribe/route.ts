@@ -36,7 +36,7 @@ export async function POST(req: Request) {
       merge_fields,
     };
     return new Response(JSON.stringify(response), {
-      status: Number(response.status),
+      status: 200,
       headers: {
         'content-type': 'application/json',
       },
