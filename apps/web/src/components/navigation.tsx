@@ -23,7 +23,7 @@ import { isAdminOrModerator } from '~/utils/auth-guards';
 export function getAdminUrl() {
   // reference for vercel.com
   if (process.env.VERCEL_URL) {
-    return `https://admin.typehero.dev`;
+    return `https://admin.boboweiken.cn`;
   }
 
   // assume localhost
@@ -76,11 +76,7 @@ export function Navigation() {
                   />
                 </svg>
 
-                <span className="font-bold leading-3">
-                  波波
-                  <br />
-                  微课
-                </span>
+                <span className="font-bold leading-3">波波微课</span>
               </Link>
               {featureFlags?.exploreButton ? (
                 <Link href="/explore" className="ml-4">

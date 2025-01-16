@@ -32,7 +32,7 @@ setup('authenticate user', async ({ page }) => {
           create: {
             role: 'USER',
           },
-        }
+        },
       },
       accounts: {
         create: {
