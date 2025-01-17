@@ -1,10 +1,8 @@
 import { ForceRenderUntilClient } from '@repo/ui/components/force-render-until-client';
-import { ChallengeLayout } from '../../challenge/_components/challenge-layout';
-import { LeftWrapper } from './left-wrapper';
-import { Wrapper } from './wrapper';
 import { getServerAuthSession } from '@repo/auth/server';
 import { isAdminOrModerator } from '~/utils/auth-guards';
 import { redirect } from 'next/navigation';
+import { ChallengePlaygroundWrapper } from './ChallengePlaygroundWrapper';
 
 export default async function LayoutData({ children }: { children: React.ReactNode }) {
   const session = await getServerAuthSession();
@@ -13,7 +11,7 @@ export default async function LayoutData({ children }: { children: React.ReactNo
   }
   return (
     <ForceRenderUntilClient>
-      <ChallengeLayout left={<LeftWrapper>{children}</LeftWrapper>} right={<Wrapper />} />
+      <ChallengePlaygroundWrapper>{children}</ChallengePlaygroundWrapper>
     </ForceRenderUntilClient>
   );
 }
