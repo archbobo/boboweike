@@ -186,20 +186,20 @@ function LoginButton({ session }: { session: Session | null }) {
           </DropdownMenuItem>
         </Link>
         {Boolean(isAdminOrMod) && (
-          <a className="block" href={getAdminUrl()}>
+          <Link className="block" href={getAdminUrl()}>
             <DropdownMenuItem className="focus:bg-accent rounded-lg p-2 duration-300 focus:outline-none dark:hover:bg-neutral-700/50">
               <Settings className="mr-2 h-4 w-4" />
               <span>Admin</span>
             </DropdownMenuItem>
-          </a>
+          </Link>
         )}
         {Boolean(isAdminOrMod) && (
-          <a className="block" href="/challenge-playground">
+          <Link className="block" href="/challenge-playground">
             <DropdownMenuItem className="focus:bg-accent rounded-lg p-2 duration-300 focus:outline-none dark:hover:bg-neutral-700/50">
               <Play className="mr-2 h-4 w-4" />
               <span>Challenge Playground</span>
             </DropdownMenuItem>
-          </a>
+          </Link>
         )}
         <DropdownMenuSeparator />
         <Button
