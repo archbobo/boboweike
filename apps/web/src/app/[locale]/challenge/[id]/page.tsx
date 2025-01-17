@@ -13,9 +13,11 @@ interface Props {
 
 export async function generateMetadata({ params: { id } }: Props) {
   const challenge = await getChallengeRouteData(id, null);
+  const description = `Unlock your TypeScript potential by solving the ${challenge.name} challenge on 波波微课.`;
+
   return buildMetaForChallenge({
     title: `${challenge.name} | 波波微课`,
-    description: `${challenge.shortDescription}`,
+    description,
     username: challenge.user.name,
     difficulty: challenge.difficulty,
     date: getRelativeTime(challenge.createdAt),
