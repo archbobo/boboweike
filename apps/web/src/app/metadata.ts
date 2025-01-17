@@ -29,6 +29,8 @@ interface MetaParamsForUser {
   title: string;
   description: string;
   username: string;
+  bio: string;
+  avatar: string;
 }
 
 /** Helper to build opengraph metadata for a user, you should call this in generateMetadata() next function */
@@ -36,6 +38,8 @@ export const buildMetaForUser = async ({
   title,
   description,
   username,
+  bio,
+  avatar,
 }: MetaParamsForUser): Promise<Metadata> => {
   return buildMeta({
     title,

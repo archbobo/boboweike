@@ -140,7 +140,9 @@ export async function Hero() {
             <div className="absolute right-1/2 top-1/2 -z-10 hidden h-56 w-56 -translate-y-[40%] rounded-full bg-[#3178c6]/20 blur-3xl dark:block" />
             <TypeHeroLogo3D />
             <h1 className="bg-gradient-to-br from-[#3178c6] from-[69%] to-black/0 bg-clip-text text-6xl font-extrabold text-transparent sm:text-8xl sm:leading-[5.5rem] dark:from-white dark:from-0% dark:to-[#3178c6]">
-              波波微课
+              波波
+              <br />
+              微课
             </h1>
           </div>
 
