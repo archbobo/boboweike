@@ -54,7 +54,7 @@ importers:
         specifier: 2.6.0-beta.12
         version: 2.6.0-beta.12
       next:
-        specifier: ^13.5.1
+        specifier: ^13.5.4
         version: 13.5.8(@babel/core@7.26.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       next-auth:
         specifier: ^4.22.1
@@ -247,11 +247,11 @@ importers:
         specifier: ^0.4.0
         version: 0.4.2(monaco-editor@0.40.0)
       next:
-        specifier: ^13.5.1
+        specifier: ^13.5.4
         version: 13.5.8(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       next-international:
-        specifier: 1.0.0-rc.6
-        version: 1.0.0-rc.6
+        specifier: 1.1.2
+        version: 1.1.2
       next-themes:
         specifier: ^0.2.1
         version: 0.2.1(next@13.5.8(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
@@ -478,7 +478,7 @@ importers:
         specifier: ^0.4.0
         version: 0.4.2(monaco-editor@0.40.0)
       next:
-        specifier: ^13.5.1
+        specifier: ^13.5.4
         version: 13.5.8(react-dom@19.0.0(react@18.2.0))(react@18.2.0)
       next-themes:
         specifier: ^0.2.1
@@ -634,7 +634,7 @@ importers:
     dependencies:
       '@next/eslint-plugin-next':
         specifier: canary
-        version: 15.2.0-canary.12
+        version: 15.2.0-canary.13
       '@repo/tsconfig':
         specifier: workspace:*
         version: link:../config-typescript
@@ -646,7 +646,7 @@ importers:
         version: 5.62.0(eslint@8.57.1)(typescript@5.7.2)
       '@vercel/style-guide':
         specifier: ^4.0.2
-        version: 4.0.2(@next/eslint-plugin-next@15.2.0-canary.12)(eslint@8.57.1)(prettier@2.8.8)(typescript@5.7.2)
+        version: 4.0.2(@next/eslint-plugin-next@15.2.0-canary.13)(eslint@8.57.1)(prettier@2.8.8)(typescript@5.7.2)
       eslint:
         specifier: ^8.45.0
         version: 8.57.1
@@ -1119,8 +1119,8 @@ packages:
   '@next/eslint-plugin-next@13.5.8':
     resolution: {integrity: sha512-rmNr6kz5g7x2CQ/5RMmav7/wTGOFIv4fcP+bxawNaJP+Y5Gb0Dvq+omBUvL66pDo/fhWurElatelEFpHX+tMSw==}
 
-  '@next/eslint-plugin-next@15.2.0-canary.12':
-    resolution: {integrity: sha512-67ZdVoT8GscNdzlSUtVtV+0d7l6+zM+3nNlxl7P8myCM71dHY8+PMXIPMRlXZ3Bhmu9EJmxJCwQEdVrT8uX8DQ==}
+  '@next/eslint-plugin-next@15.2.0-canary.13':
+    resolution: {integrity: sha512-RDbnNj3cywMspFVjUSyO/qzaoFXE5xhw4h2aOl9KXK2LrASpnkVdrQnHkvvGRIPl866RC8k5zH6HS8fBy3i2cg==}
 
   '@next/swc-darwin-arm64@13.5.8':
     resolution: {integrity: sha512-HkFw3QPeIy9bImWVTbsvzfEWQkuzBEQTK/L7ORMg+9sXNN0vNR5Gz/chD4/VbozTHyA38lWTrMBfLoWVpD+2IA==}
@@ -4781,8 +4781,8 @@ packages:
       nodemailer:
         optional: true
 
-  next-international@1.0.0-rc.6:
-    resolution: {integrity: sha512-SZN7vYJxu+wWjvN63TBrS7gDrkbtqWYzsb+buEaDf4LYgCUErEwGjJeertZJCz54uLPVDMp4qRbE/0bDxyKPzQ==}
+  next-international@1.1.2:
+    resolution: {integrity: sha512-WLWNmKet7Ln7QDzwBrQNOX27R3RPCP+2XhqL9pSo3aKyO/f/N1zX9k7srM1YnPzACUIWUKptYB0teqTaPiIq/g==}
 
   next-themes@0.2.1:
     resolution: {integrity: sha512-B+AKNfYNIzh0vqQQKqQItTS8evEouKD7H5Hj3kmuPERwddR2TxvDSFZuTj6T7Jfn1oyeUyJMydPl1Bkxkh0W7A==}
@@ -6690,7 +6690,7 @@ snapshots:
     dependencies:
       glob: 7.1.7
 
-  '@next/eslint-plugin-next@15.2.0-canary.12':
+  '@next/eslint-plugin-next@15.2.0-canary.13':
     dependencies:
       fast-glob: 3.3.1
 
@@ -8449,7 +8449,7 @@ snapshots:
     dependencies:
       '@vercel/edge-config-fs': 0.1.0
 
-  '@vercel/style-guide@4.0.2(@next/eslint-plugin-next@15.2.0-canary.12)(eslint@8.57.1)(prettier@2.8.8)(typescript@5.7.2)':
+  '@vercel/style-guide@4.0.2(@next/eslint-plugin-next@15.2.0-canary.13)(eslint@8.57.1)(prettier@2.8.8)(typescript@5.7.2)':
     dependencies:
       '@babel/core': 7.26.0
       '@babel/eslint-parser': 7.25.9(@babel/core@7.26.0)(eslint@8.57.1)
@@ -8471,7 +8471,7 @@ snapshots:
       eslint-plugin-unicorn: 43.0.2(eslint@8.57.1)
       prettier-plugin-packagejson: 2.5.6(prettier@2.8.8)
     optionalDependencies:
-      '@next/eslint-plugin-next': 15.2.0-canary.12
+      '@next/eslint-plugin-next': 15.2.0-canary.13
       eslint: 8.57.1
       prettier: 2.8.8
       typescript: 5.7.2
@@ -11003,7 +11003,7 @@ snapshots:
       react-dom: 19.0.0(react@19.0.0)
       uuid: 8.3.2
 
-  next-international@1.0.0-rc.6:
+  next-international@1.1.2:
     dependencies:
       client-only: 0.0.1
       international-types: 0.8.1
