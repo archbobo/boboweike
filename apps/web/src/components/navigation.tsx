@@ -102,7 +102,7 @@ export function Navigation({
             <div className="flex">
               <div className="flex items-center justify-end gap-2">
                 <ThemeButton />
-                <LoginButton session={session} />
+                {flags?.loginButton === true && <LoginButton session={session} />}
               </div>
             </div>
           </div>
