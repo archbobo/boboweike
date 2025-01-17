@@ -113,7 +113,6 @@ Once the server is running you can seed and sync data
 
    ![modify role](./media/change-role-to-admin.png)
 
-
 #### Dependencies
 
 UI Library: [shadcn](https://ui.shadcn.com/)
