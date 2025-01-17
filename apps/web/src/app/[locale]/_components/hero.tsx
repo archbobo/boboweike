@@ -20,8 +20,8 @@ function TypeHeroLogo3D() {
         <rect width="637.029" height="637.029" rx="68.1096" fill="#3178C6" />
       </g>
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M243.77 314.169H318.615V288.585V263H110V314.169H184.479V542H243.77V314.169Z"
         fill="white"
       />
@@ -37,9 +37,9 @@ function TypeHeroLogo3D() {
           width="736.029"
           height="736.029"
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
           <feColorMatrix
             in="SourceAlpha"
@@ -88,7 +88,7 @@ function BeamOfLight() {
           ry="273.501"
           transform="matrix(-0.822377 -0.568943 -0.568943 0.822377 2222.88 1131.09)"
           fill="white"
-          fill-opacity="0.21"
+          fillOpacity="0.21"
         />
       </g>
       <defs>
@@ -99,9 +99,9 @@ function BeamOfLight() {
           width="3785.16"
           height="2840.26"
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
           <feGaussianBlur stdDeviation="151" result="effect1_foregroundBlur_791_106" />
         </filter>
@@ -140,9 +140,7 @@ export async function Hero() {
             <div className="absolute right-1/2 top-1/2 -z-10 hidden h-56 w-56 -translate-y-[40%] rounded-full bg-[#3178c6]/20 blur-3xl dark:block" />
             <TypeHeroLogo3D />
             <h1 className="bg-gradient-to-br from-[#3178c6] from-[69%] to-black/0 bg-clip-text text-6xl font-extrabold text-transparent sm:text-8xl sm:leading-[5.5rem] dark:from-white dark:from-0% dark:to-[#3178c6]">
-              波波
-              <br />
-              微课
+              波波微课
             </h1>
           </div>
 
@@ -197,7 +195,7 @@ export async function Hero() {
                   target="_blank"
                   rel="noreferrer"
                   className="gap-1 md:inline-flex"
-                  href="https://twitter.com/boboweikeapp"
+                  href="https://twitter.com/boboweike"
                 >
                   <Twitter className="h-4 w-4" />
                   Twitter
