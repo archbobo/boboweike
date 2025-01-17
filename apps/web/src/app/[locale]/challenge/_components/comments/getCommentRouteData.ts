@@ -55,6 +55,10 @@ export async function getPreselectedCommentMetadata(challengeId: number, comment
   });
 
   const index = challengeComments.findIndex((comment) => comment.id === commentId);
+
+  // this `commentId` couldn't be found (perhaps it was deleted)
+  if (index === -1) return;
+
   const selectedComment = challengeComments[index];
   const page = Math.ceil((index + 1) / PAGESIZE);
 
@@ -90,6 +94,10 @@ export async function getPreselectedSolutionCommentMetadata(
   const comments = solution.solutionComment;
 
   const index = comments.findIndex((comment) => comment.id === commentId);
+
+  // this `commentId` couldn't be found (perhaps it was deleted)
+  if (index === -1) return;
+
   const selectedComment = comments[index];
   const page = Math.ceil((index + 1) / PAGESIZE);
 
