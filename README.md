@@ -1,3 +1,5 @@
+![boboweike header](./media/og-hub-banner.png)
+
 ### 👋 About Us
 
 TypeScript's typing system can be very powerful when used correctly. The problem
