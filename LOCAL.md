@@ -101,6 +101,19 @@ Once the server is running you can seed and sync data
 
 [new-oauth]: https://github.com/settings/applications/new
 
+### Make Yourself an Admin
+
+1. Ensure you have logged into your local instance at least once
+2. Run `pnpm db:studio` - to open [Prisma Studio](https://www.prisma.io/docs/concepts/components/prisma-studio)
+
+   ![prisma studio](./media/prisma-studio-models.png)
+
+3. Click on the `User` table from the list of models
+4. Locate your username and open record in new tab to modify Role
+
+   ![modify role](./media/change-role-to-admin.png)
+
+
 #### Dependencies
 
 UI Library: [shadcn](https://ui.shadcn.com/)
@@ -117,7 +130,7 @@ pnpm test:e2e:install
 
 You can use the production server or the dev server to run the e2e tests.
 
-> [!WARNING]  
+> [!WARNING]
 > The dev server may cause tests to timeout.
 
 ### 2.a Production server
