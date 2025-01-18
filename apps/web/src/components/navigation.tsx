@@ -1,6 +1,6 @@
 'use client';
 
-import { signIn, signOut, useSession } from '@repo/auth/react';
+import { signOut, useSession } from '@repo/auth/react';
 import { Button } from '@repo/ui/components/button';
 import {
   DropdownMenu,
@@ -69,7 +69,7 @@ export function Navigation() {
 
                 <span className="font-bold leading-3">波波微课</span>
               </Link>
-              {featureFlags?.exploreButton ? (
+              {featureFlags?.enableExplore ? (
                 <Link href="/explore" className="ml-4">
                   <div
                     className={clsx('hover:text-foreground text-foreground/80 transition-colors', {
@@ -80,7 +80,7 @@ export function Navigation() {
                   </div>
                 </Link>
               ) : null}
-              {featureFlags?.tracksButton ? (
+              {featureFlags?.enableTracks ? (
                 <Link href="/tracks" className="ml-4">
                   <div
                     className={clsx('hover:text-foreground text-foreground/80 transition-colors', {
@@ -95,7 +95,7 @@ export function Navigation() {
             <div className="flex">
               <div className="flex items-center justify-end gap-2">
                 <ThemeButton />
-                {featureFlags?.loginButton ? <LoginButton /> : null}
+                {featureFlags?.enableLogin ? <LoginButton /> : null}
               </div>
             </div>
           </div>
@@ -133,23 +133,11 @@ function ThemeButton() {
 }
 
 function LoginButton() {
-  const [loading, setLoading] = useState(false);
   const { data: session, status } = useSession();
   const router = useRouter();
 
   const isAdminOrMod = isAdminOrModerator(session);
 
-  // NOTE: 1. loading == true -> 2. signIn() -> 3. session status == 'loading' (loading == false)
-  const handleSignIn = async () => {
-    try {
-      setLoading(true);
-      // page reloads after sign in, so no need to setLoading(false), othersiwe ugly visual glitch
-      await signIn('github', { redirect: false });
-    } catch (error) {
-      // only set loading to false if there was an error and page didn't reload after sign in
-      setLoading(false);
-    }
-  };
   const handleSignOut = async () => {
     await signOut({ redirect: false });
     router.refresh();
@@ -182,12 +170,12 @@ function LoginButton() {
           </DropdownMenuItem>
         </Link>
         {isAdminOrMod ? (
-          <a className="block" href={getAdminUrl()}>
+          <Link className="block" href={getAdminUrl()}>
             <DropdownMenuItem className="focus:bg-accent rounded-lg p-2 duration-300 focus:outline-none dark:hover:bg-neutral-700/50">
               <Settings className="mr-2 h-4 w-4" />
               <span>Admin</span>
             </DropdownMenuItem>
-          </a>
+          </Link>
         ) : null}
         {isAdminOrMod ? (
           <Link className="block" href="/challenge-playground">
@@ -208,12 +196,11 @@ function LoginButton() {
       </DropdownMenuContent>
     </DropdownMenu>
   ) : (
-    <Button
+    <Link
       className="focus:bg-accent w-20 rounded-lg bg-transparent p-2 text-black duration-300 hover:bg-gray-200 focus:outline-none dark:text-white hover:dark:bg-gray-800"
-      disabled={loading || status === 'loading'}
-      onClick={handleSignIn}
+      href="/login"
     >
-      {loading || status === 'loading' ? (
+      {status === 'loading' ? (
         <Loader2 className="h-5 w-5 animate-spin" />
       ) : (
         <div className="flex items-center space-x-2">
@@ -221,6 +208,6 @@ function LoginButton() {
           <span className="dark:text-white">Login</span>
         </div>
       )}
-    </Button>
+    </Link>
   );
 }
