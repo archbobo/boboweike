@@ -16,14 +16,17 @@ export default function Page() {
         <h1>Privacy Policy for 波波微课</h1>
 
         <p>
-          At 波波微课, accessible from https://boboweike.cn, one of our main priorities is the
-          privacy of our visitors. This Privacy Policy document contains types of information that
-          is collected and recorded by 波波微课 and how we use it.
+          波波微课 ("we”, “us”, or “our") provides this Privacy Policy to inform you of our policies
+          and procedures regarding the collection, use and disclosure of personal information we may
+          receive from users of our website (“Site”), accessible from https://boboweike.cn, and any
+          other services offered by us in connection with our site (any and all of the foregoing the
+          "Services").
         </p>
 
         <p>
           If you have additional questions or require more information about our Privacy Policy, do
-          not hesitate to contact us.
+          not hesitate to contact us at{' '}
+          <a href="mailto:boboweikeapp@gmail.com">boboweikeapp@gmail.com</a>.
         </p>
 
         <p>
@@ -42,9 +45,10 @@ export default function Page() {
         <h2>Information we collect</h2>
 
         <p>
-          The personal information that you are asked to provide, and the reasons why you are asked
-          to provide it, will be made clear to you at the point we ask you to provide your personal
-          information.
+          In the course of using the Services, we collect personally identifiable information, in
+          the form of Persistent Identifiers, including IP Address. We collect and store this
+          personal information solely for the purpose of providing support for the internal
+          operations of our Services and our Site.
         </p>
         <p>
           If you contact us directly, we may receive additional information about you such as your
@@ -123,13 +127,25 @@ export default function Page() {
           波波微课's Privacy Policy does not apply to other advertisers or websites. Thus, we are
           advising you to consult the respective Privacy Policies of these third-party ad servers
           for more detailed information. It may include their practices and instructions about how
-          to opt-out of certain options.{' '}
+          to opt-out of certain options.
         </p>
 
         <p>
           You can choose to disable cookies through your individual browser options. To know more
           detailed information about cookie management with specific web browsers, it can be found
           at the browsers' respective websites.
+        </p>
+
+        <h2>Links to Other Sites</h2>
+
+        <p>
+          Our services may contain links to other websites, applications, and online services. If
+          you choose to visit a third party service or click on another third party link, you will
+          be directed to that third party's website, application, or online service. The fact that
+          we link to a website, content is not an endorsement, authorization or representation of
+          our affiliation with that third party, nor is it an endorsement of their privacy or
+          information security policies or practices. We do not exercise control over third party
+          websites or services.
         </p>
 
         <h2>CCPA Privacy Rights (Do Not Sell My Personal Information)</h2>
@@ -149,7 +165,39 @@ export default function Page() {
         </p>
         <p>
           If you make a request, we have one month to respond to you. If you would like to exercise
-          any of these rights, please contact us.
+          any of these rights, please contact us at{' '}
+          <a href="mailto:boboweikeapp@gmail.com">boboweikeapp@gmail.com</a>.
+        </p>
+
+        <h2>Information Sharing</h2>
+
+        <p>
+          WE WILL NOT SHARE, SELL, RENT, OR TRADE YOUR PERSONAL INFORMATION WITH OTHER PARTIES
+          EXCEPT AS PROVIDED BELOW:
+        </p>
+
+        <p>
+          Personal Information: We may share personal information including IP Address, for the
+          purpose of providing support for the internal operations of our services and our site.
+        </p>
+        <p>
+          "Support for the internal operations of our Services and our Site" means activities
+          necessary for the services or site to maintain or analyze its functioning; perform network
+          communications; authenticate users or personalize content; ensure legal or regulatory
+          compliance; or perform other usage analytics. Through our services and site, no other
+          personal information is collected and the persistent identifiers are not used or disclosed
+          to contact a specific individual.
+        </p>
+
+        <h2>International Transfer</h2>
+
+        <p>
+          Your information may be transferred to - and maintained on - computers located outside of
+          your state, province, country or other governmental jurisdiction where the privacy laws
+          may not be as protective as those in your jurisdiction. If you are located outside the
+          United States and choose to provide information to us, we may transfer the personal
+          information to the United States and processes it there. Use of our services or site
+          represents your consent to this Privacy Policy and your agreement to that transfer.
         </p>
 
         <h2>GDPR Data Protection Rights</h2>
@@ -207,24 +255,21 @@ export default function Page() {
         <h2>Changes to This Privacy Policy</h2>
 
         <p>
-          We may update our Privacy Policy from time to time. Thus, we advise you to review this
-          page periodically for any changes. We will notify you of any changes by posting the new
-          Privacy Policy on this page. These changes are effective immediately, after they are
-          posted on this page.
+          This Privacy Policy may be revised periodically, and this will be reflected by a 'Last
+          modified' date below. Thus, we advise you to review this page periodically for any
+          changes. We will notify you of any changes by posting the new Privacy Policy on this page.
+          These changes are effective immediately, after they are posted on this page.
         </p>
+
+        <h2>Contact Information</h2>
 
         <p>
-          Our Privacy Policy was created with the help of the{' '}
-          <a href="https://www.termsfeed.com/privacy-policy-generator/">Privacy Policy Generator</a>
-          .
+          Please contact us with any questions or comments about this Privacy Policy, Our Privacy
+          Policy Toward Children, your personal information, and our third-party disclosure
+          practices, at <a href="mailto:boboweikeapp@gmail.com">boboweikeapp@gmail.com</a>
         </p>
 
-        <h2>Contact Us</h2>
-
-        <p>
-          If you have any questions or suggestions about our Privacy Policy, do not hesitate to
-          contact us.
-        </p>
+        <p>Last modified: 10/15/2023</p>
       </div>
       <Footsies />
     </>
