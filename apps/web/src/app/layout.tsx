@@ -1,10 +1,9 @@
 import type { Metadata } from 'next';
-export const metadata: Metadata = {
-  title: {
-    template: '波波微课',
-    default: 'Home',
-  },
-};
+import { buildMetaForDefault } from './metadata';
+
+export async function generateMetadata(): Promise<Metadata> {
+  return buildMetaForDefault({});
+}
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return children;
