@@ -121,7 +121,6 @@ export function TrackChallenge({
 export function MockTrackChallenge({ challenge }: { challenge: Challenge }) {
   const isMobile = useIsMobile();
   return (
-    // eslint-disable-next-line jsx-a11y/label-has-associated-control
     <label
       htmlFor={challenge.id.toString()}
       className="group/challenge flex cursor-pointer flex-col items-center pt-2"
@@ -148,9 +147,7 @@ export function MockTrackChallenge({ challenge }: { challenge: Challenge }) {
           <Check className="absolute left-1 my-auto h-3 w-3 scale-0 stroke-[4] text-white duration-300 peer-checked:scale-100 dark:text-black" />
           {challenge.name}
         </div>
-        <div className="hidden md:block">
-          <DifficultyBadge difficulty={challenge.difficulty} />
-        </div>
+        <DifficultyBadge difficulty={challenge.difficulty} />
       </div>
     </label>
   );
