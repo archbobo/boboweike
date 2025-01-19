@@ -468,9 +468,15 @@ importers:
       '@repo/ui':
         specifier: workspace:^
         version: link:../ui
+      '@typescript/ata':
+        specifier: ^0.9.4
+        version: 0.9.7(typescript@5.7.2)
       clsx:
         specifier: ^2.0.0
         version: 2.1.1
+      lodash:
+        specifier: ^4.17.21
+        version: 4.17.21
       lz-string:
         specifier: ^1.5.0
         version: 1.5.0
@@ -634,7 +640,7 @@ importers:
     dependencies:
       '@next/eslint-plugin-next':
         specifier: canary
-        version: 15.2.0-canary.13
+        version: 15.2.0-canary.16
       '@repo/tsconfig':
         specifier: workspace:*
         version: link:../config-typescript
@@ -646,7 +652,7 @@ importers:
         version: 5.62.0(eslint@8.57.1)(typescript@5.7.2)
       '@vercel/style-guide':
         specifier: ^4.0.2
-        version: 4.0.2(@next/eslint-plugin-next@15.2.0-canary.13)(eslint@8.57.1)(prettier@2.8.8)(typescript@5.7.2)
+        version: 4.0.2(@next/eslint-plugin-next@15.2.0-canary.16)(eslint@8.57.1)(prettier@2.8.8)(typescript@5.7.2)
       eslint:
         specifier: ^8.45.0
         version: 8.57.1
@@ -1119,8 +1125,8 @@ packages:
   '@next/eslint-plugin-next@13.5.8':
     resolution: {integrity: sha512-rmNr6kz5g7x2CQ/5RMmav7/wTGOFIv4fcP+bxawNaJP+Y5Gb0Dvq+omBUvL66pDo/fhWurElatelEFpHX+tMSw==}
 
-  '@next/eslint-plugin-next@15.2.0-canary.13':
-    resolution: {integrity: sha512-RDbnNj3cywMspFVjUSyO/qzaoFXE5xhw4h2aOl9KXK2LrASpnkVdrQnHkvvGRIPl866RC8k5zH6HS8fBy3i2cg==}
+  '@next/eslint-plugin-next@15.2.0-canary.16':
+    resolution: {integrity: sha512-GepyEBVxo42vUcLgM159wSp5qwBNaTFXJ8jfWUdDV7qFX/X6+GM2/JCv2zifU9s1kFivg6zpiOyw+xzqT044fg==}
 
   '@next/swc-darwin-arm64@13.5.8':
     resolution: {integrity: sha512-HkFw3QPeIy9bImWVTbsvzfEWQkuzBEQTK/L7ORMg+9sXNN0vNR5Gz/chD4/VbozTHyA38lWTrMBfLoWVpD+2IA==}
@@ -2583,6 +2589,11 @@ packages:
   '@typescript-eslint/visitor-keys@5.62.0':
     resolution: {integrity: sha512-07ny+LHRzQXepkGg6w0mFY41fVUNBrL2Roj/++7V1txKugfjm/Ci/qSND03r2RhlJhJYMcTn9AhhSSqQp0Ysyw==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+
+  '@typescript/ata@0.9.7':
+    resolution: {integrity: sha512-CZx57/XGBKhYZ3ifchbERgUl9J6C7W3XC96ibM7axr7C32mG5dXTyrVAS3ZY88Jxlkvx4AZyZtDJyUuseHQkcQ==}
+    peerDependencies:
+      typescript: '>=4.4.4'
 
   '@uiw/copy-to-clipboard@1.0.17':
     resolution: {integrity: sha512-O2GUHV90Iw2VrSLVLK0OmNIMdZ5fgEg4NhvtwINsX+eZ/Wf6DWD0TdsK9xwV7dNRnK/UI2mQtl0a2/kRgm1m1A==}
@@ -6690,7 +6701,7 @@ snapshots:
     dependencies:
       glob: 7.1.7
 
-  '@next/eslint-plugin-next@15.2.0-canary.13':
+  '@next/eslint-plugin-next@15.2.0-canary.16':
     dependencies:
       fast-glob: 3.3.1
 
@@ -8383,6 +8394,10 @@ snapshots:
       '@typescript-eslint/types': 5.62.0
       eslint-visitor-keys: 3.4.3
 
+  '@typescript/ata@0.9.7(typescript@5.7.2)':
+    dependencies:
+      typescript: 5.7.2
+
   '@uiw/copy-to-clipboard@1.0.17': {}
 
   '@uiw/react-markdown-preview@4.2.2(@types/react@18.3.18)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
@@ -8449,7 +8464,7 @@ snapshots:
     dependencies:
       '@vercel/edge-config-fs': 0.1.0
 
-  '@vercel/style-guide@4.0.2(@next/eslint-plugin-next@15.2.0-canary.13)(eslint@8.57.1)(prettier@2.8.8)(typescript@5.7.2)':
+  '@vercel/style-guide@4.0.2(@next/eslint-plugin-next@15.2.0-canary.16)(eslint@8.57.1)(prettier@2.8.8)(typescript@5.7.2)':
     dependencies:
       '@babel/core': 7.26.0
       '@babel/eslint-parser': 7.25.9(@babel/core@7.26.0)(eslint@8.57.1)
@@ -8471,7 +8486,7 @@ snapshots:
       eslint-plugin-unicorn: 43.0.2(eslint@8.57.1)
       prettier-plugin-packagejson: 2.5.6(prettier@2.8.8)
     optionalDependencies:
-      '@next/eslint-plugin-next': 15.2.0-canary.13
+      '@next/eslint-plugin-next': 15.2.0-canary.16
       eslint: 8.57.1
       prettier: 2.8.8
       typescript: 5.7.2
