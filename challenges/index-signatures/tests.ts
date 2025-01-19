@@ -17,7 +17,6 @@ const groceryList: GroceryList = {
   shouldAlsoError: true,
 };
 
-// note: these can change.  I'm tired, haha.  Maybe they're funny?  Tomorrow will tell.
 const innapropriateActionBySituation: InnapropriateActionBySituation = {
   funeral: ['excessive laughter', 'bringing up personal achievements'],
   medicalDiagnosis: [
