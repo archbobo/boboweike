@@ -1,3 +1,5 @@
+import { Expect, Equal } from 'type-testing';
+
 type test_CapreseSaladName = Expect<Equal<CapreseSalad['name'], 'Caprese Salad'>>;
 
 type test_CapreseSaladPrice = Expect<Equal<CapreseSalad['price'], 14.99>>;
