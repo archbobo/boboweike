@@ -121,6 +121,7 @@ export function TrackChallenge({
 export function MockTrackChallenge({ challenge }: { challenge: Challenge }) {
   const isMobile = useIsMobile();
   return (
+    // eslint-disable-next-line jsx-a11y/label-has-associated-control
     <label
       htmlFor={challenge.id.toString()}
       className="group/challenge flex cursor-pointer flex-col items-center pt-2"
@@ -130,24 +131,26 @@ export function MockTrackChallenge({ challenge }: { challenge: Challenge }) {
           BGS_BY_DIFFICULTY[challenge.difficulty],
           'flex w-full items-center justify-between gap-3 overflow-hidden rounded-lg',
           'bg-gradient-to-r from-neutral-500/10 from-70% to-100% dark:from-neutral-500/20',
-          'p-4 py-2 text-black/90 duration-300 group-active/challenge:bg-neutral-500/40 group-active/challenge:duration-75 sm:py-4 dark:text-white/90',
+          'p-2 pl-3 text-black/90 duration-300 group-active/challenge:bg-neutral-500/40 group-active/challenge:duration-75 md:p-4 dark:text-white/90',
           {
             'group-hover/challenge:scale-105 group-hover/challenge:rounded-xl group-hover/challenge:bg-neutral-500/20':
               !isMobile,
           },
         )}
       >
-        <div className="relative flex flex-row items-center gap-3">
+        <div className="relative flex flex-row items-center gap-3 text-sm sm:text-base">
           <input
             className="peer absolute appearance-none"
             type="checkbox"
             id={challenge.id.toString()}
           />
-          <div className="h-5 w-5 rounded-full border border-black/70 bg-black/10 duration-75 peer-checked:border-transparent peer-checked:bg-green-600/80 dark:border-white/50 dark:bg-white/10 peer-checked:dark:bg-green-300/80" />
-          <Check className="absolute left-1 my-auto h-3 w-3 scale-0 stroke-[4] text-white duration-300 peer-checked:scale-100 dark:text-black" />
+          <div className="h-4 w-4 rounded-full border border-black/70 bg-black/10 duration-75 peer-checked:border-transparent peer-checked:bg-green-600/80 sm:h-5 sm:w-5 dark:border-white/50 dark:bg-white/10 peer-checked:dark:bg-green-300/80" />
+          <Check className="absolute left-1 my-auto h-2 w-2 scale-0 stroke-[4] text-white duration-300 peer-checked:scale-100 sm:h-3 sm:w-3 dark:text-black" />
           {challenge.name}
         </div>
-        <DifficultyBadge difficulty={challenge.difficulty} />
+        <div className="translate-x-1 scale-75 sm:translate-x-0 sm:scale-100">
+          <DifficultyBadge difficulty={challenge.difficulty} />
+        </div>
       </div>
     </label>
   );
