@@ -34,9 +34,9 @@ if (!process.env.GITHUB_SECRET) {
   throw new Error('No GITHUB_SECRET has been provided.');
 }
 
-// Get the Vercel URL from the environment variables.
-const vercelUrl = process.env.VERCEL_URL || process.env.NEXT_PUBLIC_VERCEL_URL;
-const useSecureCookies = Boolean(vercelUrl);
+const useSecureCookies = process.env.VERCEL_ENV === 'production';
+const cookiePrefix = useSecureCookies ? "__Secure-" : "";
+const cookieDomain = useSecureCookies ? 'boboweike.cn' : undefined;
 
 export const authOptions: NextAuthOptions = {
   pages: {
@@ -44,12 +44,12 @@ export const authOptions: NextAuthOptions = {
   },
   cookies: {
     sessionToken: {
-      name: `${useSecureCookies ? '__Secure-' : ''}next-auth.session-token`,
+      name: `${cookiePrefix}next-auth.session-token`,
       options: {
         httpOnly: true,
         sameSite: 'lax',
         path: '/',
-        domain: useSecureCookies ? '.boboweike.cn' : process.env.VERCEL_URL,
+        domain: cookieDomain,
         secure: useSecureCookies,
       },
     },
