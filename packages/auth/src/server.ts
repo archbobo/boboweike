@@ -49,17 +49,7 @@ export const authOptions: NextAuthOptions = {
         httpOnly: true,
         sameSite: 'lax',
         path: '/',
-        domain: useSecureCookies ? 'boboweike.cn' : vercelUrl,
-        secure: useSecureCookies,
-      },
-    },
-    csrfToken: {
-      name: `${useSecureCookies ? '__Secure-' : ''}next-auth.csrf-token`,
-      options: {
-        httpOnly: true,
-        sameSite: 'lax',
-        path: '/',
-        domain: useSecureCookies ? 'boboweike.cn' : process.env.VERCEL_URL,
+        domain: useSecureCookies ? '.boboweike.cn' : process.env.VERCEL_URL,
         secure: useSecureCookies,
       },
     },
