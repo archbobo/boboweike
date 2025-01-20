@@ -13,19 +13,19 @@ const challengePath = path.join(__dirname, '../../../challenges');
 
 export const slugify = (str: string) => str.toLowerCase().replace(/\s/g, '-');
 const TYPE_CHALLENGE_ID = uuidByString('type-challenges');
-const TYPEHERO_ID = uuidByString('typehero');
+const BOBOWEIKE_ID = uuidByString('boboweike');
 
 try {
   const typeHeroUser = await prisma.user.upsert({
-    where: { id: TYPEHERO_ID },
+    where: { id: BOBOWEIKE_ID },
     update: {},
     create: {
-      id: TYPEHERO_ID,
-      email: 'typeherapp@gmail.com',
-      name: 'TypeHero',
+      id: BOBOWEIKE_ID,
+      email: 'boboweikeapp@gmail.com',
+      name: '波波微课',
       userLinks: {
         create: {
-          url: 'https://typhero.dev',
+          url: 'https://boboweike.cn',
         },
       },
     },

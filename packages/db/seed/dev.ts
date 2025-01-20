@@ -64,7 +64,7 @@ try {
     update: {},
     create: {
       id: trashId,
-      email: 'chris@typehero.dev',
+      email: 'chris@boboweike.cn',
       name: 'chris',
       sharedSolution: {
         create: alotOfSharedSolutions(someChallenge?.id ?? 2),

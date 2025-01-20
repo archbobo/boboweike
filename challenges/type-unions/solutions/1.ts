@@ -12,7 +12,7 @@ type Miles = {
 type Feet = {
   unit: 'feet';
   value: number;
-};
+}
 
 type Distance = Meters | Miles | Feet;
 
@@ -27,4 +27,5 @@ type Position =
   | 'right'
   | 'bottomLeft'
   | 'bottom'
-  | 'bottomRight';
+  | 'bottomRight'
+;

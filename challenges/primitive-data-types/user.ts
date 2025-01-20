@@ -1,4 +1,7 @@
-const playSong = (name, year) => {
+const playSong = (
+  name,
+  year,
+) => {
   return `${name} was released in the year ${year}`;
 };
 
@@ -12,7 +15,11 @@ interface Musician {
   deceased: boolean;
 }
 
-const musicianInfo = ({ name, age, deceased }: Musician) => {
+const musicianInfo = ({
+  name,
+  age,
+  deceased,
+}: Musician) => {
   return `${name}, age ${age}${deceased ? ' (deceased)' : ''}`;
 };
 

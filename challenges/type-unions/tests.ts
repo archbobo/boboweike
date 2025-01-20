@@ -114,3 +114,4 @@ type test_right = Expect<Extends<'right', Position>>;
 type test_bottomLeft = Expect<Extends<'bottomLeft', Position>>;
 type test_bottom = Expect<Extends<'bottom', Position>>;
 type test_bottomRight = Expect<Extends<'bottomRight', Position>>;
+
