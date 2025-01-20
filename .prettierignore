@@ -11,7 +11,7 @@ monaco-editor.d.ts
 
 pnpm-lock.yaml
 
+!challenges/**/tests.ts
 !apps/**
-challenges/**
 !packages/**
 !tooling/**
