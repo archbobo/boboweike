@@ -1,6 +1,7 @@
 import { Button } from '@repo/ui/components/button';
 import { BackgroundGrid } from './_components/hero-illustration';
 import { getRandomChallenge } from '~/utils/server/get-random-challenge';
+import Link from 'next/link';
 
 export default async function NotFound() {
   const randomChallengeSlug = await getRandomChallenge();
@@ -19,12 +20,12 @@ export default async function NotFound() {
       </div>
       {randomChallengeSlug !== null ? (
         <div className="flex gap-4 ">
-          <a href="/explore">
+          <Link href="/explore">
             <Button variant="default" size="lg">
               Go to explore
             </Button>
-          </a>
-          <a href={`/challenge/${randomChallengeSlug}`}>
+          </Link>
+          <Link href={`/challenge/${randomChallengeSlug}`}>
             <Button
               variant="outline"
               size="lg"
@@ -32,15 +33,15 @@ export default async function NotFound() {
             >
               I'm feeling lucky
             </Button>
-          </a>
+          </Link>
         </div>
       ) : (
         <div>
-          <a href="/">
+          <Link href="/">
             <Button variant="default" size="lg">
               Go to home
             </Button>
-          </a>
+          </Link>
         </div>
       )}
     </div>
