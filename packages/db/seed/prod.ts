@@ -73,7 +73,6 @@ try {
         where: {
           slug: {
             in: [
-              'generic-type-arguments',
               'generic-type-constraints',
               'index-signatures',
               'indexed-types',
