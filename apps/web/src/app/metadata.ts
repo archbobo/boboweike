@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
-const tagline = 'Level up your typescript skills with interactive exercises';
-const baseMetadata: Metadata = {
+export const tagline = 'Level up your TypeScript skills with interactive exercises';
+export const baseMetadata: Metadata = {
   title: {
     default: '波波微课',
     template: '%s',
