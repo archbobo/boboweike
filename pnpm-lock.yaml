@@ -24,7 +24,7 @@ importers:
         specifier: ^0.4.1
         version: 0.4.1(prettier@3.4.2)
       turbo:
-        specifier: ^1.13.4
+        specifier: ^1.10.16
         version: 1.13.4
       typescript:
         specifier: ^5.1.6
