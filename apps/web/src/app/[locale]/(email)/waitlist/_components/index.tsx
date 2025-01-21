@@ -15,7 +15,7 @@ export function Waitlist({ params: { locale } }: { params: { locale: string } })
           <h1 className="text-3xl font-bold text-neutral-950 md:text-5xl dark:text-neutral-50">
             <Balancer>
               Join the waitlist to be part of the{' '}
-              <span className="bg-gradient-to-r from-[#3178c6] to-black bg-clip-text font-black text-transparent dark:from-blue-400 dark:to-emerald-400">
+              <span className="bg-gradient-to-r from-[#FFB800] to-black bg-clip-text font-black text-transparent dark:from-blue-400 dark:to-emerald-400">
                 波波微课
               </span>{' '}
               community
