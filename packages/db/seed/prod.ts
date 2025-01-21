@@ -16,7 +16,7 @@ const TYPE_CHALLENGE_ID = uuidByString('type-challenges');
 const BOBOWEIKE_ID = uuidByString('boboweike');
 
 try {
-  const typeHeroUser = await prisma.user.upsert({
+  const boboWeikeUser = await prisma.user.upsert({
     where: { id: BOBOWEIKE_ID },
     update: {},
     create: {
@@ -54,7 +54,10 @@ try {
     })),
   });
   await prisma.challenge.createMany({
-    data: challengesToCreate.map((challenge) => ({ ...challenge, userId: typeHeroUser.id })),
+    data: challengesToCreate.map(({ author, ...challenge }) => ({
+      ...challenge,
+      userId: boboWeikeUser.id,
+    })),
   });
 
   for (const track of tracks) {
