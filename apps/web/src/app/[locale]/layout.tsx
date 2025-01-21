@@ -8,6 +8,20 @@ import { Navigation } from '~/components/navigation';
 import { getStaticParams } from '~/locales/server';
 import { Providers } from './providers';
 
+import { tagline } from '../metadata';
+
+export const metadata = {
+  title: '波波微课',
+  robots: {
+    index: true,
+    follow: true,
+  },
+  description: tagline,
+  icons: {
+    shortcut: '/favicon.ico',
+  },
+};
+
 const inter = Inter({ subsets: ['latin'] });
 
 export function generateStaticParams() {
