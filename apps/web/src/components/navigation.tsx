@@ -67,7 +67,11 @@ export function Navigation() {
                   />
                 </svg>
 
-                <span className="font-bold leading-3">波波微课</span>
+                <span className="font-bold leading-3">
+                  波波
+                  <br />
+                  微课
+                </span>
               </Link>
               {featureFlags?.enableExplore ? (
                 <Link href="/explore" className="ml-4">
@@ -132,9 +136,12 @@ function ThemeButton() {
   );
 }
 
+const BLACKLISTED_LOGIN_REDIRECT_PATHS = ['/', '/login'];
+
 function LoginButton() {
   const { data: session, status } = useSession();
   const router = useRouter();
+  const pathname = usePathname();
 
   const isAdminOrMod = isAdminOrModerator(session);
 
@@ -142,6 +149,10 @@ function LoginButton() {
     await signOut({ redirect: false });
     router.refresh();
   };
+
+  const isBlacklistedPath = BLACKLISTED_LOGIN_REDIRECT_PATHS.some((blacklistedPath) => {
+    return blacklistedPath === pathname;
+  });
 
   return session ? (
     <DropdownMenu>
@@ -170,20 +181,20 @@ function LoginButton() {
           </DropdownMenuItem>
         </Link>
         {isAdminOrMod ? (
-          <Link className="block" href={getAdminUrl()}>
+          <a className="block" href={getAdminUrl()}>
             <DropdownMenuItem className="focus:bg-accent rounded-lg p-2 duration-300 focus:outline-none dark:hover:bg-neutral-700/50">
               <Settings className="mr-2 h-4 w-4" />
               <span>Admin</span>
             </DropdownMenuItem>
-          </Link>
+          </a>
         ) : null}
         {isAdminOrMod ? (
-          <Link className="block" href="/challenge-playground">
+          <a className="block" href="/challenge-playground">
             <DropdownMenuItem className="focus:bg-accent rounded-lg p-2 duration-300 focus:outline-none dark:hover:bg-neutral-700/50">
               <Play className="mr-2 h-4 w-4" />
               <span>Challenge Playground</span>
             </DropdownMenuItem>
-          </Link>
+          </a>
         ) : null}
         <DropdownMenuSeparator />
         <Button
@@ -198,7 +209,12 @@ function LoginButton() {
   ) : (
     <Link
       className="focus:bg-accent w-20 rounded-lg bg-transparent p-2 text-black duration-300 hover:bg-gray-200 focus:outline-none dark:text-white hover:dark:bg-gray-800"
-      href="/login"
+      href={{
+        pathname: '/login',
+        query: {
+          ...(!isBlacklistedPath && { redirectTo: pathname }),
+        },
+      }}
     >
       {status === 'loading' ? (
         <Loader2 className="h-5 w-5 animate-spin" />
