@@ -158,7 +158,7 @@ export async function Hero() {
           <a
             target="_blank"
             rel="noreferrer"
-            href="https://github.com/typehero/typehero"
+            href="https://github.com/boboweike/boboweike"
             className="animate-bg-gradient-to-center group rounded-full bg-gradient-to-r from-yellow-600 via-[#DD8800] to-[#DD8800] to-70% bg-[length:420%_420%] bg-right-bottom p-[1px] contrast-150 duration-500 hover:bg-left-top hover:shadow-[0_0_2rem_-0.5rem_#DD8800] dark:from-yellow-500 dark:via-white dark:to-[#FFB800]  dark:contrast-100 dark:hover:shadow-[0_0_2rem_-0.5rem_#fff8]"
           >
             <div className="rounded-full bg-white/80 px-3 py-1 dark:bg-black/80">
@@ -174,9 +174,9 @@ export async function Hero() {
             <div className="absolute right-1/2 top-1/2 -z-10 hidden h-56 w-56 -translate-y-[40%] rounded-full bg-[#FFB800]/20 blur-3xl dark:block" />
             <TypeHeroLogo3D />
             <h1 className="animate-bg-gradient-to-center-title dark:to-69% bg-gradient-to-br from-[#FFB800] from-[69%] to-black/0 bg-clip-text bg-right-bottom text-6xl font-extrabold text-transparent sm:text-8xl sm:leading-[5.5rem] dark:from-white dark:from-30% dark:via-[#FFB800] dark:to-[#FFB800] dark:bg-[length:300%_300%]">
-              type
+              波波
               <br />
-              hero
+              微课
             </h1>
           </div>
 
