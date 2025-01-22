@@ -88,6 +88,7 @@ export default function SplitEditor({
   const wrapper = useRef<HTMLDivElement>(null);
   const resizer = useRef<HTMLDivElement>(null);
   const testPanel = useRef<HTMLDivElement>(null);
+  const testPanelSection = useRef<HTMLDivElement>(null);
   const monacoRef = useRef<typeof import('monaco-editor')>();
   const editorRef = useRef<monacoType.editor.IStandaloneCodeEditor>();
 
@@ -125,7 +126,7 @@ export default function SplitEditor({
   // i moved this into onMount to avpid the monacoRef stuff but then you can really debounce it
   const [ata] = useState(() =>
     setupTypeAcquisition({
-      projectName: 'TypeHero Playground',
+      projectName: '波波微课 Playground',
       typescript: ts,
       logger: console,
       delegate: {
@@ -178,9 +179,10 @@ export default function SplitEditor({
   useEffect(() => {
     const resizerRef = resizer.current;
     const testPanelRef = testPanel.current;
+    const testPanelSectionRef = testPanelSection.current;
     const wrapperRef = wrapper.current;
 
-    if (!resizerRef || !testPanelRef || !wrapperRef) {
+    if (!resizerRef || !testPanelRef || !wrapperRef || !testPanelSectionRef) {
       return;
     }
 
@@ -189,8 +191,8 @@ export default function SplitEditor({
 
     const mouseMoveHandler = (e: MouseEvent | TouchEvent) => {
       // Remove transition during drag because of performance issues
-      if (testPanelRef.classList.contains('transition-all')) {
-        testPanelRef.classList.remove('transition-all');
+      if (testPanelSectionRef.classList.contains('transition-all')) {
+        testPanelSectionRef.classList.remove('transition-all');
       }
 
       document.body.style.setProperty('cursor', 'row-resize');
@@ -200,7 +202,8 @@ export default function SplitEditor({
       const height = initialHeight - dy;
 
       if (height >= MIN_HEIGHT) {
-        testPanelRef.style.height = `${Math.min(height, wrapperRef.offsetHeight)}px`;
+        const newHeight = Math.min(height, wrapperRef.offsetHeight - 55);
+        testPanelRef.style.height = `${newHeight}px`;
         setIsTestPanelExpanded(true);
       } else if (height < COLLAPSE_THRESHOLD) {
         setIsTestPanelExpanded(false);
@@ -230,7 +233,7 @@ export default function SplitEditor({
 
     const mouseUpHandler = function () {
       // Restore transition
-      testPanelRef.classList.add('transition-all');
+      testPanelSectionRef.classList.add('transition-all');
 
       document.body.style.removeProperty('cursor');
 
@@ -253,7 +256,7 @@ export default function SplitEditor({
       if (testPanelRef.offsetHeight >= MIN_HEIGHT) {
         testPanelRef.style.height = `${Math.min(
           testPanelRef.offsetHeight,
-          wrapperRef.offsetHeight,
+          wrapperRef.offsetHeight - 55,
         )}px`;
         setIsTestPanelExpanded(true);
       } else {
@@ -391,13 +394,7 @@ export default function SplitEditor({
           <VimStatusBar editor={userEditorState} />
         )}
       </section>
-      <div
-        className="transition-all"
-        style={{
-          height: `${expandTestPanel ? settings.testPanelHeight || MIN_HEIGHT : 0}px`,
-        }}
-        ref={testPanel}
-      >
+      <div className="transition-all" ref={testPanelSection}>
         <div
           className="group cursor-row-resize border-y border-zinc-200 bg-zinc-100 p-2 dark:border-zinc-700 dark:bg-zinc-800"
           ref={resizer}
@@ -407,59 +404,66 @@ export default function SplitEditor({
         >
           <div className="group-hover:bg-primary group-hover:dark:bg-primary group-active:bg-primary m-auto h-1 w-24 rounded-full bg-zinc-300 duration-300 dark:bg-zinc-700" />
         </div>
-        <CodeEditor
-          options={{
-            lineNumbers: 'off',
-            renderValidationDecorations: 'on',
-            readOnly: isTestsReadonly,
+        <div
+          style={{
+            height: `${expandTestPanel ? settings.testPanelHeight || MIN_HEIGHT : 0}px`,
           }}
-          onMount={(editor, monaco) => {
-            // this just does the typechecking so the UI can update
-            onMount?.tests?.(editor, monaco);
-            const testModel = monaco.editor.getModel(monaco.Uri.parse(TESTS_PATH))!;
-            const testCode = testModel.getValue();
-            debouncedTestCodeAta(testCode);
+          ref={testPanel}
+        >
+          <CodeEditor
+            options={{
+              lineNumbers: 'off',
+              renderValidationDecorations: 'on',
+              readOnly: isTestsReadonly,
+            }}
+            onMount={(editor, monaco) => {
+              // this just does the typechecking so the UI can update
+              onMount?.tests?.(editor, monaco);
+              const testModel = monaco.editor.getModel(monaco.Uri.parse(TESTS_PATH))!;
+              const testCode = testModel.getValue();
+              debouncedTestCodeAta(testCode);
 
-            if (hasImports(testCode)) {
-              const actualCode = testCode
-                .split('\n')
-                .filter((c) => !c.startsWith('import'))
-                .join('\n');
-              if (actualCode) {
-                monaco.languages.typescript.typescriptDefaults.setExtraLibs([
-                  {
-                    content: actualCode,
-                    filePath: 'file:///node_modules/@types/test.d.ts',
-                  },
-                ]);
+              if (hasImports(testCode)) {
+                const actualCode = testCode
+                  .split('\n')
+                  .filter((c) => !c.startsWith('import'))
+                  .join('\n');
+                if (actualCode) {
+                  monaco.languages.typescript.typescriptDefaults.setExtraLibs([
+                    {
+                      content: actualCode,
+                      filePath: 'file:///node_modules/@types/test.d.ts',
+                    },
+                  ]);
+                }
               }
-            }
-          }}
-          defaultPath={TESTS_PATH}
-          value={tests}
-          defaultValue={tests}
-          onChange={async (editor, changeEvent) => {
-            const code = editor ?? '';
-            debouncedTestCodeAta(code);
-            if (hasImports(code)) {
-              const actualCode = code
-                .split('\n')
-                .filter((c) => !c.startsWith('import'))
-                .join('\n');
-              if (actualCode) {
-                monaco?.languages.typescript.typescriptDefaults.setExtraLibs([
-                  {
-                    content: actualCode,
-                    filePath: 'file:///node_modules/@types/test.d.ts',
-                  },
-                ]);
+            }}
+            defaultPath={TESTS_PATH}
+            value={tests}
+            defaultValue={tests}
+            onChange={async (editor, changeEvent) => {
+              const code = editor ?? '';
+              debouncedTestCodeAta(code);
+              if (hasImports(code)) {
+                const actualCode = code
+                  .split('\n')
+                  .filter((c) => !c.startsWith('import'))
+                  .join('\n');
+                if (actualCode) {
+                  monaco?.languages.typescript.typescriptDefaults.setExtraLibs([
+                    {
+                      content: actualCode,
+                      filePath: 'file:///node_modules/@types/test.d.ts',
+                    },
+                  ]);
+                }
               }
-            }
 
-            onChange?.tests?.(editor, changeEvent);
-          }}
-          onValidate={onValidate?.tests}
-        />
+              onChange?.tests?.(editor, changeEvent);
+            }}
+            onValidate={onValidate?.tests}
+          />
+        </div>
       </div>
     </div>
   );
