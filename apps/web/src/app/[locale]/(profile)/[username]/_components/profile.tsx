@@ -10,8 +10,8 @@ interface Props {
 }
 
 export const metadata: Metadata = {
-  title: 'Profile | 波波微课',
-  description: 'View this profile on 波波微课.',
+  title: 'Profile | TypeHero',
+  description: 'View this profile on TypeHero.',
 };
 
 export async function Profile({ username: usernameFromQuery, children }: Props) {

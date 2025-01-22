@@ -62,13 +62,13 @@ export async function generateMetadata({ params: { username: usernameFromQuery }
   if (username)
     return buildMetaForUser({
       username,
-      title: `${username}'s profile | 波波微课`,
-      description: `View the profile of ${username} on 波波微课.`,
+      title: `${username}'s profile | TypeHero`,
+      description: `View the profile of ${username} on TypeHero.`,
       avatar,
       dateSince,
     });
   return buildMetaForDefault({
-    title: 'Profile | 波波微课',
-    description: 'View the profile of a user on 波波微课.',
+    title: 'Profile | TypeHero',
+    description: 'View the profile of a user on TypeHero.',
   });
 }
