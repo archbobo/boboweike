@@ -62,7 +62,7 @@ The second type, `TSConfig`, should feel a bit difficult, but if you get stuck, 
 <summary>small hint</summary>
 
 1. Start with a literal object as the parameter default.
-1. Use [indexed types](https://typehero.dev/challenge/indexed-types).
-1. The error you'll see is because of a missing [generic constraint](https://typehero.dev/challenge/generic-type-constraints).
+1. Use [indexed types](https://boboweike.cn/challenge/indexed-types).
+1. The error you'll see is because of a missing [generic constraint](https://boboweike.cn/challenge/generic-type-constraints).
 
 </details>
