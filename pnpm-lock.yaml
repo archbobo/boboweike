@@ -265,8 +265,8 @@ importers:
         specifier: 14.0.1
         version: 14.0.1(@babel/core@7.26.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       next-international:
-        specifier: 1.1.2
-        version: 1.1.2
+        specifier: 1.1.4
+        version: 1.1.4
       next-themes:
         specifier: ^0.2.1
         version: 0.2.1(next@14.0.1(@babel/core@7.26.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
@@ -664,7 +664,7 @@ importers:
     dependencies:
       '@next/eslint-plugin-next':
         specifier: canary
-        version: 15.2.0-canary.18
+        version: 15.2.0-canary.19
       '@repo/tsconfig':
         specifier: workspace:*
         version: link:../config-typescript
@@ -676,7 +676,7 @@ importers:
         version: 5.62.0(eslint@8.57.1)(typescript@5.7.2)
       '@vercel/style-guide':
         specifier: ^4.0.2
-        version: 4.0.2(@next/eslint-plugin-next@15.2.0-canary.18)(eslint@8.57.1)(prettier@2.8.8)(typescript@5.7.2)
+        version: 4.0.2(@next/eslint-plugin-next@15.2.0-canary.19)(eslint@8.57.1)(prettier@2.8.8)(typescript@5.7.2)
       eslint:
         specifier: ^8.45.0
         version: 8.57.1
@@ -1473,8 +1473,8 @@ packages:
   '@next/eslint-plugin-next@13.5.8':
     resolution: {integrity: sha512-rmNr6kz5g7x2CQ/5RMmav7/wTGOFIv4fcP+bxawNaJP+Y5Gb0Dvq+omBUvL66pDo/fhWurElatelEFpHX+tMSw==}
 
-  '@next/eslint-plugin-next@15.2.0-canary.18':
-    resolution: {integrity: sha512-wVOjQ+ROQme3GxFz8eVkFh3yn67SmbyfTWeoBJudBHbEXe8M7DjUPHYwn4/uXkPgjV+PfxWTYkES86PNnpPHzw==}
+  '@next/eslint-plugin-next@15.2.0-canary.19':
+    resolution: {integrity: sha512-9gIlSIYsxGVoCM1fgWCAR28Cj+3F9G8sHBjCBjdJLbhJyYz1sYaAtxLXv/uKKsJvNqn3V7hEFeJ9jUdGXct1Yw==}
 
   '@next/swc-darwin-arm64@14.0.1':
     resolution: {integrity: sha512-JyxnGCS4qT67hdOKQ0CkgFTp+PXub5W1wsGvIq98TNbF3YEIN7iDekYhYsZzc8Ov0pWEsghQt+tANdidITCLaw==}
@@ -5514,8 +5514,8 @@ packages:
       nodemailer:
         optional: true
 
-  next-international@1.1.2:
-    resolution: {integrity: sha512-WLWNmKet7Ln7QDzwBrQNOX27R3RPCP+2XhqL9pSo3aKyO/f/N1zX9k7srM1YnPzACUIWUKptYB0teqTaPiIq/g==}
+  next-international@1.1.4:
+    resolution: {integrity: sha512-peIJXXEC5lM7zZONCgN1uUxCkIHpSW1pZuHoRTp9ND14K7CDdHajDMz9RTxVCmQUGWXSaqruM6XVAuq4d+Gpxg==}
 
   next-themes@0.2.1:
     resolution: {integrity: sha512-B+AKNfYNIzh0vqQQKqQItTS8evEouKD7H5Hj3kmuPERwddR2TxvDSFZuTj6T7Jfn1oyeUyJMydPl1Bkxkh0W7A==}
@@ -7882,7 +7882,7 @@ snapshots:
     dependencies:
       glob: 7.1.7
 
-  '@next/eslint-plugin-next@15.2.0-canary.18':
+  '@next/eslint-plugin-next@15.2.0-canary.19':
     dependencies:
       fast-glob: 3.3.1
 
@@ -9718,7 +9718,7 @@ snapshots:
     dependencies:
       '@vercel/edge-config-fs': 0.1.0
 
-  '@vercel/style-guide@4.0.2(@next/eslint-plugin-next@15.2.0-canary.18)(eslint@8.57.1)(prettier@2.8.8)(typescript@5.7.2)':
+  '@vercel/style-guide@4.0.2(@next/eslint-plugin-next@15.2.0-canary.19)(eslint@8.57.1)(prettier@2.8.8)(typescript@5.7.2)':
     dependencies:
       '@babel/core': 7.26.0
       '@babel/eslint-parser': 7.25.9(@babel/core@7.26.0)(eslint@8.57.1)
@@ -9740,7 +9740,7 @@ snapshots:
       eslint-plugin-unicorn: 43.0.2(eslint@8.57.1)
       prettier-plugin-packagejson: 2.5.6(prettier@2.8.8)
     optionalDependencies:
-      '@next/eslint-plugin-next': 15.2.0-canary.18
+      '@next/eslint-plugin-next': 15.2.0-canary.19
       eslint: 8.57.1
       prettier: 2.8.8
       typescript: 5.7.2
@@ -12671,7 +12671,7 @@ snapshots:
       react-dom: 19.0.0(react@19.0.0)
       uuid: 8.3.2
 
-  next-international@1.1.2:
+  next-international@1.1.4:
     dependencies:
       client-only: 0.0.1
       international-types: 0.8.1
