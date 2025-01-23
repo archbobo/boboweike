@@ -10,9 +10,8 @@ import type * as monacoType from 'monaco-editor';
 import dynamic from 'next/dynamic';
 import { useEffect, useRef, useState } from 'react';
 import ts from 'typescript';
-import { CodeEditor, LIB_URI } from './code-editor';
+import { CodeEditor } from './code-editor';
 import { useResetEditor } from './editor-hooks';
-import { libSource } from './editor-types';
 import { PrettierFormatProvider } from './prettier';
 import { useEditorSettingsStore } from './settings-store';
 import { getEventDeltas } from './utils';
@@ -127,7 +126,7 @@ export default function SplitEditor({
   // i moved this into onMount to avpid the monacoRef stuff but then you can really debounce it
   const [ata] = useState(() =>
     setupTypeAcquisition({
-      projectName: '波波微课 Playground',
+      projectName: 'TypeHero Playground',
       typescript: ts,
       logger: console,
       delegate: {
@@ -145,13 +144,15 @@ export default function SplitEditor({
             monacoRef.current.editor.createModel(code, 'typescript', uri);
           }
 
-          const userCode = monacoRef.current.editor
-            .getModel(monacoRef.current.Uri.parse(USER_CODE_PATH))!
-            .getValue();
+          const userCode =
+            monacoRef.current.editor
+              .getModel(monacoRef.current.Uri.parse(USER_CODE_PATH))
+              ?.getValue() ?? '';
 
-          const testCode = monacoRef.current.editor
-            .getModel(monacoRef.current.Uri.parse(TESTS_PATH))!
-            .getValue();
+          const testCode =
+            monacoRef.current.editor
+              .getModel(monacoRef.current.Uri.parse(TESTS_PATH))
+              ?.getValue() ?? '';
 
           if (hasImports(userCode)) {
             monacoRef.current.languages.typescript.typescriptDefaults.addExtraLib(
@@ -299,16 +300,7 @@ export default function SplitEditor({
             onMount?.user?.(editor, monaco);
             // @ts-ignore
             typeCheck(monaco);
-            const libUri = monaco.Uri.parse(LIB_URI);
-
             monaco.languages.typescript.typescriptDefaults.setEagerModelSync(true);
-
-            if (!monaco.editor.getModel(libUri)) {
-              monaco.languages.typescript.javascriptDefaults.addExtraLib(libSource, LIB_URI);
-              monaco.editor
-                .createModel(libSource, 'typescript', libUri)
-                .setEOL(monaco.editor.EndOfLineSequence.LF);
-            }
 
             const model = monaco.editor.getModel(monaco.Uri.parse(USER_CODE_PATH))!;
             const code = model.getValue();
