@@ -12,7 +12,7 @@ export async function AotLandingPage() {
   return (
     <div className="flex flex-col gap-5 pb-8 md:gap-10 md:py-5">
       <div className="container">
-        <h1 className="mb-10 text-center text-4xl font-bold tracking-tighter text-black sm:text-8xl dark:text-white">
+        <h1 className="mb-10 mt-16 text-center text-4xl font-bold tracking-tighter text-black sm:text-8xl dark:text-white">
           <span>Advent</span> of <span className="text-red-600">TypeScript</span>
         </h1>
         <div className="flex flex-col items-center justify-center gap-5">
@@ -20,11 +20,11 @@ export async function AotLandingPage() {
             The first type challenge will unlock at{' '}
             <span className="text-primary">midnight(est)</span> on December 1st
           </p>
-          <div className="flex items-center justify-center gap-5">
-            <About />
+          <div className="flex w-full flex-col items-center justify-center gap-2 md:w-auto md:flex-row md:gap-5">
+            <About className="w-full md:w-auto" />
             <Button
               asChild
-              className="flex items-center gap-2 rounded-xl border-2 px-4 py-2 dark:text-white"
+              className="flex w-full items-center justify-center gap-2 rounded-xl border-2 px-4 py-2 md:w-auto dark:text-white"
               variant="outline"
             >
               <a
