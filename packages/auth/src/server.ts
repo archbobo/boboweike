@@ -15,7 +15,7 @@ export type { Session, DefaultSession as DefaultAuthSession } from 'next-auth';
  */
 declare module 'next-auth' {
   interface Session extends DefaultSession {
-    user: DefaultSession['user'] & {
+    user?: DefaultSession['user'] & {
       id: string;
       role: RoleTypes[];
     };
@@ -59,6 +59,7 @@ export const {
     },
   },
   callbacks: {
+    // @ts-ignore
     session: async ({ session, user }) => {
       let userRoles: RoleTypes[] = [];
       if (user.roles) {
