@@ -11,7 +11,7 @@ the intricacies of TypeScript's typing system.
 
 ### ✨ Want to contribute?
 
-Please see the [`LOCAL.md`](/LOCAL.md) on how to get setup.
+Please see the [`LOCAL.md`](/LOCAL.md) on how to get set up.
 
 ### 💖 Sponsors
 
