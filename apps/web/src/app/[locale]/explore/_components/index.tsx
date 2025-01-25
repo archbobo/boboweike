@@ -1,8 +1,6 @@
 import { auth } from '@repo/auth/server';
-import { redirect } from 'next/navigation';
 import { Suspense } from 'react';
 import { Footsies } from '~/components/footsies';
-import { isBetaUser } from '~/utils/server/is-beta-user';
 import { ExploreSection } from './explore-section';
 import { ExploreSectionSkeleton } from './explore-section-skeleton';
 
@@ -11,11 +9,6 @@ export const dynamic = 'force-dynamic';
 
 export async function Explore() {
   const session = await auth();
-  const isBeta = await isBetaUser(session);
-
-  if (!isBeta) {
-    return redirect('/claim');
-  }
 
   return (
     <>
