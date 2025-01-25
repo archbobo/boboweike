@@ -2,7 +2,7 @@ import { setStaticParamsLocale } from 'next-international/server';
 import { Footsies } from '~/components/footsies';
 import { Features } from './_components/features';
 import { Hero } from './_components/hero';
-import { WaitlistBanner } from './_components/waitlist-banner';
+import { NewsletterBanner } from './_components/newsletter-banner';
 import { getStaticParams } from '~/locales/server';
 
 export function generateStaticParams() {
@@ -17,7 +17,7 @@ export default async function Index({ params: { locale } }: { params: { locale: 
       <Hero />
       <Features />
       {/* <Community /> */}
-      <WaitlistBanner />
+      <NewsletterBanner />
       <Footsies />
     </>
   );
