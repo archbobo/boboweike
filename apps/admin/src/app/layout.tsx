@@ -11,7 +11,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html suppressHydrationWarning lang="en">
       <head>
-        <title>TypeHero Admin</title>
+        <title>波波微课 Admin</title>
       </head>
       <body className={`${inter.className} flex flex-col`}>
         <Providers>

@@ -1,6 +1,6 @@
 ## `typeof`: A Bridge Between Worlds
 
-Have we said thank you, yet, for taking these TypeHero challenges? Well... THANK YOU!
+Have we said thank you, yet, for taking these 波波微课 challenges? Well... THANK YOU!
 
 You're doing yourself a great service by improving your knowledge of TypeScript. As you dig deeper, on your quest to become a TypeScript wizard, you're going to start noticing that there are almost two worlds. The "JavaScript" world and the "types" world.
 

@@ -13,7 +13,7 @@ interface Props {
 export async function generateMetadata({ params: { slug } }: Props) {
   const { challenge } = await getChallengeRouteData(slug, null);
   return buildMetaForDefault({
-    title: `Solutions to ${challenge.name} | TypeHero`,
+    title: `Solutions to ${challenge.name} | 波波微课`,
     description: challenge.shortDescription,
   });
 }

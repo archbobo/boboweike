@@ -14,7 +14,7 @@ export function generateStaticParams() {
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
-  title: 'TypeHero',
+  title: '波波微课',
   robots: {
     index: true,
     follow: true,

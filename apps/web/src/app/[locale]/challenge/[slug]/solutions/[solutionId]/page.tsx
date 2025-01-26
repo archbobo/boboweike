@@ -40,7 +40,7 @@ export async function generateMetadata({ params: { solutionId } }: Props) {
   });
 
   return {
-    title: `${solution.title}, solution to ${solution.challenge?.name} | TypeHero`,
-    description: `View this solution to ${solution.challenge?.name} on TypeHero.`,
+    title: `${solution.title}, solution to ${solution.challenge?.name} | 波波微课`,
+    description: `View this solution to ${solution.challenge?.name} on 波波微课.`,
   };
 }

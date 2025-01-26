@@ -27,7 +27,7 @@ export async function generateMetadata({ params: { slug } }: Props) {
   const description = `Unlock your TypeScript potential by solving the ${challenge.name} challenge on 波波微课.`;
 
   return buildMetaForChallenge({
-    title: `${challenge.name} | TypeHero`,
+    title: `${challenge.name} | 波波微课`,
     description,
     username: challenge.user.name,
     difficulty: challenge.difficulty,

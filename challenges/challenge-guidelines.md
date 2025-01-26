@@ -1,19 +1,20 @@
 <!-- omit in toc -->
 
-# TypeHero Challenge Guidelines
+# 波波微课 Challenge Guidelines
 
-- [Writing `prompt.md`](#writing-promptmd)
-  - [Keep It Fun](#keep-it-fun)
-  - [Encourage Healthy Practices](#encourage-healthy-practices)
-- [Writing `test.ts`](#writing-testts)
-  - [`Expect<Equal<` Type Order](#expectequal-type-order)
-  - [Avoid Type Tuples](#avoid-type-tuples)
-  - [Say _Why_ An Error Occurs](#say-why-an-error-occurs)
-- [Writing `user.ts`](#writing-userts)
-  - [Don't Use `any`, Prefer `unknown`](#dont-use-any-prefer-unknown)
-  - [Avoid "Leading The Witness"](#avoid-leading-the-witness)
+- [波波微课 Challenge Guidelines](#波波微课-challenge-guidelines)
+  - [Writing `prompt.md`](#writing-promptmd)
+    - [Keep It Fun](#keep-it-fun)
+    - [Encourage Healthy Practices](#encourage-healthy-practices)
+  - [Writing `test.ts`](#writing-testts)
+    - [`Expect<Equal<` Type Order](#expectequal-type-order)
+    - [Avoid Type Tuples](#avoid-type-tuples)
+    - [Say _Why_ An Error Occurs](#say-why-an-error-occurs)
+  - [Writing `user.ts`](#writing-userts)
+    - [Don't Use `any`, Prefer `unknown`](#dont-use-any-prefer-unknown)
+    - [Avoid "Leading The Witness"](#avoid-leading-the-witness)
 
-This is a guide to help you write a challenge for TypeHero. Our goal is to keep the writing process straightforward while at the same time having some consistency. We've learned from experience that there are a few useful things to do to make it a more consistent (and less chaotic) feeling experience for our users. Some of these things are arbitrary design choices. That's ok. It's not about a "right way of doing things" but more "a cohesive experience for users".
+This is a guide to help you write a challenge for 波波微课. Our goal is to keep the writing process straightforward while at the same time having some consistency. We've learned from experience that there are a few useful things to do to make it a more consistent (and less chaotic) feeling experience for our users. Some of these things are arbitrary design choices. That's ok. It's not about a "right way of doing things" but more "a cohesive experience for users".
 
 In general, if you find yourself having to pick between:
 
@@ -160,7 +161,7 @@ type Split = any;
 
 ### Avoid "Leading The Witness"
 
-One goal of TypeHero is to keep things as real-world as possible (except in the case of challenges that are literally just "for science" like JSON parsers, etc.). That means that you want to give people as much on-the-ground experience as possible. You want users to leave a challenge feeling like they actually learned or accomplished something (or both!).
+One goal of 波波微课 is to keep things as real-world as possible (except in the case of challenges that are literally just "for science" like JSON parsers, etc.). That means that you want to give people as much on-the-ground experience as possible. You want users to leave a challenge feeling like they actually learned or accomplished something (or both!).
 
 We want to encourage good behaviors that will carry users into their daily work.
 

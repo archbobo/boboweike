@@ -103,6 +103,7 @@ export default function SplitEditor({
         wrapper.current.contains(document.activeElement)
       ) {
         e.preventDefault();
+        editorRef.current?.getAction('editor.action.formatDocument')?.run();
         toast({
           title: 'Saved',
           description: 'Your code has been saved',
@@ -118,7 +119,7 @@ export default function SplitEditor({
       document.removeEventListener('keydown', saveHandler);
       inlayHintsProviderDisposableRef.current?.dispose();
     };
-  }, []);
+  }, [editorRef]);
 
   useEffect(() => {
     monacoRef.current = monaco;
@@ -130,7 +131,7 @@ export default function SplitEditor({
   // i moved this into onMount to avpid the monacoRef stuff but then you can really debounce it
   const [ata] = useState(() =>
     setupTypeAcquisition({
-      projectName: 'TypeHero Playground',
+      projectName: 'BoboWeike Playground',
       typescript: ts,
       logger: console,
       delegate: {
