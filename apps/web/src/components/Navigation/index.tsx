@@ -1,4 +1,4 @@
-import { auth } from '@repo/auth/server';
+import { auth, type Session } from '@repo/auth/server';
 import { Badge } from '@repo/ui/components/badge';
 import {
   DropdownMenu,
@@ -30,10 +30,13 @@ export function getAdminUrl() {
 }
 
 export async function Navigation() {
+  const session = await auth();
+
+  const isAdminOrMod = isAdminOrModerator(session);
   const t = await getScopedI18n('navigation');
   const featureFlags = await getAllFlags();
 
-  const NavLinks = () => (
+  const TopSectionLinks = (
     <>
       {featureFlags?.enableExplore ? <NavLink title={t('explore')} href="/explore" /> : null}
       {featureFlags?.enableTracks ? <NavLink title={t('tracks')} href="/tracks" /> : null}
@@ -45,6 +48,29 @@ export async function Navigation() {
           </Badge>
         </div>
       ) : null}
+    </>
+  );
+
+  const NavLinks = (
+    <>
+      <div className="ml-4 hidden items-center gap-4 md:flex">{TopSectionLinks}</div>
+      <div className="flex flex-col gap-5 pl-4 md:hidden">
+        {TopSectionLinks}
+        {session?.user ? (
+          <>
+            <hr />
+            <NavLink title="Profile" href={`/@${session.user.name}`} />
+            <NavLink title="Settings" href="/settings" />
+            {isAdminOrMod ? <NavLink title="Admin" href={getAdminUrl()} /> : null}
+            {isAdminOrMod ? (
+              <NavLink title="Challenge Playground" href="/challenge-playground" />
+            ) : null}
+            <SignOutLink className="px-0" />
+          </>
+        ) : (
+          <LoginLink className="px-0 hover:bg-transparent hover:dark:bg-transparent" />
+        )}
+      </div>
     </>
   );
 
@@ -80,9 +106,7 @@ export async function Navigation() {
                 微课 <span className="text-muted-foreground bg-muted px-1 text-xs">BETA</span>
               </div>
             </Link>
-            <div className="hidden items-center md:flex">
-              <NavLinks />
-            </div>
+            <div className="hidden items-center md:ml-4 md:flex md:gap-4">{NavLinks}</div>
           </div>
 
           <div className="flex">
@@ -90,10 +114,10 @@ export async function Navigation() {
               {/* <Suspense>
                 <Search />
               </Suspense> */}
-              {featureFlags?.enableLogin ? <LoginButton /> : null}
-              <MobileNav>
-                <NavLinks />
-              </MobileNav>
+              {featureFlags?.enableLogin ? (
+                <LoginButton isAdminOrMod={isAdminOrMod} session={session} />
+              ) : null}
+              <MobileNav>{NavLinks}</MobileNav>
             </div>
           </div>
         </div>
@@ -102,17 +126,19 @@ export async function Navigation() {
   );
 }
 
-async function LoginButton() {
-  const session = await auth();
-
-  const isAdminOrMod = isAdminOrModerator(session);
-
-  return session && session.user ? (
+async function LoginButton({
+  isAdminOrMod,
+  session,
+}: {
+  isAdminOrMod: boolean;
+  session: Session | null;
+}) {
+  return session?.user ? (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <button
           aria-label="profile button"
-          className="focus:bg-accent rounded-lg p-2 duration-300 focus:outline-none focus-visible:ring-2"
+          className="focus:bg-accent hidden rounded-lg p-2 duration-300 focus:outline-none focus-visible:ring-2 md:block"
         >
           <User className="h-5 w-5" />
         </button>
@@ -134,27 +160,29 @@ async function LoginButton() {
           </DropdownMenuItem>
         </Link>
         {isAdminOrMod ? (
-          <Link className="block" href={getAdminUrl()}>
+          <a className="block" href={getAdminUrl()}>
             <DropdownMenuItem className="focus:bg-accent rounded-lg p-2 duration-300 focus:outline-none dark:hover:bg-neutral-700/50">
               <Settings className="mr-2 h-4 w-4" />
               <span>Admin</span>
             </DropdownMenuItem>
-          </Link>
+          </a>
         ) : null}
         {isAdminOrMod ? (
-          <Link className="block" href="/challenge-playground">
+          <a className="block" href="/challenge-playground">
             <DropdownMenuItem className="focus:bg-accent rounded-lg p-2 duration-300 focus:outline-none dark:hover:bg-neutral-700/50">
               <Play className="mr-2 h-4 w-4" />
               <span>Challenge Playground</span>
             </DropdownMenuItem>
-          </Link>
+          </a>
         ) : null}
         <DropdownMenuSeparator />
 
-        <SignOutLink />
+        <SignOutLink className="w-full rounded-b-lg rounded-t-sm" />
       </DropdownMenuContent>
     </DropdownMenu>
   ) : (
-    <LoginLink />
+    <span className="hidden md:flex">
+      <LoginLink />
+    </span>
   );
 }
