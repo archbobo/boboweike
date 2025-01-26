@@ -10,7 +10,7 @@ test.beforeEach(async ({ page }) => {
 });
 
 test('home page', async ({ page }) => {
-  await expect(page.getByRole('heading', { name: 'type hero' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: '波波 微课' })).toBeVisible();
 });
 
 test.describe('homepage a11y', () => {
