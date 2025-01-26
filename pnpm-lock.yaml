@@ -165,6 +165,9 @@ importers:
 
   apps/web:
     dependencies:
+      '@axe-core/playwright':
+        specifier: ^4.8.2
+        version: 4.10.1(playwright-core@1.49.1)
       '@hookform/error-message':
         specifier: ^2.0.1
         version: 2.0.1(react-dom@18.2.0(react@18.2.0))(react-hook-form@7.54.2(react@18.2.0))(react@18.2.0)
@@ -831,6 +834,11 @@ packages:
     resolution: {integrity: sha512-PQU8/Oi5gfjzb0MkhMGVX0Dg877phPzsQdK54+C7ubukCeZPjyvuSAx1vVtWEYVWp2oQvjgG/C6QiDoeC7S10A==}
     peerDependencies:
       '@prisma/client': '>=2.26.0 || >=3 || >=4 || >=5'
+
+  '@axe-core/playwright@4.10.1':
+    resolution: {integrity: sha512-EV5t39VV68kuAfMKqb/RL+YjYKhfuGim9rgIaQ6Vntb2HgaCaau0h98Y3WEUqW1+PbdzxDtDNjFAipbtZuBmEA==}
+    peerDependencies:
+      playwright-core: '>= 1.0.0'
 
   '@babel/code-frame@7.26.2':
     resolution: {integrity: sha512-RJlIHRueQgwWitWgF8OdFYGZX328Ax5BCemNGlqHfplnRT9ESi8JkFlvaVYbS+UubVY6dpv87Fs2u5M29iNFVQ==}
@@ -7502,6 +7510,11 @@ snapshots:
       - '@simplewebauthn/browser'
       - '@simplewebauthn/server'
       - nodemailer
+
+  '@axe-core/playwright@4.10.1(playwright-core@1.49.1)':
+    dependencies:
+      axe-core: 4.10.2
+      playwright-core: 1.49.1
 
   '@babel/code-frame@7.26.2':
     dependencies:
