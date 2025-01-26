@@ -18,6 +18,7 @@ export function Footsies() {
             className="group rounded-lg p-2"
             href="https://github.com/boboweike/boboweike"
           >
+            <span className="sr-only">波波微课 on Github</span>
             <Github className="h-5 w-5 duration-150 group-hover:scale-110 group-hover:fill-black dark:group-hover:fill-white" />
           </a>
           <a
@@ -26,6 +27,7 @@ export function Footsies() {
             className="group rounded-lg p-2"
             href="https://twitter.com/boboweikeapp"
           >
+            <span className="sr-only">波波微课 on Twitter</span>
             <Twitter className="h-5 w-5 duration-150 group-hover:scale-110 group-hover:fill-black dark:group-hover:fill-white" />
           </a>
         </div>
