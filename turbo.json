@@ -5,6 +5,7 @@
       "dependsOn": ["^build", "@repo/db#db:generate"],
       "outputs": ["dist/**", ".next/**", "!.next/cache/**"],
       "env": [
+        "VERCEL",
         "VERCEL_URL",
         "NEXT_PUBLIC_VERCEL_URL",
         "VERCEL_ENV",
@@ -20,7 +21,9 @@
         "UPLOADTHING_APP_ID",
         "EDGE_CONFIG",
         "NEXTAUTH_SECRET",
+        "AUTH_SECRET",
         "NEXTAUTH_URL",
+        "AUTH_REDIRECT_PROXY_URL",
         "RESEND_API_KEY",
         "PORT",
         "USERNAME",
