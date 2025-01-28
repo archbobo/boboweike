@@ -24,7 +24,7 @@ try {
     create: {
       id: BOBOWEIKE_ID,
       email: 'boboweikeapp@gmail.com',
-      name: '波波微课',
+      name: 'BoboWeike',
       userLinks: {
         create: {
           url: 'https://boboweike.cn',
@@ -78,6 +78,8 @@ try {
         where: {
           slug: {
             in: [
+              'generic-function-arguments',
+              'generic-type-arguments',
               'generic-type-constraints',
               'index-signatures',
               'indexed-types',
