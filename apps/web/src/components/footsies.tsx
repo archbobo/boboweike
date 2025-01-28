@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { Binary, Github, Twitter } from '@repo/ui/icons';
 import { ThemeButton } from './Navigation/theme-button';
-import { getScopedI18n } from '~/locales/server';
+import { getScopedI18n } from '../locales/server';
 
 export async function Footsies() {
   const t = await getScopedI18n('footsies');
