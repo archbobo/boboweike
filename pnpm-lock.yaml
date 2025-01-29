@@ -33,7 +33,7 @@ importers:
         specifier: ^3.14.0
         version: 3.14.0
       turbo:
-        specifier: ^1.12.4
+        specifier: ^1.13.0
         version: 1.13.4
       type-testing:
         specifier: 0.2.0
