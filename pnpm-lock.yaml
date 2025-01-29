@@ -33,7 +33,7 @@ importers:
         specifier: ^3.14.0
         version: 3.14.0
       turbo:
-        specifier: ^1.10.16
+        specifier: ^1.12.4
         version: 1.13.4
       type-testing:
         specifier: 0.2.0
@@ -701,7 +701,7 @@ importers:
     dependencies:
       '@next/eslint-plugin-next':
         specifier: canary
-        version: 15.2.0-canary.28
+        version: 15.2.0-canary.30
       '@repo/tsconfig':
         specifier: workspace:*
         version: link:../config-typescript
@@ -713,7 +713,7 @@ importers:
         version: 5.62.0(eslint@8.57.1)(typescript@5.7.2)
       '@vercel/style-guide':
         specifier: ^4.0.2
-        version: 4.0.2(@next/eslint-plugin-next@15.2.0-canary.28)(eslint@8.57.1)(prettier@2.8.8)(typescript@5.7.2)
+        version: 4.0.2(@next/eslint-plugin-next@15.2.0-canary.30)(eslint@8.57.1)(prettier@2.8.8)(typescript@5.7.2)
       eslint:
         specifier: ^8.45.0
         version: 8.57.1
@@ -1766,8 +1766,8 @@ packages:
   '@next/eslint-plugin-next@13.5.8':
     resolution: {integrity: sha512-rmNr6kz5g7x2CQ/5RMmav7/wTGOFIv4fcP+bxawNaJP+Y5Gb0Dvq+omBUvL66pDo/fhWurElatelEFpHX+tMSw==}
 
-  '@next/eslint-plugin-next@15.2.0-canary.28':
-    resolution: {integrity: sha512-W2KpClPshXU2uGqcag3+6nyxFe5AqoMYVF/Fxm4LeFtPoRaNwmI+I8a4Sj1pIocEiMVNmBjkohdO2qpvMYekKQ==}
+  '@next/eslint-plugin-next@15.2.0-canary.30':
+    resolution: {integrity: sha512-MxqZF16W9N+dMRnlTxDPHxsbeb1qOdT6p7jhbPruRTF5BpcxfrUh8EMzaQeUFjFvgwxYVSEXJObhajVLuc2dQQ==}
 
   '@next/swc-darwin-arm64@14.0.1':
     resolution: {integrity: sha512-JyxnGCS4qT67hdOKQ0CkgFTp+PXub5W1wsGvIq98TNbF3YEIN7iDekYhYsZzc8Ov0pWEsghQt+tANdidITCLaw==}
@@ -9471,7 +9471,7 @@ snapshots:
     dependencies:
       glob: 7.1.7
 
-  '@next/eslint-plugin-next@15.2.0-canary.28':
+  '@next/eslint-plugin-next@15.2.0-canary.30':
     dependencies:
       fast-glob: 3.3.1
 
@@ -11512,7 +11512,7 @@ snapshots:
       - rollup
       - supports-color
 
-  '@vercel/style-guide@4.0.2(@next/eslint-plugin-next@15.2.0-canary.28)(eslint@8.57.1)(prettier@2.8.8)(typescript@5.7.2)':
+  '@vercel/style-guide@4.0.2(@next/eslint-plugin-next@15.2.0-canary.30)(eslint@8.57.1)(prettier@2.8.8)(typescript@5.7.2)':
     dependencies:
       '@babel/core': 7.26.0
       '@babel/eslint-parser': 7.25.9(@babel/core@7.26.0)(eslint@8.57.1)
@@ -11534,7 +11534,7 @@ snapshots:
       eslint-plugin-unicorn: 43.0.2(eslint@8.57.1)
       prettier-plugin-packagejson: 2.5.6(prettier@2.8.8)
     optionalDependencies:
-      '@next/eslint-plugin-next': 15.2.0-canary.28
+      '@next/eslint-plugin-next': 15.2.0-canary.30
       eslint: 8.57.1
       prettier: 2.8.8
       typescript: 5.7.2
