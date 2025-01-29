@@ -9,8 +9,7 @@ Provide your values as needed.
 
 ### 2 Configure your database
 
-You can either use Vercel PostgreSQL or a local Docker container to run your database.
-Use either 2.a or 2.b for the next step.
+You can use a local Docker container to run your database, or any other remote PostgreSQL host you prefer that is compatible with Prisma.
 
 ### 2.a Local Database (using Docker)
 
@@ -19,10 +18,6 @@ Starting the docker container
 ```
 docker compose up -d
 ```
-
-### 2.b Remote Database (using Vercel PostgreSQL)
-
-TODO
 
 ### 3. Create a new GitHub OAuth Application
 
