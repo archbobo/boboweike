@@ -1,16 +1,13 @@
 import Link from 'next/link';
 import { Binary, Github, Twitter } from '@repo/ui/icons';
 import { ThemeButton } from './Navigation/theme-button';
-import { getScopedI18n } from '../locales/server';
 
 export async function Footsies() {
-  const t = await getScopedI18n('footsies');
-
   return (
     <footer className="flex flex-col items-center gap-2 px-8 pb-12 text-sm font-light sm:px-16 sm:pb-20 sm:pt-6 md:px-0 md:py-12">
       <div className="container flex flex-col-reverse justify-between gap-2 md:flex-row md:items-end">
         <span>
-          {t('built', { icon: <Binary className="inline-block h-5 w-5 text-[#31bdc6]" /> })}
+          Built with <Binary className="inline-block h-5 w-5 text-[#31bdc6]" /> by 架构师杨波.
         </span>
         <div className="flex items-center gap-2">
           <ThemeButton />
@@ -21,7 +18,7 @@ export async function Footsies() {
             className="group rounded-lg p-2"
             href="https://github.com/boboweike/boboweike"
           >
-            <span className="sr-only">{t('onGithub')}</span>
+            <span className="sr-only">波波微课 on GitHub</span>
             <Github className="h-5 w-5 duration-150 group-hover:scale-110 group-hover:fill-black dark:group-hover:fill-white" />
           </a>
           <a
@@ -30,7 +27,7 @@ export async function Footsies() {
             className="group rounded-lg p-2"
             href="https://twitter.com/boboweikeapp"
           >
-            <span className="sr-only">{t('onTwitter')}</span>
+            <span className="sr-only">波波微课 on Twitter</span>
             <Twitter className="h-5 w-5 duration-150 group-hover:scale-110 group-hover:fill-black dark:group-hover:fill-white" />
           </a>
         </div>
@@ -41,14 +38,14 @@ export async function Footsies() {
             href="/privacy"
             className="dark:hover:text-primary-foreground transition-colors duration-300 hover:text-neutral-900 hover:underline"
           >
-            {t('PrivacyPolicy')}
+            Privacy Policy
           </Link>{' '}
           |{' '}
           <Link
             href="/tos"
             className="dark:hover:text-primary-foreground transition-colors duration-300 hover:text-neutral-900 hover:underline"
           >
-            {t('TermsOfService')}
+            Terms of Service
           </Link>
         </span>
         <span>

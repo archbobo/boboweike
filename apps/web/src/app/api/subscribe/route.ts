@@ -1,12 +1,10 @@
-// import mailchimp from '@mailchimp/mailchimp_marketing';
+import mailchimp from '@mailchimp/mailchimp_marketing';
 
-// const AUDIENCE_ID = process.env.MAILCHIMP_AUDIENCE_ID;
-// mailchimp.setConfig({
-//   apiKey: process.env.MAILCHIMP_API_KEY,
-//   server: process.env.MAILCHIMP_API_SERVER,
-// });
-
-// TODO: Implement the POST method to add a new subscriber to your Mailchimp Audience
+const AUDIENCE_ID = process.env.MAILCHIMP_AUDIENCE_ID;
+mailchimp.setConfig({
+  apiKey: process.env.MAILCHIMP_API_KEY,
+  server: process.env.MAILCHIMP_API_SERVER,
+});
 
 export async function POST(req: Request) {
   const { name: NAME, email, intention: REASON } = await req.json();
@@ -17,24 +15,12 @@ export async function POST(req: Request) {
   };
 
   try {
-    // const response = await mailchimp.lists.addListMember(AUDIENCE_ID!, {
-    //   email_address: email,
-    //   status: 'subscribed',
-    //   merge_fields,
-    // });
-
-    // return new Response(JSON.stringify(response), {
-    //   status: Number(response.status),
-    //   headers: {
-    //     'content-type': 'application/json',
-    //   },
-    // });
-    const response = {
-      status: 200,
-      id: '123',
+    const response = await mailchimp.lists.addListMember(AUDIENCE_ID!, {
       email_address: email,
+      status: 'subscribed',
       merge_fields,
-    };
+    });
+
     return new Response(JSON.stringify(response), {
       status: 200,
       headers: {

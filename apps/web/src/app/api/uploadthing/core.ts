@@ -10,6 +10,7 @@ const f = createUploadthing({
   errorFormatter: (err) => {
     console.log('Error uploading file', err.message);
     console.log('  - Above error caused by:', err.cause);
+
     return { message: err.message };
   },
 });

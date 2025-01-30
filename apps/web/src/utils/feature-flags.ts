@@ -6,7 +6,6 @@ export const mockFlags = {
   enableTracks: true,
   enableEarlyAccess: false,
   enableInChallengeTrack: true,
-  enableHolidayEvent: true,
 };
 
 export async function getAllFlags() {

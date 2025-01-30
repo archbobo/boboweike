@@ -1,5 +1,4 @@
 import { auth, type Session } from '@repo/auth/server';
-import { Badge } from '@repo/ui/components/badge';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -9,7 +8,6 @@ import {
 } from '@repo/ui/components/dropdown-menu';
 import { Play, Settings, Settings2, User } from '@repo/ui/icons';
 import Link from 'next/link';
-import { getScopedI18n } from '~/locales/server';
 import { isAdminOrModerator } from '~/utils/auth-guards';
 import { getAllFlags } from '~/utils/feature-flags';
 import { LoginLink } from './login-link';
@@ -32,21 +30,12 @@ export function getAdminUrl() {
 export async function Navigation() {
   const session = await auth();
   const isAdminOrMod = isAdminOrModerator(session);
-  const t = await getScopedI18n('navigation');
   const featureFlags = await getAllFlags();
 
   const TopSectionLinks = (
     <>
-      {featureFlags?.enableExplore ? <NavLink title={t('explore')} href="/explore" /> : null}
-      {featureFlags?.enableTracks ? <NavLink title={t('tracks')} href="/tracks" /> : null}
-      {featureFlags?.enableHolidayEvent ? (
-        <div className="flex items-center gap-1">
-          <NavLink title={t('advent')} href="/aot-2023" />
-          <Badge className="h-4 bg-red-600 px-1.5" variant="default">
-            New
-          </Badge>
-        </div>
-      ) : null}
+      {featureFlags?.enableExplore ? <NavLink title="Explore" href="/explore" /> : null}
+      {featureFlags?.enableTracks ? <NavLink title="Tracks" href="/tracks" /> : null}
     </>
   );
 
@@ -110,9 +99,6 @@ export async function Navigation() {
 
           <div className="flex">
             <div className="flex items-center justify-end gap-2">
-              {/* <Suspense>
-                <Search />
-              </Suspense> */}
               {featureFlags?.enableLogin ? (
                 <LoginButton isAdminOrMod={isAdminOrMod} session={session} />
               ) : null}
@@ -159,12 +145,12 @@ async function LoginButton({
           </DropdownMenuItem>
         </Link>
         {isAdminOrMod ? (
-          <a className="block" href={getAdminUrl()}>
+          <Link className="block" href={getAdminUrl()}>
             <DropdownMenuItem className="focus:bg-accent rounded-lg p-2 duration-300 focus:outline-none dark:hover:bg-neutral-700/50">
               <Settings className="mr-2 h-4 w-4" />
               <span>Admin</span>
             </DropdownMenuItem>
-          </a>
+          </Link>
         ) : null}
         {isAdminOrMod ? (
           <Link className="block" href="/challenge-playground">

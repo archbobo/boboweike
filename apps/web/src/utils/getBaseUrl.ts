@@ -6,9 +6,8 @@ export function getBaseUrl() {
   // When rendering on the server, we return an absolute URL
 
   // reference for vercel.com
-  const vercelUrl = process.env.VERCEL_URL || process.env.NEXT_PUBLIC_VERCEL_URL;
-  if (vercelUrl) {
-    return `https://${vercelUrl}`;
+  if (process.env.VERCEL_URL) {
+    return `https://${process.env.VERCEL_URL}`;
   }
 
   // assume localhost

@@ -53,5 +53,8 @@
         "monaco-editor"
       ]
     }
+  },
+  "dependencies": {
+    "pnpm": "^9.15.2"
   }
 }

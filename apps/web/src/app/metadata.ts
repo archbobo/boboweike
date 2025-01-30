@@ -32,7 +32,6 @@ interface MetaParamsForUser {
   avatar: string;
   dateSince: string;
 }
-
 /** Helper to build opengraph metadata for a user, you should call this in generateMetadata() next function */
 export const buildMetaForUser = async ({
   title,
