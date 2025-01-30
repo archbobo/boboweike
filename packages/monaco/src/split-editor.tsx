@@ -328,6 +328,7 @@ export default function SplitEditor({
 
             monaco.languages.registerDocumentFormattingEditProvider(
               'typescript',
+              // @ts-ignore
               PrettierFormatProvider,
             );
 

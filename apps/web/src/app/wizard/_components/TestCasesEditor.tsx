@@ -33,6 +33,7 @@ export function TestCasesEditor({ form, hasTsErrors, setTsErrors }: Props) {
         strictNullChecks: true,
       });
 
+      // @ts-ignore
       monaco.languages.registerDocumentFormattingEditProvider('typescript', PrettierFormatProvider);
 
       const model = editor.getModel();
