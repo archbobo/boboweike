@@ -1,4 +1,4 @@
-import type axe from 'axe-core';
+import type axe from '@axe-core/playwright/node_modules/axe-core/axe';
 
 export default class A11yError extends Error {
   violations: typeof axe.AxeResults.violations = [];

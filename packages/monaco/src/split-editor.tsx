@@ -1,8 +1,7 @@
 'use client';
 
-import { createTwoslashInlayProvider } from './twoslash';
-
 import { type OnChange, type OnMount, type OnValidate } from '@monaco-editor/react';
+import { useToast } from '@repo/ui/components/use-toast';
 import { setupTypeAcquisition } from '@typescript/ata';
 import clsx from 'clsx';
 import debounce from 'lodash/debounce';
@@ -14,8 +13,11 @@ import { CodeEditor } from './code-editor';
 import { useResetEditor } from './editor-hooks';
 import { PrettierFormatProvider } from './prettier';
 import { useEditorSettingsStore } from './settings-store';
+import { createTwoslashInlayProvider } from './twoslash/provider';
 import { getEventDeltas } from './utils';
-import { useToast } from '@repo/ui/components/use-toast';
+
+/** these types are dynamically fetched on load and used to add node types to the monaco instance */
+const NECESSARY_NODE_TYPES = ['process'];
 
 function preventSelection(event: Event) {
   event.preventDefault();
@@ -27,6 +29,8 @@ const VimStatusBar = dynamic(() => import('./vim-mode'), {
 
 const MIN_HEIGHT = 150;
 const COLLAPSE_THRESHOLD = MIN_HEIGHT / 2;
+const USER_FILE_PATH = 'node_modules/@types/user.d.ts';
+const TEST_FILE_PATH = 'node_modules/@types/test.d.ts';
 
 export const TESTS_PATH = 'file:///tests.ts';
 export const USER_CODE_PATH = 'file:///user.ts';
@@ -57,8 +61,7 @@ export interface SplitEditorProps {
 }
 
 export const hasImports = (code: string) => {
-  const x = code.split('\n').filter((line) => line.trim().startsWith('import'));
-  return x.length > 0;
+  return code.split('\n').some((line) => line.trim().startsWith('import'));
 };
 
 const getActualCode = (code: string) =>
@@ -92,15 +95,13 @@ export default function SplitEditor({
   const testPanelSection = useRef<HTMLDivElement>(null);
   const monacoRef = useRef<typeof import('monaco-editor')>();
   const editorRef = useRef<monacoType.editor.IStandaloneCodeEditor>();
-  const inlayHintsProviderDisposableRef = useRef<monacoType.IDisposable>();
 
   useEffect(() => {
     const saveHandler = (e: KeyboardEvent) => {
       if (
         (e.ctrlKey || e.metaKey) &&
         e.code === 'KeyS' &&
-        wrapper.current &&
-        wrapper.current.contains(document.activeElement)
+        wrapper.current?.contains(document.activeElement)
       ) {
         e.preventDefault();
         editorRef.current?.getAction('editor.action.formatDocument')?.run();
@@ -117,7 +118,6 @@ export default function SplitEditor({
 
     return () => {
       document.removeEventListener('keydown', saveHandler);
-      inlayHintsProviderDisposableRef.current?.dispose();
     };
   }, [editorRef]);
 
@@ -128,10 +128,10 @@ export default function SplitEditor({
     editorRef.current = userEditorState;
   }, [userEditorState]);
 
-  // i moved this into onMount to avpid the monacoRef stuff but then you can really debounce it
+  // i moved this into onMount to avoid the monacoRef stuff but then you can really debounce it
   const [ata] = useState(() =>
     setupTypeAcquisition({
-      projectName: 'BoboWeike Playground',
+      projectName: '波波微课 Playground',
       typescript: ts,
       logger: console,
       delegate: {
@@ -162,18 +162,17 @@ export default function SplitEditor({
           if (hasImports(userCode)) {
             monacoRef.current.languages.typescript.typescriptDefaults.addExtraLib(
               getActualCode(userCode),
-              'file:///node_modules/@types/user.d.ts',
+              USER_FILE_PATH,
             );
           }
 
           if (hasImports(testCode)) {
             monacoRef.current.languages.typescript.typescriptDefaults.addExtraLib(
               getActualCode(testCode),
-              'file:///node_modules/@types/test.d.ts',
+              TEST_FILE_PATH,
             );
           }
 
-          // @ts-ignore
           onMount?.tests?.(editorRef.current, monacoRef.current);
         },
       },
@@ -286,11 +285,36 @@ export default function SplitEditor({
     'resetCode',
     () => {
       if (monaco && userEditorState) {
-        // @ts-ignore
         onMount?.tests?.(userEditorState, monaco);
       }
     },
     [monaco, userEditorState],
+  );
+
+  const inlayHintsRef = useRef<monacoType.IDisposable | null>(null);
+
+  const debouncedRefreshInlayHints = useRef(
+    debounce(async (monaco: typeof monacoType) => {
+      inlayHintsRef.current?.dispose();
+
+      // TODO: Surely monaco is guaranteed to exist, right? Why the optional chaining?
+      // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
+      const model = monaco?.editor.getModel(monaco.Uri.parse(USER_CODE_PATH))!;
+      const getTsWorker = await monaco?.languages.typescript.getTypeScriptWorker();
+      const tsWorker = await getTsWorker?.(model.uri);
+
+      inlayHintsRef.current = monaco?.languages.registerInlayHintsProvider(
+        'typescript',
+        createTwoslashInlayProvider(monaco, tsWorker),
+      );
+    }, 1000),
+  ).current;
+
+  useEffect(
+    () => () => {
+      inlayHintsRef.current?.dispose();
+    },
+    [],
   );
 
   return (
@@ -306,14 +330,62 @@ export default function SplitEditor({
           defaultPath={USER_CODE_PATH}
           onMount={async (editor, monaco) => {
             // this just does the typechecking so the UI can update
+            // it also makes the monaco instance available outside of this callback by setting state in parent
             onMount?.user?.(editor, monaco);
-            // @ts-ignore
             typeCheck(monaco);
             monaco.languages.typescript.typescriptDefaults.setEagerModelSync(true);
 
             const model = monaco.editor.getModel(monaco.Uri.parse(USER_CODE_PATH))!;
             const code = model.getValue();
             debouncedUserCodeAta(code);
+
+            async function addNodeTypesToMonaco() {
+              try {
+                // Fetch the main Node types index file
+                const baseUrl = 'https://unpkg.com/@types/node/';
+                const indexResponse = await fetch(`${baseUrl}index.d.ts`);
+
+                if (!indexResponse.ok) {
+                  console.error('Failed to load Node.js types:', indexResponse.statusText);
+                  return;
+                }
+                const indexContent = await indexResponse.text();
+
+                // Add the main index.d.ts file
+                monaco.languages.typescript.typescriptDefaults.addExtraLib(
+                  indexContent,
+                  'file:///node_modules/@types/node/index.d.ts',
+                );
+
+                // Extract all referenced files from the index.d.ts
+                const referenceRegex = /\/\/\/ <reference path="(.+?)" \/>/g;
+                const referencedFiles = [];
+                let match;
+                while ((match = referenceRegex.exec(indexContent)) !== null) {
+                  const x = match[1] ?? '';
+                  if (NECESSARY_NODE_TYPES.some((type) => x.includes(type))) {
+                    referencedFiles.push(match[1]);
+                  }
+                }
+
+                // Fetch each referenced file and add it to Monaco
+                await Promise.all(
+                  referencedFiles.map(async (file) => {
+                    const response = await fetch(`${baseUrl}${file}`);
+                    const content = await response.text();
+                    monaco.languages.typescript.typescriptDefaults.addExtraLib(
+                      content,
+                      `file:///node_modules/@types/node/${file}`,
+                    );
+                  }),
+                );
+
+                // Restart the Monaco worker to make sure types are recognized
+                monaco.languages.typescript.typescriptDefaults.setEagerModelSync(true);
+              } catch (error) {
+                console.error('Failed to load Node.js types:', error);
+              }
+            }
 
             monaco.languages.typescript.typescriptDefaults.setCompilerOptions({
               allowNonTsExtensions: true,
@@ -325,23 +397,20 @@ export default function SplitEditor({
               outDir: 'lib', // kills the override input file error
               ...tsconfig,
             });
+            addNodeTypesToMonaco();
 
             monaco.languages.registerDocumentFormattingEditProvider(
               'typescript',
-              // @ts-ignore
               PrettierFormatProvider,
             );
 
             const getTsWorker = await monaco.languages.typescript.getTypeScriptWorker();
             const tsWorker = await getTsWorker(model.uri);
 
-            const inlayHintsProviderDisposable = monaco.languages.registerInlayHintsProvider(
+            inlayHintsRef.current = monaco.languages.registerInlayHintsProvider(
               'typescript',
-              // @ts-ignore
               createTwoslashInlayProvider(monaco, tsWorker),
             );
-
-            inlayHintsProviderDisposableRef.current = inlayHintsProviderDisposable;
 
             if (hasImports(code)) {
               const actualCode = code
@@ -352,7 +421,7 @@ export default function SplitEditor({
                 monaco.languages.typescript.typescriptDefaults.setExtraLibs([
                   {
                     content: actualCode,
-                    filePath: 'file:///node_modules/@types/user.d.ts',
+                    filePath: USER_FILE_PATH,
                   },
                 ]);
               }
@@ -361,7 +430,7 @@ export default function SplitEditor({
           defaultValue={userCode}
           value={userCode}
           onValidate={onValidate?.user}
-          onChange={async (value, changeEvent) => {
+          onChange={(value, changeEvent) => {
             const code = value ?? '';
             debouncedUserCodeAta(code);
             if (hasImports(code)) {
@@ -373,7 +442,7 @@ export default function SplitEditor({
                 monaco?.languages.typescript.typescriptDefaults.setExtraLibs([
                   {
                     content: actualCode,
-                    filePath: 'file:///node_modules/@types/user.d.ts',
+                    filePath: USER_FILE_PATH,
                   },
                 ]);
               }
@@ -381,19 +450,17 @@ export default function SplitEditor({
               // because `receivedFile` wont be called again
               setTimeout(() => {
                 // send to next tick
-                // @ts-ignore
                 onMount?.tests?.(editorRef.current!, monacoRef.current!);
               });
             } else {
               // we want to blow away the user.d.ts because
               // 1. its no longer needed
               // 2. so you dont get duplicate type errors if you add imports back in
-              monaco?.languages.typescript.typescriptDefaults.addExtraLib(
-                '',
-                'file:///node_modules/@types/user.d.ts',
-              );
+              monaco?.languages.typescript.typescriptDefaults.addExtraLib('', USER_FILE_PATH);
             }
             onChange?.user?.(value, changeEvent);
+
+            debouncedRefreshInlayHints(monaco!);
             typeCheck(monaco!);
           }}
         />
@@ -439,7 +506,7 @@ export default function SplitEditor({
                   monaco.languages.typescript.typescriptDefaults.setExtraLibs([
                     {
                       content: actualCode,
-                      filePath: 'file:///node_modules/@types/test.d.ts',
+                      filePath: TEST_FILE_PATH,
                     },
                   ]);
                 }
@@ -448,7 +515,7 @@ export default function SplitEditor({
             defaultPath={TESTS_PATH}
             value={tests}
             defaultValue={tests}
-            onChange={async (editor, changeEvent) => {
+            onChange={(editor, changeEvent) => {
               const code = editor ?? '';
               debouncedTestCodeAta(code);
               if (hasImports(code)) {
@@ -460,7 +527,7 @@ export default function SplitEditor({
                   monaco?.languages.typescript.typescriptDefaults.setExtraLibs([
                     {
                       content: actualCode,
-                      filePath: 'file:///node_modules/@types/test.d.ts',
+                      filePath: TEST_FILE_PATH,
                     },
                   ]);
                 }

@@ -4,11 +4,11 @@ import { motion } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 import React, { useEffect } from 'react';
 
-interface Props {
+interface MobileNavProps {
   children: React.ReactNode;
 }
 
-export function MobileNav({ children }: Props) {
+export function MobileNav({ children }: MobileNavProps) {
   const pathname = usePathname();
   const [open, setOpen] = React.useState(false);
   const [mounted, setMounted] = React.useState(false);
@@ -40,7 +40,7 @@ export function MobileNav({ children }: Props) {
           {/* Hamburger Icon */}
           <button
             className={cn(
-              'hamburger  rounded-lg p-4 duration-300 focus:outline-none ',
+              'hamburger rounded-lg p-4 duration-300 focus:outline-none ',
               open ? 'is-active' : '',
             )}
             onClick={() => setOpen((prev) => !prev)}

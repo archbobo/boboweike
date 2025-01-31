@@ -38,7 +38,11 @@ export function Navigation() {
                 />
               </svg>
 
-              <span className="font-bold leading-3">波波微课</span>
+              <span className="font-bold leading-3">
+                波波
+                <br />
+                微课
+              </span>
             </Link>
           </div>
           <div className="flex">
@@ -90,7 +94,7 @@ function LoginButton() {
       setLoading(true);
       // page reloads after sign in, so no need to setLoading(false), othersiwe ugly visual glitch
       await signIn('github', { redirect: false });
-    } catch (error) {
+    } catch {
       // only set loading to false if there was an error and page didn't reload after sign in
       setLoading(false);
     }

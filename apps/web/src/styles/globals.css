@@ -22,7 +22,7 @@
     --border: 240 5.9% 90%;
     --input: 240 5.9% 90%;
 
-    --primary: 211 61% 48%;
+    --primary: 211 61% 47%;
     --primary-foreground: 0 0% 98%;
 
     --secondary: 240 4.8% 95.9%;
@@ -51,6 +51,12 @@
     --difficulty-medium-dark: 31 86% 60%;
     --difficulty-hard-dark: 0 91% 71%;
     --difficulty-extreme-dark: 269 97% 85%;
+
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
   }
 
   .dark {
@@ -70,7 +76,7 @@
     --border: 240 3.7% 15.9%;
     --input: 240 3.7% 15.9%;
 
-    --primary: 211 61% 48%;
+    --primary: 211 61% 47%;
     --primary-foreground: 0 0% 98%;
 
     --secondary: 240 3.7% 15.9%;
@@ -85,6 +91,18 @@
     --error-label: 0 92.2% 64.9%;
 
     --ring: 240 3.7% 15.9%;
+
+    --difficulty-beginner: 199 69% 72%;
+    --difficulty-easy: 142 77% 73%;
+    --difficulty-medium: 31 86% 60%;
+    --difficulty-hard: 0 91% 71%;
+    --difficulty-extreme: 269 97% 85%;
+
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
   }
 }
 
@@ -736,4 +754,35 @@ a {
 
 body.mobile-nav-active {
   overflow: hidden;
+}
+
+.donate-btn:before {
+  content: '';
+  background: #ffffff80;
+  filter: blur(8px);
+  width: 150%;
+  height: 1rem;
+  position: absolute;
+  top: 50%;
+  transform: rotate(-30deg) translateX(-100%) translateY(-25%);
+  opacity: 0;
+}
+
+.donate-btn:hover:before {
+  animation: shimmer 1.69s linear infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    opacity: 1;
+    transform: translateX(-100%) translateY(0rem) rotate(-30deg);
+  }
+  42% {
+    opacity: 1;
+    transform: translateX(0%) translateY(0rem) rotate(-30deg);
+  }
+  69% {
+    opacity: 0;
+    transform: translateX(100%) translateY(-1rem) rotate(-30deg);
+  }
 }

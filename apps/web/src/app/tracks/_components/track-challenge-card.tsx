@@ -51,6 +51,7 @@ export function TrackChallenge({
       : '';
 
   return (
+    // TODO: Fix this accessibility issue!
     // eslint-disable-next-line jsx-a11y/label-has-associated-control
     <label
       htmlFor={challenge.id.toString()}
@@ -134,6 +135,7 @@ export function TrackChallenge({
 export function MockTrackChallenge({ challenge }: { challenge: Challenge }) {
   const isMobile = useIsMobile();
   return (
+    // TODO: Fix this accessibility issue!
     // eslint-disable-next-line jsx-a11y/label-has-associated-control
     <label
       htmlFor={challenge.id.toString()}

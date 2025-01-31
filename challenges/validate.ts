@@ -6,7 +6,6 @@ import {
   CompilerOptions,
   createProgram,
   createSourceFile,
-  flattenDiagnosticMessageText,
   formatDiagnosticsWithColorAndContext,
   getPreEmitDiagnostics,
   readConfigFile,
@@ -72,11 +71,15 @@ const repoRoot = join(__dirname, '..');
 const challengesDir = `${repoRoot}/challenges/`;
 
 export const getChallengeIds = () => {
-  return readdirSync(challengesDir)
+  const challengeIds = readdirSync(challengesDir)
     .filter((id) => id !== 'blank')
     .filter((id) => statSync(join(challengesDir, id)).isDirectory())
     .filter((id) => statSync(join(challengesDir, id, 'metadata.json')).isFile())
     .filter((id) => statSync(join(challengesDir, id, 'tsconfig.json')).isFile());
+
+  return {
+    challengeIds,
+  };
 };
 
 const getMetadata = (id: string) => {
@@ -141,15 +144,15 @@ const validatePrerequisiteIds = (id: string, _: number, ids: string[]) => {
 };
 
 const validateMetadataFiles = () => {
-  const challengeIds = getChallengeIds();
-
+  const { challengeIds } = getChallengeIds();
   validateMetadataSchema(challengeIds);
   challengeIds.forEach(ensureChallengeIdMatchesDirectory);
   challengeIds.forEach(validatePrerequisiteIds);
 };
 
 const validateTests = () => {
-  getChallengeIds()
+  const { challengeIds } = getChallengeIds();
+  challengeIds
     .filter((id) => {
       const path = join(challengesDir, id, 'solutions');
       statSync(path).isDirectory();

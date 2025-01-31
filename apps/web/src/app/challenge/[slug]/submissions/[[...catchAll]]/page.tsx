@@ -1,4 +1,4 @@
-import { auth } from '@repo/auth/server';
+import { auth } from '~/server/auth';
 import { prisma } from '@repo/db';
 import { notFound } from 'next/navigation';
 import { cache } from 'react';
@@ -6,7 +6,7 @@ import { withUnstableCache } from '~/utils/withUnstableCache';
 import { Submissions } from './_components';
 import { createChallengeSubmissionCacheKey } from './cache-keys';
 
-interface Props {
+interface SubmissionPageProps {
   params: {
     slug: string;
   };
@@ -17,7 +17,7 @@ export const metadata = {
   description: 'View your submissions to this challenge on 波波微课.',
 };
 
-export default async function SubmissionPage({ params: { slug } }: Props) {
+export default async function SubmissionPage({ params: { slug } }: SubmissionPageProps) {
   const session = await auth();
 
   const submissions = await withUnstableCache({

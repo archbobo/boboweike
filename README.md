@@ -1,5 +1,3 @@
-![boboweike header](./media/og-hub-banner.png)
-
 ### 👋 About Us
 
 TypeScript's typing system can be very powerful when used correctly. The problem
@@ -12,7 +10,3 @@ the intricacies of TypeScript's typing system.
 ### ✨ Want to contribute?
 
 Please see the [`LOCAL.md`](/LOCAL.md) on how to get set up.
-
-### 💖 Sponsors
-
-If you find our project interesting and want to support us please consider sponsoring. Your sponsorship would contribute to the advancement of this project and further ensure its ongoing maintenance and improvement for the benefit of the open-source community.

@@ -15,13 +15,13 @@ const VimStatusBar = dynamic(() => import('@repo/monaco/vim-mode'), {
   ssr: false,
 });
 
-interface Props {
+interface TestCasesEditorProps {
   form: Pick<WizardForm, 'control'>;
   hasTsErrors: boolean;
   setTsErrors: (errors: TsErrors) => void;
 }
 
-export function TestCasesEditor({ form, hasTsErrors, setTsErrors }: Props) {
+export function TestCasesEditor({ form, hasTsErrors, setTsErrors }: TestCasesEditorProps) {
   const [editorState, setEditorState] = useState<monaco.editor.IStandaloneCodeEditor>();
 
   const onMount = useCallback<NonNullable<CodeEditorProps['onMount']>>(
@@ -33,7 +33,6 @@ export function TestCasesEditor({ form, hasTsErrors, setTsErrors }: Props) {
         strictNullChecks: true,
       });
 
-      // @ts-ignore
       monaco.languages.registerDocumentFormattingEditProvider('typescript', PrettierFormatProvider);
 
       const model = editor.getModel();
@@ -65,7 +64,6 @@ export function TestCasesEditor({ form, hasTsErrors, setTsErrors }: Props) {
 
       monaco.languages.registerInlayHintsProvider(
         'typescript',
-        // @ts-ignore
         createTwoslashInlayProvider(monaco, ts),
       );
 

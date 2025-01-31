@@ -1,30 +1,31 @@
-import { auth, type Session } from '@repo/auth/server';
+import { type Session } from '@repo/auth/server';
 import { buildMetaForChallenge } from '~/app/metadata';
-import { getRelativeTime } from '~/utils/relativeTime';
+import { auth } from '~/server/auth';
+import { getRelativeTimeStrict } from '~/utils/relativeTime';
 import { Comments } from '../_components/comments';
 import { Description } from '../_components/description';
 import { getChallengeRouteData } from './getChallengeRouteData';
 
-interface Props {
+interface ChallengesProps {
   params: {
     slug: string;
   };
 }
 
-export async function generateMetadata({ params: { slug } }: Props) {
+export async function generateMetadata({ params: { slug } }: ChallengesProps) {
   const { challenge } = await getChallengeRouteData(slug, null);
   const description = `Unlock your TypeScript potential by solving the ${challenge.name} challenge on 波波微课.`;
 
   return buildMetaForChallenge({
-    title: `${challenge.name} |  波波微课`,
+    title: `${challenge.name} | 波波微课`,
     description,
     username: challenge.user.name,
     difficulty: challenge.difficulty,
-    date: getRelativeTime(challenge.createdAt),
+    date: getRelativeTimeStrict(challenge.createdAt),
   });
 }
 
-export default async function Challenges({ params: { slug } }: Props) {
+export default async function Challenges({ params: { slug } }: ChallengesProps) {
   const session = await auth();
 
   const { challenge } = await getChallengeRouteData(slug, session);
@@ -32,7 +33,7 @@ export default async function Challenges({ params: { slug } }: Props) {
   return (
     <div className="relative h-full ">
       <Description challenge={challenge} />
-      <Comments rootId={challenge.id} type="CHALLENGE" />
+      <Comments root={challenge} type="CHALLENGE" />
     </div>
   );
 }

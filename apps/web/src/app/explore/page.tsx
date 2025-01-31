@@ -4,10 +4,11 @@ import { buildMetaForDefault } from '~/app/metadata';
 // CI fails without this
 export const dynamic = 'force-dynamic';
 
-export async function generateMetadata(): Promise<Metadata> {
+export function generateMetadata(): Metadata {
   return buildMetaForDefault({
     title: 'Explore Challenges | 波波微课',
-    description: 'Explore all challenges by difficulty or tags on 波波微课.',
+    description:
+      'Explore all challenges by difficulty on 波波微课. These are interactive coding challenges to help you learn and improve your TypeScript skills.',
   });
 }
 

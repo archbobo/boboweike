@@ -1,10 +1,13 @@
 'use client';
 
 import clsx from 'clsx';
+import { userMentions } from './utils/mentions';
 import { useTheme } from 'next-themes';
 import { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import rehypeRaw from 'rehype-raw';
+import rehypeSanitize from 'rehype-sanitize';
 import remarkGfm from 'remark-gfm';
 import type { Transformer } from 'unified';
 import { SKIP, visit, type BuildVisitor } from 'unist-util-visit';
@@ -13,7 +16,6 @@ import { vscDarkPlus } from '../themes/vs-dark-plus';
 import { Tooltip, TooltipContent, TooltipTrigger } from './tooltip';
 import { Button } from './button';
 import { Check, Copy } from '../icons';
-// import rehypeRaw from 'rehype-raw';
 
 const HTML_COMMENT_REGEX = new RegExp('<!--([\\s\\S]*?)-->', 'g');
 
@@ -23,7 +25,7 @@ const HTML_COMMENT_REGEX = new RegExp('<!--([\\s\\S]*?)-->', 'g');
 function removeHtmlComments(): Transformer {
   return (tree) => {
     // TODO: PRs are welcomed to fix the any type
-    // eslint-disable-next-line
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const handler: BuildVisitor<any> = (node, index, parent) => {
       const isComment = node.value.match(HTML_COMMENT_REGEX);
 
@@ -42,9 +44,19 @@ function removeHtmlComments(): Transformer {
   };
 }
 
-export function Markdown({ children, className }: { children: string; className?: string }) {
-  const { theme } = useTheme();
-  const syntaxHighlighterTheme = theme === 'light' ? vs : vscDarkPlus;
+export function Markdown({
+  children,
+  className,
+  disableMentions = false,
+  disableCopy = false,
+}: {
+  children: string;
+  className?: string;
+  disableMentions?: boolean;
+  disableCopy?: boolean;
+}) {
+  const { resolvedTheme } = useTheme();
+  const syntaxHighlighterTheme = resolvedTheme === 'light' ? vs : vscDarkPlus;
 
   return (
     <ReactMarkdown
@@ -72,11 +84,20 @@ export function Markdown({ children, className }: { children: string; className?
         p: ({ className, ...props }) => (
           <p className={clsx(className, 'mb-4 overflow-hidden text-ellipsis')} {...props} />
         ),
+        blockquote: ({ className, ...props }) => (
+          <blockquote
+            className={clsx(
+              className,
+              'mx-0 my-[10px] border-l-8 border-gray-400 bg-zinc-200 px-2 py-[10px] dark:border-gray-200 dark:bg-zinc-700 ',
+            )}
+            {...props}
+          />
+        ),
         code({ inline, className, children, style: _, ...props }) {
           const match = /language-(\w+)/.exec(className || '');
           return !inline && match ? (
             <div className="relative">
-              <CopyButton text={String(children).replace(/\n$/, '')} />
+              {!disableCopy ? <CopyButton text={String(children).replace(/\n$/, '')} /> : null}
               <SyntaxHighlighter
                 PreTag="section" // parent tag
                 className={clsx(className, 'rounded-xl dark:rounded-md')}
@@ -107,10 +128,9 @@ export function Markdown({ children, className }: { children: string; className?
         details: ({ ...props }) => <details {...props} />,
         summary: ({ ...props }) => <summary {...props} />,
       }}
-      // FIXME: this is vuln to XSS and I don't know why we use it, let's remove it
-      // or add in a sanitizer lib like: https://github.com/rehypejs/rehype-sanitize
-      // rehypePlugins={[rehypeRaw as any]}
-      remarkPlugins={[removeHtmlComments, remarkGfm]}
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      rehypePlugins={[rehypeRaw as any, rehypeSanitize]}
+      remarkPlugins={[removeHtmlComments, remarkGfm, ...(disableMentions ? [] : [userMentions])]}
     >
       {children}
     </ReactMarkdown>

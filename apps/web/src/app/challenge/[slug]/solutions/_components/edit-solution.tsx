@@ -8,10 +8,11 @@ import { useTheme } from 'next-themes';
 import { useParams } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import { RichMarkdownEditor } from '~/components/rich-markdown-editor';
 import { createNoProfanitySchemaWithValidate } from '~/utils/antiProfanityZod';
 import type { ChallengeSolution } from '~/app/challenge/[slug]/solutions/[solutionId]/page';
 import { updateSolution } from './_actions';
+import { RichMarkdownEditor } from '@repo/ui/components/rich-markdown-editor';
+import { useUploadThing } from '~/utils/useUploadthing';
 
 const formSchema = z.object({
   title: createNoProfanitySchemaWithValidate((zodString) =>
@@ -24,12 +25,12 @@ const formSchema = z.object({
 
 export type FormSchema = z.infer<typeof formSchema>;
 
-interface Props {
+interface EditSolutionProps {
   solution: ChallengeSolution;
   setIsEditing: (isEditing: boolean) => void;
 }
 
-export function EditSolution({ solution, setIsEditing }: Props) {
+export function EditSolution({ solution, setIsEditing }: EditSolutionProps) {
   const { slug } = useParams();
   const session = useSession();
   const form = useForm<FormSchema>({
@@ -48,6 +49,8 @@ export function EditSolution({ solution, setIsEditing }: Props) {
         description: data.content ?? '',
         slug: slug as string,
         title: data.title ?? '',
+        // TODO: Is this guaranteed to exist, or is userId actually optional?
+        // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
         userId: session.data?.user?.id!,
       });
 
@@ -55,7 +58,7 @@ export function EditSolution({ solution, setIsEditing }: Props) {
         variant: 'success',
         title: 'Your solution has been updated!',
       });
-    } catch (error) {
+    } catch {
       toast({
         variant: 'destructive',
         title: 'Uh oh! Something went wrong. Please try again.',
@@ -66,9 +69,7 @@ export function EditSolution({ solution, setIsEditing }: Props) {
   };
 
   const { theme } = useTheme();
-  theme !== undefined
-    ? document.documentElement.setAttribute('data-color-mode', theme)
-    : document.documentElement.setAttribute('data-color-mode', 'system');
+  document.documentElement.setAttribute('data-color-mode', theme ?? 'system');
 
   return (
     <Form {...form}>
@@ -118,6 +119,7 @@ export function EditSolution({ solution, setIsEditing }: Props) {
                   value={field.value}
                   // non-split-screen by default
                   onChange={field.onChange}
+                  useUploadThing={useUploadThing}
                 />
                 <FormMessage />
               </FormItem>

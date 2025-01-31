@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 
-export const tagline = 'Level up your TypeScript skills with interactive exercises';
+export const tagline = 'Level up and learn TypeScript with interactive exercises';
 export const baseMetadata: Metadata = {
   title: {
     default: '波波微课',
@@ -33,13 +33,7 @@ interface MetaParamsForUser {
   dateSince: string;
 }
 /** Helper to build opengraph metadata for a user, you should call this in generateMetadata() next function */
-export const buildMetaForUser = async ({
-  title,
-  description,
-  username,
-  dateSince,
-  avatar,
-}: MetaParamsForUser): Promise<Metadata> => {
+export const buildMetaForUser = ({ title, description }: MetaParamsForUser): Metadata => {
   return buildMeta({
     title,
     description,
@@ -47,13 +41,7 @@ export const buildMetaForUser = async ({
 };
 
 /** Helper to build opengraph metadata for a challenge, you should call this in generateMetadata() next function */
-export const buildMetaForChallenge = async ({
-  title,
-  description,
-  username,
-  difficulty,
-  date,
-}: MetaParamsForChallenge): Promise<Metadata> => {
+export const buildMetaForChallenge = ({ title, description }: MetaParamsForChallenge): Metadata => {
   return buildMeta({
     title,
     description,
@@ -61,26 +49,26 @@ export const buildMetaForChallenge = async ({
 };
 
 /** Helper to build opengraph metadata with defaults, you should call this in generateMetadata() next function */
-export const buildMetaForDefault = async ({
+export const buildMetaForDefault = ({
   title,
   description,
 }: {
   title?: string;
   description?: string;
-}): Promise<Metadata> => {
+}): Metadata => {
   return buildMeta({
     title,
     description,
   });
 };
 
-export const buildMetaForEventPage = async ({
+export const buildMetaForEventPage = ({
   title,
   description,
 }: {
   title?: string;
   description?: string;
-}): Promise<Metadata> => {
+}): Metadata => {
   return buildMeta({
     title,
     description,
@@ -88,13 +76,7 @@ export const buildMetaForEventPage = async ({
 };
 
 /** update the metadata for og */
-const buildMeta = async ({
-  description,
-  title,
-}: {
-  description?: string;
-  title?: string;
-}): Promise<Metadata> => {
+const buildMeta = ({ description, title }: { description?: string; title?: string }): Metadata => {
   if (description) {
     baseMetadata.description = description;
   }

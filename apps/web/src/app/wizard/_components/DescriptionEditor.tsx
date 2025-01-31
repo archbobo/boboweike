@@ -1,17 +1,18 @@
 'use client';
 
-import { useWatch } from 'react-hook-form';
 import { FormField, FormItem, FormMessage } from '@repo/ui/components/form';
-import { TypographyH3 } from '@repo/ui/components/typography/h3';
 import { Markdown } from '@repo/ui/components/markdown';
+import { RichMarkdownEditor } from '@repo/ui/components/rich-markdown-editor';
+import { TypographyH3 } from '@repo/ui/components/typography/h3';
+import { useWatch } from 'react-hook-form';
+import { useUploadThing } from '~/utils/useUploadthing';
 import { type WizardForm } from '.';
-import { RichMarkdownEditor } from '~/components/rich-markdown-editor';
 
-interface Props {
+interface DescriptionEditorProps {
   form: WizardForm;
 }
 
-export function DescriptionEditor({ form }: Props) {
+export function DescriptionEditor({ form }: DescriptionEditorProps) {
   const description = useWatch({ control: form.control, name: 'description' });
   return (
     <div className="flex h-full flex-1 flex-col">
@@ -30,6 +31,7 @@ export function DescriptionEditor({ form }: Props) {
                       allowImageUpload
                       onChange={field.onChange}
                       value={field.value}
+                      useUploadThing={useUploadThing}
                     />
                   </FormItem>
                   <FormMessage className="p-2 pt-0" />

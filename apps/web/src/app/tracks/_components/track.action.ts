@@ -1,10 +1,11 @@
 'use server';
 
-import { auth, type Session } from '@repo/auth/server';
+import { type Session } from '@repo/auth/server';
 import { prisma } from '@repo/db';
 import { revalidateTag } from 'next/cache';
 import { cache } from 'react';
 import { track } from '@vercel/analytics/server';
+import { auth } from '~/server/auth';
 
 /**
  * Enrolls the session user in the track given a track id.
@@ -13,7 +14,7 @@ import { track } from '@vercel/analytics/server';
 export async function enrollUserInTrack(id: number, slug: string) {
   const session = await auth();
   if (!session) {
-    throw new Error('User is not logged in');
+    return 'User is not logged in';
   }
 
   await prisma.track.update({
@@ -40,7 +41,7 @@ export async function enrollUserInTrack(id: number, slug: string) {
 export async function unenrollUserFromTrack(id: number, slug: string) {
   const session = await auth();
   if (!session) {
-    throw new Error('User is not logged in');
+    return 'User is not logged in';
   }
 
   await prisma.track.update({

@@ -10,7 +10,7 @@
     "check:solutions": "tsx ./challenges/validate.ts",
     "db:push": "turbo db:push",
     "db:reset": "turbo db:reset",
-    "db:seed": "turbo db:seed",
+    "db:seed": "turbo db:reset && turbo db:seed",
     "db:prod:seed": "turbo db:reset && turbo db:prod:seed",
     "db:studio": "turbo db:studio",
     "dev": "turbo dev --concurrency=1000",
@@ -18,10 +18,12 @@
     "dl-monaco:force": "turbo dl-monaco",
     "format": "prettier . \"!./apps/**\" \"!./packages/**\" \"!./tooling/**\" \"!challenges/**/tests.ts\" --check --cache --cache-location=\"node_modules/.cache/prettiercache\"",
     "format:fix": "prettier . \"!./apps/**\" \"!./packages/**\" \"!./tooling/**\" \"!challenges/**/tests.ts\" --write --cache --cache-location=\"node_modules/.cache/prettiercache\" --log-level=warn",
-    "lint": "eslint . --cache --cache-location \"node_modules/.cache/.eslintcache\" --max-warnings 0",
+    "lint": "eslint . --max-warnings 0",
     "lint:markdown": "markdownlint-cli2 \"challenges/**/*.md\" \"#**/node_modules\" && cspell challenges/** --no-progress",
     "lint:markdown:validate": "tsx challenges/validate.ts",
-    "lint:fix": "eslint . --fix --cache --cache-location \"node_modules/.cache/.eslintcache\" --max-warnings 0",
+    "lint:fix": "eslint . --fix --max-warnings 0",
+    "package-check": "pnpm dlx sherif@latest --ignore-rule root-package-dependencies",
+    "package-check:fix": "pnpm dlx sherif@latest --ignore-rule root-package-dependencies --fix",
     "refresh": "turbo db:reset db:seed --concurrency=1",
     "test:e2e": "turbo test:e2e",
     "test:e2e:install": "playwright install",
@@ -37,24 +39,30 @@
     "picocolors": "^1.0.0",
     "prettier": "^3.1.1",
     "prettier-plugin-tailwindcss": "^0.5.9",
-    "turbo": "^1.13.0",
-    "tsx": "^3.14.0",
+    "tsx": "4.19.0",
+    "turbo": "^2.0.12",
     "type-testing": "0.2.0",
     "typescript": "^5.3.3",
     "vitest": "^0.34.6"
   },
-  "packageManager": "pnpm@9.15.2",
+  "packageManager": "pnpm@9.6.0",
   "pnpm": {
     "overrides": {
-      "@auth/core": "0.19.0"
+      "@auth/core": "0.19.0",
+      "@typescript-eslint/eslint-plugin": "8.16.0",
+      "@typescript-eslint/parser": "8.16.0"
     },
     "peerDependencyRules": {
       "ignoreMissing": [
         "monaco-editor"
       ]
+    },
+    "patchedDependencies": {
+      "@monaco-editor/react@4.5.1": "patches/@monaco-editor__react@4.5.1.patch",
+      "monaco-vim@0.4.0": "patches/monaco-vim@0.4.0.patch"
     }
   },
   "dependencies": {
-    "pnpm": "^9.15.2"
+    "pnpm": "^8.15.8"
   }
 }

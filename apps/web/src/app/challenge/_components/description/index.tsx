@@ -15,21 +15,20 @@ import { DifficultyBadge } from '@repo/ui/components/difficulty-badge';
 import { Markdown } from '@repo/ui/components/markdown';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@repo/ui/components/tooltip';
 import { TypographyH3 } from '@repo/ui/components/typography/h3';
-import { UserBadge } from '@repo/ui/components/user-badge';
 import { Bookmark as BookmarkIcon, Calendar, CheckCircle, Flag, Share } from '@repo/ui/icons';
 import clsx from 'clsx';
 import { debounce } from 'lodash';
-import Link from 'next/link';
 import { useRef, useState } from 'react';
 import { type ChallengeRouteData } from '~/app/challenge/[slug]/getChallengeRouteData';
 import { ReportDialog } from '~/components/ReportDialog';
-import { getRelativeTime } from '~/utils/relativeTime';
+import { ShareUrl } from '~/components/share-url';
+import { getRelativeTimeStrict } from '~/utils/relativeTime';
 import { addOrRemoveBookmark } from '../bookmark.action';
-import { ShareForm } from '../share-form';
+import { UserBadge } from '../comments/enhanced-user-badge';
 import { Vote } from '../vote';
 import { Suggestions } from './suggestions';
 
-interface Props {
+interface DescriptionProps {
   challenge: ChallengeRouteData['challenge'];
 }
 
@@ -40,7 +39,7 @@ export interface FormValues {
   other: boolean;
 }
 
-export function Description({ challenge }: Props) {
+export function Description({ challenge }: DescriptionProps) {
   const [hasBookmarked, setHasBookmarked] = useState(challenge.bookmark.length > 0);
   const session = useSession();
 
@@ -59,7 +58,8 @@ export function Description({ challenge }: Props) {
 
   return (
     <div
-      // eslint-disable-next-line
+      // TODO: Fix this accessibility issue!
+      // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
       tabIndex={0}
       className="custom-scrollable-element h-full overflow-y-auto px-4 pb-36 pt-3 outline-none"
     >
@@ -84,10 +84,17 @@ export function Description({ challenge }: Props) {
       </div>
       {/* Author & Time */}
       <div className="mt-2 flex items-center gap-4">
-        <UserBadge username={challenge.user.name} linkComponent={Link} />
+        <UserBadge
+          user={{
+            name: challenge.user?.name ?? '',
+            image: challenge.user?.image ?? '',
+            bio: challenge.user?.bio ?? '',
+            roles: challenge.user?.roles ?? [],
+          }}
+        />
         <div className="text-muted-foreground flex items-center gap-2">
           <Calendar className=" h-4 w-4" />
-          <span className="text-xs">Last updated {getRelativeTime(challenge.updatedAt)}</span>
+          <span className="text-xs">Last updated {getRelativeTimeStrict(challenge.updatedAt)}</span>
         </div>
       </div>
       {/* Difficulty & Action Buttons */}
@@ -109,6 +116,8 @@ export function Description({ challenge }: Props) {
           disabled={!session?.data?.user?.id}
           rootType="CHALLENGE"
           rootId={challenge?.id}
+          toUserId={challenge.user.id}
+          challengeSlug={challenge.slug}
         />
         <Dialog>
           <DialogTrigger>
@@ -133,10 +142,11 @@ export function Description({ challenge }: Props) {
               <DialogTitle>Share</DialogTitle>
             </DialogHeader>
             <div className="pt-4">
-              <ShareForm />
+              <ShareUrl isChallenge />
             </div>
           </DialogContent>
         </Dialog>
+
         <Tooltip>
           <TooltipTrigger asChild>
             <Button
@@ -158,6 +168,8 @@ export function Description({ challenge }: Props) {
                   shouldBookmark = true;
                   setHasBookmarked(true);
                 }
+                // TODO: Is this guaranteed to exist, or is userId actually optional?
+                // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
                 debouncedBookmark(challenge.id, session.data?.user?.id!, shouldBookmark)?.catch(
                   (e) => {
                     console.error(e);

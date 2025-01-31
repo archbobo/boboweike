@@ -1,5 +1,5 @@
 'use server';
-import { auth } from '@repo/auth/server';
+import { auth } from '~/server/auth';
 import { prisma } from '@repo/db';
 import { type Prisma, type Report } from '@repo/db/types';
 import { cache } from 'react';
@@ -138,7 +138,7 @@ export async function deleteSolution(solutionId: number, reportId: number) {
       }),
     ]);
     return 'ok';
-  } catch (e) {
+  } catch {
     return 'failed';
   }
 }

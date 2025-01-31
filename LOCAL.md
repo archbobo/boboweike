@@ -9,9 +9,9 @@ Provide your values as needed.
 
 ### 2 Configure your database
 
-You can use a local Docker container to run your database, or any other remote PostgreSQL host you prefer that is compatible with Prisma.
+You can use a local Docker container to run your database, or any other remote MySQL host you prefer that is compatible with Prisma.
 
-### 2.a Local Database (using Docker)
+### 2.a Local Database & Redis (using Docker)
 
 Starting the docker container
 
@@ -44,12 +44,12 @@ GITHUB_SECRET=<client_secret>
 ### 4. Setup uploadthing for file uploads
 
 Go to [uploadthing.com](https://uploadthing.com/dashboard) and create a project,
-then copy in the secrets into your `.env`.
+then copy in the secrets (legacy, not SDK v7+) into your `.env`.
 
 In the end your local `.env` file should look something like the following
 
 ```
-DATABASE_URL="postgres://dev:dev@127.0.0.1/boboweike"
+DATABASE_URL="mysql://dev:dev@localhost/boboweike"
 GITHUB_ID=very_real_github_id
 GITHUB_SECRET=very_real_secret
 
@@ -63,16 +63,7 @@ NEXTAUTH_SECRET="for local use you can just use a garble of letters"
 NEXTAUTH_URL="http://localhost:3000"
 ```
 
-### 5. Setup algolia for search
-
-Go to [algolia.com](https://www.algolia.com/apps/) and create a project, then copy in the secrets into your `.env`.
-
-```
-NEXT_PUBLIC_ALGOLIA_APP_ID=APP_ID
-NEXT_PUBLIC_ALGOLIA_API_KEY=API_KEY
-```
-
-### 6. Install dependencies
+### 5. Install dependencies
 
 Use `pnpm` to install dependencies.
 
@@ -80,14 +71,14 @@ Use `pnpm` to install dependencies.
 pnpm install
 ```
 
-### 7. Push Database Schema and Seed
+### 6. Push Database Schema and Seed
 
 ```
 pnpm db:push
 pnpm db:seed
 ```
 
-### 8. Running the dev server
+### 7. Running the dev server
 
 Finally, you can run the dev server:
 
@@ -99,15 +90,13 @@ pnpm dev
 
 Once the server is running you can seed and sync data
 
-1. Navigate to
-   [http://localhost:3000/api/auth/github](http://localhost:3000/api/auth/github)
-   to authenticate with GitHub OAuth.
+1. Navigate to [http://localhost:3000](http://localhost:3000) in your browser and login using your GitHub account
 
 [new-oauth]: https://github.com/settings/applications/new
 
 ### Make Yourself an Admin
 
-1. Ensure you have logged into your local instance at least once
+1. Ensure you have logged into your local instance atleast once
 2. Run `pnpm db:studio` - to open [Prisma Studio](https://www.prisma.io/docs/concepts/components/prisma-studio)
 
    ![prisma studio](./media/prisma-studio-models.png)
@@ -209,13 +198,12 @@ pnpm refresh
 This tends to resolve the issue as it entirely destroys and rebuilds + reseeds the database.
 
 </details>
-<!-- Other stuff here? I can't think of anything -->
 
 <details>
   <summary>How do I use the `@vercel/toolbar` locally?</summary>
   If you have access to the vercel project then you can run `vercel link` (make sure you have the vercel CLI).
 
-Follow the interactive CLI to link it to the boboweike project.
+Follow the interactive CLI to link it to the archbobo/boboweike project.
 
 From there on out you should be able to read and make comments while on local host for that branch.
 

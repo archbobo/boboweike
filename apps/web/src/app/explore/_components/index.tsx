@@ -1,18 +1,14 @@
-import { auth } from '@repo/auth/server';
 import { Suspense } from 'react';
 import { Footsies } from '~/components/footsies';
 import { ExploreSection } from './explore-section';
 import { ExploreSectionSkeleton } from './explore-section-skeleton';
 
-// CI fails without this
 export const dynamic = 'force-dynamic';
 
-export async function Explore() {
-  const session = await auth();
-
+export function Explore() {
   return (
     <>
-      <div className="flex flex-col gap-8 py-8 md:gap-10 md:py-8">
+      <div className="flex flex-col gap-8 py-8 md:gap-10">
         <div className="container text-center">
           <h1 className="mb-8 text-4xl font-bold tracking-tight text-neutral-900 dark:text-white">
             Explore

@@ -2,44 +2,51 @@
 
 import { useSession } from '@repo/auth/react';
 import { type CommentRoot } from '@repo/db/types';
+import { Button } from '@repo/ui/components/button';
 import { Markdown } from '@repo/ui/components/markdown';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@repo/ui/components/tooltip';
 import { toast } from '@repo/ui/components/use-toast';
-import { UserBadge } from '@repo/ui/components/user-badge';
+import { UserAvatar } from '@repo/ui/components/user-avatar';
 import {
+  Calendar,
   ChevronDown,
   ChevronUp,
-  Calendar,
+  EllipsisVertical,
   Flag,
+  MoreHorizontal,
   Pencil,
   Reply,
   Share,
   Trash2,
-  MoreHorizontal,
 } from '@repo/ui/icons';
 import clsx from 'clsx';
-import Link from 'next/link';
 import { useParams, useSearchParams } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
-import { z } from 'zod';
 import { ReportDialog } from '~/components/ReportDialog';
-import { getRelativeTime } from '~/utils/relativeTime';
+import { isAdminOrModerator } from '~/utils/auth-guards';
+import { getRelativeTimeStrict } from '~/utils/relativeTime';
+import type { ChallengeRouteData } from '../../[slug]/getChallengeRouteData';
+import type { SolutionRouteData } from '../../[slug]/solutions/[solutionId]/getSolutionIdRouteData';
 import { Vote } from '../vote';
 import { CommentInput } from './comment-input';
-import { CommentDeleteDialog } from './delete';
-import { type PaginatedComments, type PreselectedCommentMetadata } from './getCommentRouteData';
-import { Avatar, AvatarFallback, AvatarImage } from '@repo/ui/components/avatar';
-import { Button } from '@repo/ui/components/button';
 import { CommentSkeleton } from './comment-skeleton';
-import { isAdminOrModerator } from '~/utils/auth-guards';
-import { useCommentsReplies } from './comments.hooks';
+import { useCommentsReplies, type UseCommentRepliesProps } from './comments.hooks';
+import { CommentDeleteDialog } from './delete';
+import { UserBadge } from './enhanced-user-badge';
+import { type PaginatedComments, type PreselectedCommentMetadata } from './getCommentRouteData';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@repo/ui/components/dropdown-menu';
 
 interface SingleCommentProps {
   comment: PaginatedComments['comments'][number];
   readonly?: boolean;
   isReply?: boolean;
   isToggleReply?: boolean;
-  onClickReply?: () => void;
+  onClickReply?: (replyingTo: string) => void;
   onClickToggleReply?: () => void;
   preselectedCommentMetadata?: PreselectedCommentMetadata;
   deleteComment: (commentId: number) => Promise<void>;
@@ -48,45 +55,34 @@ interface SingleCommentProps {
 
 type CommentProps = SingleCommentProps & {
   preselectedCommentMetadata?: PreselectedCommentMetadata;
-  rootId: number;
+  root: ChallengeRouteData['challenge'] | SolutionRouteData;
   type: CommentRoot;
   deleteComment: (commentId: number) => Promise<void>;
   updateComment: (text: string, commentId: number) => Promise<void>;
 };
 
-const commentReportSchema = z
-  .object({
-    spam: z.boolean().optional(),
-    threat: z.boolean().optional(),
-    hate_speech: z.boolean().optional(),
-    bullying: z.boolean().optional(),
-    text: z.string().optional(),
-  })
-  .refine(
-    (obj) => {
-      const { spam, threat, hate_speech, bullying, text } = obj;
-      return spam || threat || hate_speech || bullying || (text !== undefined && text !== '');
-    },
-    {
-      path: ['text'],
-      message: 'Your report should include an issue or a reason.',
-    },
-  );
-
-export type CommentReportSchemaType = z.infer<typeof commentReportSchema>;
+export interface CommentReportSchemaType {
+  spam: boolean;
+  threat: boolean;
+  hate_speech: boolean;
+  bullying: boolean;
+  text: string;
+}
 
 // million-ignore
 export function Comment({
   comment,
   preselectedCommentMetadata,
   readonly = false,
-  rootId,
+  root,
   type,
   deleteComment,
   updateComment,
 }: CommentProps) {
   const params = useSearchParams();
   const replyId = params.get('replyId');
+
+  const timeoutRef = useRef<NodeJS.Timeout>();
 
   const hasPreselectedReply =
     preselectedCommentMetadata?.selectedComment?.id === comment.id && Boolean(replyId);
@@ -104,14 +100,57 @@ export function Comment({
     showLoadMoreRepliesBtn,
   } = useCommentsReplies({
     enabled: showReplies,
-    rootId,
+    root,
     type,
-    parentCommentId: comment.id,
+    parentComment: comment,
     preselectedReplyId: hasPreselectedReply ? Number(replyId) : undefined,
-  });
+  } as UseCommentRepliesProps);
 
-  const toggleReplies = () => setShowReplies(!showReplies);
+  const toggleReplies = () => {
+    if (showReplies) {
+      setIsReplying(false);
+    }
+
+    setShowReplies(!showReplies);
+  };
   const toggleIsReplying = () => setIsReplying(!isReplying);
+
+  const commentInputRef = useRef<{
+    textarea: HTMLTextAreaElement;
+    setInputValue: (value: string) => void;
+  }>(null);
+
+  useEffect(() => {
+    return () => clearTimeout(timeoutRef.current);
+  }, []);
+
+  function prefillReplyInput(replyingTo: string) {
+    if (commentInputRef?.current) {
+      const name = `@${replyingTo} `;
+      commentInputRef.current.setInputValue(name);
+      commentInputRef.current.textarea?.setSelectionRange(name.length, name.length);
+      commentInputRef.current.textarea?.focus();
+      window.requestAnimationFrame(
+        () =>
+          commentInputRef.current?.textarea?.scrollIntoView({
+            block: 'nearest',
+            behavior: 'smooth',
+          }),
+      );
+    }
+  }
+
+  const showReplyInput = (replyingTo: string) => {
+    setIsReplying(true);
+    clearTimeout(timeoutRef.current);
+
+    timeoutRef.current = setTimeout(() => prefillReplyInput(replyingTo));
+  };
+
+  const hideReplyInput = () => {
+    setIsReplying(false);
+    clearTimeout(timeoutRef.current);
+  };
 
   return (
     <div className="flex flex-col px-2 py-1">
@@ -125,22 +164,6 @@ export function Comment({
         deleteComment={deleteComment}
         updateComment={updateComment}
       />
-      {isReplying ? (
-        <div className="relative mt-2 pb-2 pl-8">
-          <Reply className="absolute left-2 top-2 h-4 w-4 opacity-50" />
-          <CommentInput
-            mode="edit"
-            onCancel={() => {
-              setIsReplying(false);
-            }}
-            onSubmit={async (text) => {
-              await addReplyComment(text);
-              setShowReplies(true);
-              setIsReplying(false);
-            }}
-          />
-        </div>
-      ) : null}
 
       {showReplies && status === 'pending' ? <CommentSkeleton /> : null}
       {showReplies ? (
@@ -156,6 +179,7 @@ export function Comment({
                   preselectedCommentMetadata={preselectedCommentMetadata}
                   deleteComment={deleteReplyComment}
                   updateComment={updateReplyComment}
+                  onClickReply={(replyingTo) => showReplyInput(replyingTo)}
                 />
               )),
             )}
@@ -172,6 +196,22 @@ export function Comment({
             </Button>
           ) : null}
         </>
+      ) : null}
+
+      {isReplying ? (
+        <div className="relative mt-2 pb-2 pl-8">
+          <Reply className="absolute left-2 top-2 h-4 w-4 opacity-50" />
+          <CommentInput
+            mode="edit"
+            onCancel={() => hideReplyInput()}
+            onSubmit={async (text) => {
+              await addReplyComment(text);
+              hideReplyInput();
+              setShowReplies(true);
+            }}
+            ref={commentInputRef}
+          />
+        </div>
       ) : null}
     </div>
   );
@@ -259,7 +299,7 @@ function SingleComment({
     <div
       id={`comment-${comment.id}`}
       className={clsx(
-        'relative p-2 pl-3',
+        'group relative p-2 pl-3',
         isHighlighted && SELECTED_CLASSES,
         'transition-colors',
         'duration-150',
@@ -269,42 +309,205 @@ function SingleComment({
       <div className="flex items-start justify-between gap-4 pr-[0.4rem]">
         <div className="mb-2 flex w-full items-center justify-between gap-1">
           <div className="flex items-center gap-2">
-            <Avatar className="h-7 w-7">
-              <AvatarImage alt="github profile picture" src={comment.user?.image ?? ''} />
-              <AvatarFallback className="border border-zinc-300 dark:border-zinc-600">
-                {comment.user?.name.substring(0, 1)}
-              </AvatarFallback>
-            </Avatar>
-            <UserBadge username={comment.user.name ?? ''} linkComponent={Link} />
+            <UserAvatar src={comment.user?.image ?? ''} />
+            <UserBadge
+              user={{
+                name: comment.user?.name ?? '',
+                image: comment.user?.image ?? '',
+                bio: comment.user?.bio ?? '',
+                roles: comment.user?.roles ?? [],
+              }}
+            />
           </div>
-
-          <Tooltip delayDuration={0.05}>
-            <TooltipTrigger asChild>
-              <div className="text-muted-foreground flex items-center gap-2 whitespace-nowrap text-xs">
-                <Calendar className="h-4 w-4" />
-                <span>{getRelativeTime(comment.createdAt)}</span>
-              </div>
-            </TooltipTrigger>
-            <TooltipContent align="start" alignOffset={-55} className="rounded-xl">
-              <span className="text-foreground text-xs">{comment.createdAt.toLocaleString()}</span>
-            </TooltipContent>
-          </Tooltip>
+          <div className="flex items-center gap-2">
+            <Tooltip delayDuration={0.05}>
+              <TooltipTrigger asChild>
+                <div className="text-muted-foreground flex items-center gap-2 whitespace-nowrap text-xs">
+                  <Calendar className="h-4 w-4" />
+                  <span>{getRelativeTimeStrict(comment.createdAt)}</span>
+                </div>
+              </TooltipTrigger>
+              <TooltipContent align="start" alignOffset={-55} className="rounded-xl">
+                <span className="text-foreground text-xs">
+                  {comment.createdAt.toLocaleString()}
+                </span>
+              </TooltipContent>
+            </Tooltip>
+            <DropdownMenu>
+              <DropdownMenuTrigger className="flex items-center">
+                <Button variant="outline" size="xs">
+                  <EllipsisVertical className="h-3 w-3" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="bg-neutral-900">
+                <DropdownMenuItem>
+                  <div>
+                    <Tooltip>
+                      <TooltipTrigger>
+                        <div
+                          className="flex items-center gap-2"
+                          onClick={() => {
+                            copyPathNotifyUser(Boolean(isReply), slug as string);
+                          }}
+                        >
+                          <Share className="h-4 w-4" />
+                          Share
+                          <span className="sr-only">Share this comment</span>
+                        </div>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>Share this comment</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </div>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <div>
+                    {isAuthor ? (
+                      <Tooltip>
+                        <TooltipTrigger>
+                          <div
+                            onClick={() => setIsEditing(!isEditing)}
+                            className="flex items-center gap-2"
+                          >
+                            <Pencil className="h-4 w-4" />
+                            Edit
+                            <span className="sr-only">Edit this comment</span>
+                          </div>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p>Edit this comment</p>
+                        </TooltipContent>
+                      </Tooltip>
+                    ) : null}
+                  </div>
+                </DropdownMenuItem>
+                <div>
+                  {isAuthor || isAdminAndModerator ? (
+                    <Tooltip>
+                      <CommentDeleteDialog asChild comment={comment} deleteComment={deleteComment}>
+                        <TooltipTrigger asChild>
+                          <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
+                            <div className="flex items-center gap-2">
+                              <Trash2 className="h-4 w-4" />
+                              Delete
+                              <span className="sr-only">Delete this comment</span>
+                            </div>
+                          </DropdownMenuItem>
+                        </TooltipTrigger>
+                      </CommentDeleteDialog>
+                      <TooltipContent>
+                        <p>Delete this comment</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  ) : (
+                    <Tooltip>
+                      <ReportDialog triggerAsChild commentId={comment.id} reportType="COMMENT">
+                        <TooltipTrigger asChild>
+                          <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
+                            <div className="flex items-center gap-2">
+                              <Flag className="h-4 w-4" />
+                              Report
+                              <span className="sr-only">Report this comment</span>
+                            </div>
+                          </DropdownMenuItem>
+                        </TooltipTrigger>
+                      </ReportDialog>
+                      <TooltipContent>
+                        <p>Report this comment</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  )}
+                </div>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
         </div>
       </div>
-      {!isEditing && (
-        <div className="-mb-1">
-          <ExpandableContent content={comment.text} />
-          {hasBeenEdited ? (
-            <div className="text-muted-foreground flex items-center gap-2 whitespace-nowrap text-xs">
-              Last edited at{' '}
-              {new Intl.DateTimeFormat(undefined, {
-                timeStyle: 'short',
-                dateStyle: 'short',
-              }).format(comment.updatedAt)}
-            </div>
-          ) : null}
+
+      <div className="flex gap-3">
+        <ExpandableContent content={comment.text} />
+      </div>
+
+      <div className="mb-2 flex flex-row flex-wrap items-center justify-between">
+        {!isEditing && (
+          <div className="flex gap-4">
+            {comment._count.replies > 0 && (
+              <Button
+                variant="secondary"
+                size="xs"
+                className="z-50 gap-1"
+                onClick={onClickToggleReply}
+              >
+                {isToggleReply ? (
+                  <ChevronDown className="h-4 w-4" />
+                ) : (
+                  <ChevronUp className="h-4 w-4" />
+                )}
+
+                <div className="text-xs">
+                  {comment._count.replies === 1 ? '1 reply' : `${comment._count.replies} replies`}
+                </div>
+                <span className="sr-only">Toggle replies view</span>
+              </Button>
+            )}
+            {hasBeenEdited ? (
+              <div className="text-muted-foreground flex items-center gap-2 whitespace-nowrap text-xs">
+                Last edited at{' '}
+                {new Intl.DateTimeFormat(undefined, {
+                  timeStyle: 'short',
+                  dateStyle: 'short',
+                }).format(comment.updatedAt)}
+              </div>
+            ) : null}
+          </div>
+        )}
+        <div className="flex flex-col items-end">
+          {!readonly && (
+            <>
+              <div className="flex gap-1">
+                <Vote
+                  comment={comment}
+                  toUserId={comment.user.id}
+                  challengeSlug={comment.rootChallenge?.slug ?? ''}
+                  voteCount={comment._count.vote}
+                  initialHasVoted={comment.vote.length > 0}
+                  disabled={!session?.data?.user?.id || comment.userId === session?.data?.user?.id}
+                  rootType="COMMENT"
+                  rootId={comment.id}
+                  onVote={(didUpvote: boolean) => {
+                    comment.vote = didUpvote
+                      ? [
+                          {
+                            userId: session?.data?.user?.id ?? '',
+                          },
+                        ]
+                      : [];
+                    comment._count.vote += didUpvote ? 1 : -1;
+                  }}
+                />
+
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      variant="secondary"
+                      size="xs"
+                      onClick={() => onClickReply?.(comment?.user?.name)}
+                    >
+                      <Reply className="h-3 w-3" />
+                      <span className="sr-only">Create a reply</span>
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>Reply</p>
+                  </TooltipContent>
+                </Tooltip>
+              </div>
+            </>
+          )}
         </div>
-      )}
+      </div>
+
       {isEditing ? (
         <div className="mb-2">
           <CommentInput
@@ -320,133 +523,20 @@ function SingleComment({
           />
         </div>
       ) : null}
-      <div className="my-auto mt-3 flex items-center gap-2">
-        {!readonly && (
-          <>
-            <Vote
-              voteCount={comment._count.vote}
-              initialHasVoted={comment.vote.length > 0}
-              disabled={!session?.data?.user?.id || comment.userId === session?.data?.user?.id}
-              rootType="COMMENT"
-              rootId={comment.id}
-              onVote={(didUpvote: boolean) => {
-                comment.vote = didUpvote
-                  ? [
-                      {
-                        userId: session?.data?.user?.id ?? '',
-                      },
-                    ]
-                  : [];
-                comment._count.vote += didUpvote ? 1 : -1;
-              }}
-            />
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button
-                  variant="secondary"
-                  size="xs"
-                  className="gap-2"
-                  onClick={() => {
-                    copyPathNotifyUser(Boolean(isReply), slug as string);
-                  }}
-                >
-                  <Share className="h-3 w-3" />
-                  <span className="sr-only">Share this comment</span>
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>Share</p>
-              </TooltipContent>
-            </Tooltip>
-            {!isReply && (
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Button variant="secondary" size="xs" onClick={onClickReply}>
-                    <Reply className="h-3 w-3" />
-                    <span className="sr-only">Create a reply</span>
-                  </Button>
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p>Reply</p>
-                </TooltipContent>
-              </Tooltip>
-            )}
-            {isAuthor ? (
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Button variant="secondary" size="xs" onClick={() => setIsEditing(!isEditing)}>
-                    <Pencil className="h-3 w-3" />
-                    <span className="sr-only">Edit this comment</span>
-                  </Button>
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p>Edit</p>
-                </TooltipContent>
-              </Tooltip>
-            ) : null}
-            {isAuthor || isAdminAndModerator ? (
-              <Tooltip>
-                <CommentDeleteDialog asChild comment={comment} deleteComment={deleteComment}>
-                  <TooltipTrigger asChild>
-                    <Button variant="secondary" size="xs">
-                      <Trash2 className="h-3 w-3" />
-                      <span className="sr-only">Delete this comment</span>
-                    </Button>
-                  </TooltipTrigger>
-                </CommentDeleteDialog>
-                <TooltipContent>
-                  <p>Delete</p>
-                </TooltipContent>
-              </Tooltip>
-            ) : (
-              <Tooltip>
-                <ReportDialog triggerAsChild commentId={comment.id} reportType="COMMENT">
-                  <TooltipTrigger asChild>
-                    <Button variant="secondary" size="xs">
-                      <Flag className="h-3 w-3" />
-                      <span className="sr-only">Report this comment</span>
-                    </Button>
-                  </TooltipTrigger>
-                </ReportDialog>
-                <TooltipContent>
-                  <p>Report</p>
-                </TooltipContent>
-              </Tooltip>
-            )}
-            {comment._count.replies > 0 && (
-              <Button
-                variant="ghost"
-                size="xs"
-                className="z-50 ml-auto gap-1"
-                onClick={onClickToggleReply}
-              >
-                {isToggleReply ? (
-                  <ChevronDown className="h-4 w-4" />
-                ) : (
-                  <ChevronUp className="h-4 w-4" />
-                )}
-
-                <div className="text-xs">
-                  {comment._count.replies === 1 ? '1 reply' : `${comment._count.replies} replies`}
-                </div>
-                <span className="sr-only">Toggle replies view</span>
-              </Button>
-            )}
-          </>
-        )}
-      </div>
     </div>
   );
 }
 
 function ExpandableContent({ content }: { content: string }) {
   const [expanded, setExpanded] = useState(true);
+  const [isLarge, setIsLarge] = useState(false);
   const contentWrapperRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleResize = () => {
-      if ((contentWrapperRef.current?.clientHeight ?? 0) > 300) {
+      if ((contentWrapperRef.current?.clientHeight ?? 0) > 150) {
         setExpanded(false);
+        setIsLarge(true);
       }
     };
 
@@ -461,7 +551,7 @@ function ExpandableContent({ content }: { content: string }) {
   return (
     <div
       className={clsx(
-        { 'h-full': expanded, 'max-h-[300px]': !expanded },
+        { 'h-full': expanded, 'max-h-[150px]': !expanded },
         'relative w-full overflow-hidden break-words pl-[1px] text-sm',
       )}
       ref={contentWrapperRef}
@@ -477,6 +567,21 @@ function ExpandableContent({ content }: { content: string }) {
           </div>
         </div>
       )}
+      {expanded && isLarge ? (
+        <div className="flex w-full items-center justify-center">
+          <Button
+            variant="ghost"
+            size="xs"
+            className="z-50 mx-auto gap-1"
+            onClick={() => {
+              setExpanded(false);
+            }}
+          >
+            <ChevronUp className="h-4 w-4" />
+            collapse
+          </Button>
+        </div>
+      ) : null}
     </div>
   );
 }

@@ -1,5 +1,5 @@
 'use server';
-import { auth } from '@repo/auth/server';
+import { auth } from '~/server/auth';
 import { prisma } from '@repo/db';
 import type { CommentRoot } from '@repo/db/types';
 import { orderBy, type SortKey, type SortOrder } from '~/utils/sorting';
@@ -54,16 +54,15 @@ export async function getPreselectedSolutionCommentMetadata(
       id: solutionId,
       challengeId,
     },
-    orderBy: {
-      createdAt: 'desc',
-    },
     select: {
       id: true,
-      solutionComment: true,
+      solutionComment: {
+        orderBy: { createdAt: 'desc' },
+      },
     },
   });
 
-  if (!solution || !solution.solutionComment) return;
+  if (!solution?.solutionComment) return;
 
   const comments = solution.solutionComment;
   const index = comments.findIndex((comment) => comment.id === commentId);
@@ -134,7 +133,7 @@ export async function getPaginatedComments({
   });
 
   const comments = await prisma.comment.findMany({
-    skip: (page - 1) * take,
+    skip: ((page || 1) - 1) * take,
     take,
     where: {
       rootType,
@@ -149,6 +148,8 @@ export async function getPaginatedComments({
           id: true,
           name: true,
           image: true,
+          roles: true,
+          bio: true,
         },
       },
       _count: {
@@ -167,12 +168,18 @@ export async function getPaginatedComments({
       },
       rootChallenge: {
         select: {
+          slug: true,
           name: true,
         },
       },
       rootSolution: {
         select: {
           title: true,
+          challenge: {
+            select: {
+              slug: true,
+            },
+          },
         },
       },
     },
@@ -217,6 +224,8 @@ export async function getAllComments({
           id: true,
           name: true,
           image: true,
+          roles: true,
+          bio: true,
         },
       },
       _count: {
@@ -235,12 +244,18 @@ export async function getAllComments({
       },
       rootChallenge: {
         select: {
+          slug: true,
           name: true,
         },
       },
       rootSolution: {
         select: {
           title: true,
+          challenge: {
+            select: {
+              slug: true,
+            },
+          },
         },
       },
     },

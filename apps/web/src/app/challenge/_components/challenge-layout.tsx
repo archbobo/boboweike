@@ -1,7 +1,7 @@
 import { useEffect, useRef, type ReactNode, useState, type MutableRefObject, useMemo } from 'react';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { useFullscreenSettingsStore } from './fullscreen';
+import { useFullscreenSettingsStore } from '../../../components/fullscreen-button';
 import { getEventDeltas } from '@repo/monaco/utils';
 
 export const DEFAULT_SETTINGS = {
@@ -10,12 +10,12 @@ export const DEFAULT_SETTINGS = {
 };
 
 type Settings = typeof DEFAULT_SETTINGS;
-interface State {
+interface ChallengeLayoutState {
   settings: Settings;
   updateSettings: (settings: Settings) => void;
 }
 
-export const useLayoutSettingsStore = create<State>()(
+export const useLayoutSettingsStore = create<ChallengeLayoutState>()(
   persist(
     (set, get) => ({
       settings: DEFAULT_SETTINGS,
@@ -38,6 +38,7 @@ export interface ChallengeLayoutProps {
   adjustPanelSize: (divideByW: number, divideByH: number, newDimensionValue: number) => void;
   isLeftPanelCollapsed: () => boolean;
   isPlayground?: boolean;
+  isReversed?: boolean;
 }
 
 export const MOBILE_BREAKPOINT = 1025;
@@ -55,13 +56,14 @@ export function ChallengeLayout({
   expandPanel,
   isLeftPanelCollapsed,
   isPlayground,
+  isReversed = false,
 }: ChallengeLayoutProps) {
   const parent = useRef<HTMLDivElement>(null);
   const resizer = useRef<HTMLDivElement>(null);
   const rightSide = useRef<HTMLDivElement>(null);
 
   const { settings, updateSettings } = useLayoutSettingsStore();
-  const { fssettings, updateFSSettings } = useFullscreenSettingsStore();
+  const { fssettings } = useFullscreenSettingsStore();
   const [isCollapsed, setIsCollapsed] = useState(false);
 
   const LEFT_PANEL_BREAKPOINT = isDesktop ? 500 : 318;
@@ -141,11 +143,18 @@ export function ChallengeLayout({
         height: 0,
       };
 
+      // swap the logic for dragging left and right
+      const adjustedDx = isReversed ? -dx : dx;
       const newDimensionValue = isDesktop
-        ? ((leftWidth + dx) * 100) / divideByW
+        ? ((leftWidth + adjustedDx) * 100) / divideByW
         : ((topHeight + dy) * 100) / divideByH;
 
-      if (currPos <= COLLAPSE_BREAKPOINT) {
+      // Adjust collapse check for reversed layout
+      const shouldCollapse = isReversed
+        ? currPos >= parent.current!.getBoundingClientRect().width - COLLAPSE_BREAKPOINT
+        : currPos <= COLLAPSE_BREAKPOINT;
+
+      if (shouldCollapse) {
         collapsePanel();
       } else {
         adjustPanelSize(divideByW, divideByH, newDimensionValue);
@@ -165,15 +174,28 @@ export function ChallengeLayout({
     const mouseDownHandler = (e: MouseEvent | TouchEvent) => {
       if (e instanceof MouseEvent) {
         // Get the current mouse position
-        isDesktop ? (x = e.clientX) : (y = e.clientY);
+        if (isDesktop) {
+          x = e.clientX;
+        } else {
+          y = e.clientY;
+        }
       } else if (e instanceof TouchEvent) {
         // Get the current finger position
-        isDesktop ? (x = e.touches[0]?.clientX ?? 0) : (y = e.touches[0]?.clientY ?? 0);
+        if (isDesktop) {
+          x = e.touches[0]?.clientX ?? 0;
+        } else {
+          y = e.touches[0]?.clientY ?? 0;
+        }
       }
 
-      isDesktop
-        ? (leftWidth = leftSide.current?.getBoundingClientRect().width!)
-        : (topHeight = leftSide.current?.getBoundingClientRect().height!);
+      // TODO: Either leftSide.current is always defined, or leftWidth can be nullish
+      /* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
+      if (isDesktop) {
+        leftWidth = leftSide.current?.getBoundingClientRect().width!;
+      } else {
+        topHeight = leftSide.current?.getBoundingClientRect().height!;
+      }
+      /* eslint-enable @typescript-eslint/no-non-null-asserted-optional-chain */
 
       // Attach the listeners to `document`
       if (e instanceof MouseEvent) {
@@ -203,9 +225,11 @@ export function ChallengeLayout({
       document.removeEventListener('touchend', mouseUpHandler);
       document.removeEventListener('mouseup', mouseUpHandler);
 
-      isDesktop
-        ? updateSettings({ width: `${leftRef.offsetWidth}px`, height: settings.height })
-        : updateSettings({ width: settings.width, height: `${leftRef.offsetHeight}px` });
+      updateSettings(
+        isDesktop
+          ? { width: `${leftRef.offsetWidth}px`, height: settings.height }
+          : { width: settings.width, height: `${leftRef.offsetHeight}px` },
+      );
     };
 
     // handle window resize
@@ -245,9 +269,11 @@ export function ChallengeLayout({
         collapsePanel();
       }
 
-      isDesktop
-        ? updateSettings({ width: `${leftRef.offsetWidth}px`, height: settings.height })
-        : updateSettings({ width: settings.width, height: `${leftRef.offsetHeight}px` });
+      updateSettings(
+        isDesktop
+          ? { width: `${leftRef.offsetWidth}px`, height: settings.height }
+          : { width: settings.width, height: `${leftRef.offsetHeight}px` },
+      );
     };
 
     window.addEventListener('resize', resizeHandler);
@@ -277,11 +303,12 @@ export function ChallengeLayout({
     updateSettings,
     _COLLAPSED_DESKTOP_WIDTH,
     _COLLAPSED_MOBILE_HEIGHT,
+    isReversed,
   ]);
 
   return (
     <div
-      className="flex flex-col px-4 pb-4 lg:flex-row"
+      className={`flex flex-col px-4 pb-4 ${isReversed ? 'lg:flex-row-reverse' : 'lg:flex-row'}`}
       ref={parent}
       style={{ height: fssettings.isFullscreen ? '100vh' : 'calc(100vh - 3.5rem)' }}
     >

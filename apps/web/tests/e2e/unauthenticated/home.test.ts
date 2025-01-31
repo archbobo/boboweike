@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { AxeBuilder } from '@axe-core/playwright';
+import AxeBuilder from '@axe-core/playwright';
 import { A11YTAGS } from '../constant';
 import A11yError from 'playwright/utils/a11yLogger';
 
@@ -18,6 +18,8 @@ test.describe('homepage a11y', () => {
   test('homepage should not have any automatically detectable WCAG A or AA violations in light mode', async ({
     page,
   }) => {
+    // TODO: fix this type error
+    // @ts-expect-error -- playwright types are duplicated across differing versions
     const a11yScanResults = await new AxeBuilder({ page }).withTags(A11YTAGS).analyze();
     if (a11yScanResults.violations.length > 0) {
       throw new A11yError(a11yScanResults.violations);
@@ -34,7 +36,10 @@ test.describe('homepage a11y', () => {
       })
       .click();
 
+    // TODO: fix this type error
+    // @ts-expect-error -- playwright types are duplicated across differing versions
     const a11yScanResults = await new AxeBuilder({ page }).withTags(A11YTAGS).analyze();
+
     if (a11yScanResults.violations.length > 0) {
       throw new A11yError(a11yScanResults.violations);
     }

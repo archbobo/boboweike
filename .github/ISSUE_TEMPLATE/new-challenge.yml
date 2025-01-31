@@ -4,7 +4,7 @@ description: Submit a Challenge for Review
 title: "[Challenge]: "
 labels: ["challenge"]
 assignees:
-  - archbobo
+  - bautistaaa
 body:
   - type: dropdown
     id: difficulty

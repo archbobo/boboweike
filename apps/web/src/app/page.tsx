@@ -3,7 +3,7 @@ import { Features } from './_components/features';
 import { Hero } from './_components/hero';
 import { NewsletterBanner } from './_components/newsletter-banner';
 
-export default async function Index() {
+export default function Index() {
   return (
     <>
       <Hero />

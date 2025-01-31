@@ -1,7 +1,8 @@
-import { auth, type Session } from '@repo/auth/server';
+import { type Session } from '@repo/auth/server';
 import { prisma } from '@repo/db';
 import { TrackCard } from './track-card';
 import { TrackCardSoon } from './track-card-soon';
+import { auth } from '~/server/auth';
 
 export async function TrackGrid() {
   const session = await auth();
@@ -44,7 +45,7 @@ async function getTracks(session: Session | null) {
             include: {
               submission: {
                 where: {
-                  userId: session?.user?.id,
+                  userId: session?.user?.id ?? '',
                 },
               },
             },

@@ -1,27 +1,13 @@
 'use client';
 
-// eslint-disable-next-line import/no-named-as-default
 import Editor, { loader, type EditorProps } from '@monaco-editor/react';
 import { useTheme } from 'next-themes';
 import { useMemo } from 'react';
 import { useEditorSettingsStore } from './settings-store';
 
-const ADMIN_HOST = 'admin.boboweike.cn';
-const getBaseUrl = () => {
-  if (typeof globalThis.window === 'undefined') return '';
-  const isProd = process.env.NODE_ENV === 'production';
-  if (isProd && window?.location?.hostname === ADMIN_HOST) {
-    return 'https://boboweike.cn';
-  }
-  if (!isProd && window?.location?.port === '3001') {
-    return 'http://localhost:3000';
-  }
-  return '';
-};
-
 loader.config({
   paths: {
-    vs: `${getBaseUrl()}/min/vs`,
+    vs: `https://playgroundcdn.typescriptlang.org/cdn/5.5.4/monaco/min/vs`,
   },
 });
 
@@ -39,8 +25,8 @@ const DEFAULT_OPTIONS = {
 export type CodeEditorProps = Omit<EditorProps, 'theme'>;
 
 export function CodeEditor({ onChange, onMount, options, value, ...props }: CodeEditorProps) {
-  const { theme } = useTheme();
-  const editorTheme = theme === 'light' ? 'light' : 'vs-dark';
+  const { resolvedTheme } = useTheme();
+  const editorTheme = resolvedTheme === 'light' ? 'light' : 'vs-dark';
   const { settings } = useEditorSettingsStore();
   const editorOptions = useMemo(() => {
     return {

@@ -1,17 +1,17 @@
-import { auth } from '@repo/auth/server';
+import { auth } from '~/server/auth';
 import { Comments } from '../../../_components/comments';
 import { getPreselectedCommentMetadata } from '../../../_components/comments/getCommentRouteData';
 import { Description } from '../../../_components/description';
 import { getChallengeRouteData } from '../../getChallengeRouteData';
 
-interface Props {
+interface CommentPageProps {
   params: {
     slug: string;
     commentId: string;
   };
 }
 
-export default async function CommentPage({ params: { slug, commentId } }: Props) {
+export default async function CommentPage({ params: { slug, commentId } }: CommentPageProps) {
   const session = await auth();
   const { challenge } = await getChallengeRouteData(slug, session);
   const preselectedCommentMetadata = await getPreselectedCommentMetadata(
@@ -23,7 +23,7 @@ export default async function CommentPage({ params: { slug, commentId } }: Props
     <div className="relative h-full">
       <Description challenge={challenge} />
       <Comments
-        rootId={challenge.id}
+        root={challenge}
         preselectedCommentMetadata={preselectedCommentMetadata}
         type="CHALLENGE"
         expanded

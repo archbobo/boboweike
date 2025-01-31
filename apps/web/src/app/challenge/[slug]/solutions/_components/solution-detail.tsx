@@ -2,41 +2,46 @@
 
 import { useSession } from '@repo/auth/react';
 import { ActionMenu } from '@repo/ui/components/action-menu';
-import { Avatar, AvatarFallback, AvatarImage } from '@repo/ui/components/avatar';
 import { Button } from '@repo/ui/components/button';
 import { Markdown } from '@repo/ui/components/markdown';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@repo/ui/components/tooltip';
 import { TypographyLarge } from '@repo/ui/components/typography/large';
 import { toast } from '@repo/ui/components/use-toast';
-import { UserBadge } from '@repo/ui/components/user-badge';
-import { Calendar, Flag, Pin, Share, Trash, ArrowLeft, Pencil } from '@repo/ui/icons';
+import { UserAvatar } from '@repo/ui/components/user-avatar';
+import { ArrowLeft, Calendar, Flag, Pencil, Pin, Share, Trash } from '@repo/ui/icons';
+import { useQueryClient } from '@tanstack/react-query';
 import clsx from 'clsx';
 import Link from 'next/link';
-import type { ChallengeSolution } from '~/app/challenge/[slug]/solutions/[solutionId]/page';
-import { ReportDialog } from '~/components/ReportDialog';
-import { getRelativeTime } from '~/utils/relativeTime';
-import { Vote } from '../../../_components/vote';
-import { pinOrUnpinSolution } from './_actions';
-import { isAdminOrModerator, isAuthor } from '~/utils/auth-guards';
-import { SolutionDeleteDialog } from './delete';
 import { useParams } from 'next/navigation';
 import { useState } from 'react';
+import type { ChallengeSolution } from '~/app/challenge/[slug]/solutions/[solutionId]/page';
+import { UserBadge } from '~/app/challenge/_components/comments/enhanced-user-badge';
+import { ReportDialog } from '~/components/ReportDialog';
+import { isAdminOrModerator, isAuthor } from '~/utils/auth-guards';
+import { getRelativeTimeStrict } from '~/utils/relativeTime';
+import { Vote } from '../../../_components/vote';
+import { pinOrUnpinSolution } from './_actions';
+import { SolutionDeleteDialog } from './delete';
 import { EditSolution } from './edit-solution';
 import { useGetQueryString } from './useGetQueryString';
 
-interface Props {
+interface SolutionDetailsProps {
   solution: ChallengeSolution;
 }
 
-export function SolutionDetails({ solution }: Props) {
+export function SolutionDetails({ solution }: SolutionDetailsProps) {
   const { slug } = useParams();
   const { data: session } = useSession();
   const showPin = isAdminOrModerator(session);
   const [isEditing, setIsEditing] = useState(false);
   const queryString = useGetQueryString();
+  const queryClient = useQueryClient();
 
   const handlePinClick = async () => {
     await pinOrUnpinSolution(solution.id, !solution.isPinned, slug as string);
+    queryClient.invalidateQueries({
+      queryKey: ['challenge-solutions', slug],
+    });
   };
   const handleShareClick = async () => {
     if (navigator.clipboard) {
@@ -60,12 +65,7 @@ export function SolutionDetails({ solution }: Props) {
                 </div>
               </Link>
               <div className="flex items-center gap-2">
-                <Avatar className="h-7 w-7">
-                  <AvatarImage alt="github profile picture" src={solution.user?.image ?? ''} />
-                  <AvatarFallback className="border border-zinc-300 dark:border-zinc-600">
-                    {solution.user?.name.substring(0, 1)}
-                  </AvatarFallback>
-                </Avatar>
+                <UserAvatar src={solution.user?.image ?? ''} />
                 <TypographyLarge>{solution.title}</TypographyLarge>
               </div>
               <div className="flex items-center gap-2">
@@ -87,14 +87,25 @@ export function SolutionDetails({ solution }: Props) {
             </div>
             {/* Author, Time, Action Buttons */}
             <div className="flex items-center gap-4">
-              <UserBadge username={solution.user?.name ?? ''} linkComponent={Link} />
+              <UserBadge
+                user={{
+                  name: solution.user?.name ?? '',
+                  image: solution.user?.image ?? '',
+                  bio: solution.user?.bio ?? '',
+                  roles: solution.user?.roles ?? [],
+                }}
+              />
               <div className="text-muted-foreground flex items-center gap-2">
                 <Calendar className="h-4 w-4" />
-                <span className="text-xs">{getRelativeTime(solution.createdAt)}</span>
+                <span className="text-xs">{getRelativeTimeStrict(solution.createdAt)}</span>
               </div>
             </div>
             <div className="flex items-center gap-3">
               <Vote
+                challengeSlug={solution.challenge?.slug ?? ''}
+                // TODO: Is this guaranteed to exist, or is userId actually optional?
+                // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
+                toUserId={solution.user?.id!}
                 voteCount={solution._count.vote}
                 initialHasVoted={solution.vote.length > 0}
                 disabled={!session?.user?.id || solution.userId === session?.user?.id}

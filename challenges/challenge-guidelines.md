@@ -1,8 +1,8 @@
 <!-- omit in toc -->
 
-# 波波微课 Challenge Guidelines
+# BoboWeike Challenge Guidelines
 
-- [波波微课 Challenge Guidelines](#波波微课-challenge-guidelines)
+- [BoboWeike Challenge Guidelines](#boboweike-challenge-guidelines)
   - [Writing `prompt.md`](#writing-promptmd)
     - [Keep It Fun](#keep-it-fun)
     - [Encourage Healthy Practices](#encourage-healthy-practices)

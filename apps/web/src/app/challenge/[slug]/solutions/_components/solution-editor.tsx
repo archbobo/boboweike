@@ -8,10 +8,11 @@ import { useTheme } from 'next-themes';
 import { useParams } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import { RichMarkdownEditor } from '~/components/rich-markdown-editor';
 import { createNoProfanitySchemaWithValidate } from '~/utils/antiProfanityZod';
 import { postSolution } from './_actions';
 import { useQueryClient } from '@tanstack/react-query';
+import { useUploadThing } from '~/utils/useUploadthing';
+import { RichMarkdownEditor } from '@repo/ui/components/rich-markdown-editor';
 
 const getDefaultMarkdown = (solution: string) => `
 ## Thoughts
@@ -38,13 +39,13 @@ const formSchema = z.object({
 
 export type FormSchema = z.infer<typeof formSchema>;
 
-interface Props {
+interface SolutionEditorProps {
   challengeId: number;
   code?: string;
   dismiss: () => void;
 }
 
-export function SolutionEditor({ dismiss, challengeId, code }: Props) {
+export function SolutionEditor({ dismiss, challengeId, code }: SolutionEditorProps) {
   const { slug } = useParams();
   const queryClient = useQueryClient();
   const session = useSession();
@@ -64,6 +65,8 @@ export function SolutionEditor({ dismiss, challengeId, code }: Props) {
         description: data.content ?? '',
         slug: slug as string,
         title: data.title ?? `${session.data?.user?.name}'s Solution`,
+        // TODO: Is this guaranteed to exist, or is userId actually optional?
+        // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
         userId: session.data?.user?.id!,
       });
 
@@ -79,7 +82,7 @@ export function SolutionEditor({ dismiss, challengeId, code }: Props) {
       queryClient.refetchQueries({
         queryKey: ['challenge-solutions', slug],
       });
-    } catch (error) {
+    } catch {
       toast({
         variant: 'destructive',
         title: 'Uh oh! Something went wrong. Please try again.',
@@ -90,9 +93,7 @@ export function SolutionEditor({ dismiss, challengeId, code }: Props) {
   };
 
   const { theme } = useTheme();
-  theme !== undefined
-    ? document.documentElement.setAttribute('data-color-mode', theme)
-    : document.documentElement.setAttribute('data-color-mode', 'system');
+  document.documentElement.setAttribute('data-color-mode', theme ?? 'system');
 
   return (
     <Form {...form}>
@@ -142,6 +143,7 @@ export function SolutionEditor({ dismiss, challengeId, code }: Props) {
                   value={field.value}
                   // non-split-screen by default
                   onChange={field.onChange}
+                  useUploadThing={useUploadThing}
                 />
                 <FormMessage />
               </FormItem>
